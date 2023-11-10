@@ -58,54 +58,57 @@
 
 <body>
     <?php
-        require("./includes/components/header.php");
-    ?>  
-
-    <div cla></div>
+        require("./includes/components/headerLogin.php");
+    ?>
 
     <main>
-        <section class="content-box center">
-            <form action="login.php" method="POST">
-                <h1>Bem-vindo(a)!</h1>
-                <div class='input-container'>
-                    <input type="email" name="email" required placeholder="email@exemplo.com">
-                </div>
-                <div>
-                    <input type="password" name="password" required placeholder="********">
-                </div>
-
-                <button type="submit" id="login" name="login" value="login">
-                    <img src="images/icons/arrowIcon.svg" alt="Ícone de uma seta para indicar o botão de avanço">
-                </button>
-
-                <div>
+        <section class="position-content-login">
+            <div class="content-box center">
+                <form action="login.php" method="POST">
+                    <h1>Bem-vindo(a)!</h1>
+                    <div class='input-container'>
+                        <div >
+                            <input type="email" name="email" required placeholder="email@exemplo.com">
+                        </div>
+                        <div>
+                            <input type="password" name="password" required placeholder="********">
+                        </div>
+                    </div>
+    
+                    <button type="submit" id="btn-login" name="login" value="login">
+                        <img src="images/icons/arrowIcon.svg" alt="Ícone de uma seta para indicar o botão de avanço">
+                    </button>
+    
+                </form>
+    
+                <div class="links-container">
                     <a href="create_account.php">Criar uma conta</a>
                     <a href="recover_password.php">Esqueceu a senha?</a>
                 </div>
-            </form>
-        </section>
-
-        <section>
-            <span class="msg-error">
-                <?php
-                    echo $_SESSION["msg"];
-                ?>
-            </span>
-            <span class="msg-error">
-                <?php
-                    echo $_SESSION["msg_confirma"];
-                ?>
-            </span>
-            <span class="msg-sucess">
-                <?php
-                    echo $_SESSION["senha_atualizada_msg"];
-                ?>
-            </span>
-            <span class="msg-sucess">
-                <?php
-                    echo $_SESSION["msg_envia-email"];
-                ?>
-            </span>
+            </div>
+    
+            <div>
+                <span class="msg-error">
+                    <?php
+                        echo $_SESSION["msg"];
+                    ?>
+                </span>
+                <span class="msg-error">
+                    <?php
+                        echo $_SESSION["msg_confirma"];
+                    ?>
+                </span>
+                <span class="msg-sucess">
+                    <?php
+                        echo $_SESSION["senha_atualizada_msg"];
+                    ?>
+                </span>
+                <span class="msg-sucess">
+                    <?php
+                        echo $_SESSION["msg_envia-email"];
+                    ?>
+                </span>
+            </div>
         </section>
        
     </main>

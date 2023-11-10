@@ -1,9 +1,3 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 :root{
     font-size: 62.5%;
 
@@ -14,56 +8,31 @@
     --font-color-nav-home: #E0E0E0;
     --font-color-nav-home-hover: #fff;
 
+    --font-color-title: #326B73;
+    --font-color-links: #326B73;
+    --font-color-links-hover: #BF6C2C;
+
+
     --bg-color-forms: #fff;
-}
+    --bg-color-input: #fff;
+    --bg-color-btn: #326B73;
+    --bg-color-btn-hover: #155159;
 
-body{
-    font-size: 1.6rem;
 
-    font-family: var(--font-family-title); 
-}
+    --border-color-focus: #BF6C2C;
 
-body::before{
-    content: '';
-    width: 100%;
-    height: 100vh;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    z-index: -1;
-
-    background-image: url(../images/background.png);
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-}
-
-body::after{
-    content: '';
-    width: 100%;
-    height: 100vh;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    z-index: -1;
-
-    background-color: #3FB0BF;
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-    filter: opacity(32%);
 }
 
 header{
-    border: 1px solid red;
     padding: 4.4rem 10.3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header nav{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     gap: 3rem;
     font-size: 1.8rem;
     letter-spacing: .1rem;
@@ -74,7 +43,7 @@ header nav a{
     color: var(--font-color-nav-home);
 
     border-bottom: .2rem solid transparent;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
 
     font-family: var(--font-family-subtitle);
     font-weight: bold;
@@ -85,4 +54,126 @@ header nav a:hover{
     border-bottom: .2rem solid var(--font-color-nav-home-hover);
     padding-bottom: 1rem;
 
+}
+
+.position-content-login{
+    padding: 7.7rem 10.4rem 17rem;
+}
+
+.content-box h1, h2{
+    font-family: var(--font-family-title);
+    line-height: 130%;
+    color: var(--font-color-title);
+}
+
+.content-box h1{
+    font-size: 3.9rem;   
+    font-weight: medium;
+
+    margin-bottom: 4.1rem;
+}
+
+.content-box h2{
+    font-size: 2.5rem;
+}
+
+.input-container input:focus{
+    outline: 2px solid var(--border-color-focus);
+}
+
+.input-container::placeholder{
+    font-family: var(--font-family-primary);
+    font-size: 1.4rem;
+    line-height: 140%;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#btn-login{
+    width: 100%;
+    padding: 1.6rem;
+    margin: 3.3rem 0;
+
+    background-color: var(--bg-color-btn);
+
+    border: 1px solid var(--bg-color-btn);
+    border-radius: .6rem;
+
+    cursor: pointer;
+}
+
+#btn-login:hover{
+    background-color: var(--bg-color-btn-hover);
+}
+
+.links-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    gap: 1rem;
+}
+
+.links-container a{
+    display: block;
+    font-family: var(--font-family-primary);
+    font-size: 1.6rem;
+    line-height: 150%;
+    color: var(--font-color-links);
+} 
+
+.links-container a:hover{
+    color: var(--font-color-links-hover);
+}
+
+/* form create account */
+
+.radio-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.4rem;
+
+    margin-top: 4.9rem;
+}
+
+.input-radio{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    margin-bottom: 2rem;
+}
+
+.arrow-advance, .arrows{
+    display: flex;
+    cursor: pointer;
+}
+
+.arrow-advance{
+    justify-content: end;
+}
+
+.arrow-advance.left{
+    justify-content: start;
+}
+
+.arrows{
+    justify-content: space-between;
+}
+
+.input-row{
+    display: flex;
+    gap: 2.4rem;
+}
+
+.input-row .large{
+    width: 70%;
+}
+
+.input-row .small{
+    width: 30%;
+}
+
+.input-row .medium{
+    width: 50%;
 }
