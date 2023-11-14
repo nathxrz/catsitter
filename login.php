@@ -36,13 +36,21 @@
 
             if($login){
                 if($user['confirma_email'] == 1){
+                    
                     $_SESSION["logged"]=true;
                     $_SESSION["email"]=$email;
-                    $_SESSION["cod_usuario"]=$login['cod_usuario'];
+                    $_SESSION["cod_usuario"]=$user['cod_usuario'];
 
-                    sendLoginEmail($email);
-                    
-                    header("Location:home.php");
+                    $user_catsitter = searchUserCatSitter($user["cod_usuario"], $pdo);
+
+                    if($user_catsitter){
+                        $_SESSION["cod_usuario"]=$user_catsitter['cod_catsitter'];
+                        sendLoginEmail($email);
+                        header("Location:catsitter_home_page.php");
+                    }else{
+                        sendLoginEmail($email);
+                        header("Location:tutor_home_page.php");
+                    }
                 }else{
                     $_SESSION["msg"]="Confirme seu e-mail!";
                 }
@@ -58,24 +66,24 @@
 
 <body>
     <?php
-        require("./includes/components/headerLogin.php");
+        require("./includes/components/header_login.php");
     ?>
 
     <main>
-        <section class="position-content-login">
+        <section class="position-forms">
             <div class="content-box center">
                 <form action="login.php" method="POST">
                     <h1>Bem-vindo(a)!</h1>
-                    <div class='input-container'>
-                        <div >
+                    <div class='form-container gap-no-label'>
+                        <div class="input-container" >
                             <input type="email" name="email" required placeholder="email@exemplo.com">
                         </div>
-                        <div>
+                        <div class="input-container">
                             <input type="password" name="password" required placeholder="********">
                         </div>
                     </div>
     
-                    <button type="submit" id="btn-login" name="login" value="login">
+                    <button type="submit" class="btn-submit" name="login" value="login">
                         <img src="images/icons/arrowIcon.svg" alt="Ícone de uma seta para indicar o botão de avanço">
                     </button>
     
@@ -83,7 +91,7 @@
     
                 <div class="links-container">
                     <a href="create_account.php">Criar uma conta</a>
-                    <a href="recover_password.php">Esqueceu a senha?</a>
+                    <a href="password_recovery_page.php">Esqueceu a senha?</a>
                 </div>
             </div>
     

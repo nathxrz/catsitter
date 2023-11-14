@@ -52,14 +52,14 @@
 
 <body>
     <?php
-        require("./includes/components/headerLogin.php");
+        require("./includes/components/header_login.php");
     ?>  
     <main>
-        <section class="position-content-login">
+        <section class="position-forms">
             <div class="content-box">
                 <form action="create_account.php" method="POST">
                 <!-- form 1 -->   
-                    <div class="disable"> 
+                    <div class="hidden"> 
                         <h2>Você é tutor ou cat sitter?</h2>
                         <div class='radio-container'>
                             <div class="input-radio">
@@ -74,22 +74,22 @@
                     </div>
     
                     <!-- form 2 --> 
-                    <div class="disable" >
+                    <div class="hidden" >
                         <h2>Informações pessoais</h2>
-                        <div class="input-container">
-                            <div>
+                        <div class="form-container">
+                            <div class="input-container">
                                 <label for="name">Nome</label>
                                 <input type="text" id="name" name="name" placeholder="Nome do usuário" autocomplete="off" required>
                             </div>
-                            <div>
+                            <div class="input-container">
                                 <label for="lastname">Sobrenome</label>
                                 <input type="text" id="lastname" name="lastname" placeholder="Sobrenome" autocomplete="off" required>
                             </div>
-                            <div>
+                            <div class="input-container">
                                 <label for="birth">Data de nascimento</label>
                                 <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" required>
                             </div>
-                            <div>
+                            <div class="input-container">
                                 <label for="gender">Gênero</label>
                                 <select name="gender" id="gender">
                                     <option value="Feminino">Feminino</option>
@@ -98,11 +98,11 @@
                                     <option value="Não informado">Não informado</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="input-container">
                                 <label for="cpf">CPF</label>
                                 <input type="text" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" autocomplete="off" required>
                             </div>
-                            <div>
+                            <div class="input-container">
                                 <label for="telephone">Telefone</label>
                                 <input type="text" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx" autocomplete="off" required>
                             </div>
@@ -110,10 +110,10 @@
                     </div>
                     
                     <!-- form 3 --> 
-                    <div class="disable">
+                    <div class="hidden">
                         <h2>Endereço</h2>
                         <div class='input-container'>
-                            <div>
+                            <div class="input-container">
                                 <label for="cep">CEP</label>
                                 <input type="text" id="cep" name="cep" placeholder="xxxxx-xxx" autocomplete="off" required>
                             </div>
@@ -156,24 +156,25 @@
                     <!-- form 4 -->
                     <div class="">
                         <h2>Cadastro</h2>
-                        <div class="input-container" >
-                            <div>
+                        <div class="form-container" >
+                            <div class="input-container">
                                 <label for="email">E-mail</label>
                                 <input type="email" id="email" name="email" placeholder="nome@exemplo.com" autocomplete="off" required>
                             </div>
-                            <div>
+                            <div class="input-container">
                                 <label for="password">Senha</label>
                                 <input type="password" id="password" name="password" placeholder="********" autocomplete="off" required>
                             </div>
-                            <div>
-                                <label for="PasswordConfirmation">Senha</label>
+                            <div class="input-container">
+                                <label for="PasswordConfirmation">Confirme sua senha</label>
                                 <input type="password" id="PasswordConfirmation" name="PasswordConfirmation" placeholder="********" autocomplete="off" required>
                             </div>
         
-                            <button type="submit" class='btn-submit'>
-                                Criar conta!
-                            </button>
                         </div>
+                        
+                        <button type="submit" class='btn-submit'>
+                            Criar conta!
+                        </button>
                     </div>
                     <div class='arrows'>
                         <img src="images/icons/iconLeft.svg" alt="Ícone para voltar.">

@@ -1,0 +1,276 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    font-size: 62.5%;
+    --font-family-title: 'Poppins', sans-serif;
+    --font-family-subtitle: 'Montserrat', sans-serif;
+    --font-family-primary: 'Roboto', sans-serif;
+    --font-family-footer: 'Montserrat', sans-serif;
+
+    --font-color-primary: #326B73;
+    --font-color-secondary: #5A9DA6;
+    --font-color-third: #878D96;
+    --font-color-neutral: #000;
+    --font-btn-card: #BF6C2C;
+    --font-btn-card-hover: #fff;
+
+    
+
+    --bg-header: #fff;
+    --bg-color-forms: #fff;
+    --bg-color-input: #fff;
+    --bg-header-card: #5A9DA6;
+    --bg-footer: rgba(8, 35, 39, 1);
+    --bg-color-btn: #326B73;
+    --bg-color-btn-hover: #155159;
+
+    --bg-color-third: #878d9643;
+
+    --border-color: #326B73;
+    --border-color-focus: #BF6C2C;
+    --border-btn-card: #BF6C2C;
+
+    --line-copyright-color: rgba(63, 176, 191, 0.17);
+    --copyright-color: rgba(63, 176, 191, 0.338);
+}
+
+.radio-container{
+    display: flex;
+    gap: 2.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.radio-input, .checkbox-container{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem;
+
+    border-radius: 1.9rem;
+    box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.19);
+
+    width: 30%;
+}
+
+.radio-input p, .radio-input span, .checkbox-container p{
+    font-family: var(--font-family-primary);
+    font-weight: 400;
+    line-height: 1.6rem;
+}
+
+.radio-input p, .checkbox-container p{
+    font-size: 1.6rem;
+}
+
+.radio-input span{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--font-color-third);
+
+    display: block;
+    margin-top: .5rem;
+}
+
+.checkbox-input{
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    margin-top: -1.5rem;
+}
+
+.checkbox-input input[type=checkbox]{
+    cursor: pointer;
+}
+
+.form-details-container-position{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.7rem;
+}
+
+.date-width{
+    width: 30% !important;
+}
+
+.search{
+    width: 20%;
+    margin: 2rem auto 0;
+}
+
+.radio-input.disable{
+    background-color: var(--bg-color-third);
+}
+
+.link-form a{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.link-form a{
+    color: var(--font-color-primary);
+}
+
+.link-form a:hover{
+    color: var(--font-color-secondary);
+}
+
+.card-content{
+    display: flex;
+    gap: 4.6rem;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+}
+
+.card-profile .chat{
+    position: absolute;
+    
+    right: 2.9rem;
+    top: 14.6rem;
+}
+
+.card-profile button{
+    font-family: var(--font-family-primary);
+    font-size: 1.6rem;
+
+    font-weight: 400;
+    line-height: 145%;
+
+    margin-top: 2rem;
+}
+
+.card-profile a{
+    text-decoration: none;
+    color: var(--font-color-neutral);
+}
+
+.btn-mark{
+    margin-top: 3rem;
+    padding: .4rem;
+
+    width: 13rem;
+
+    color: var(--font-btn-card);
+    font-family: var(--font-family-subtitle);
+
+    border: 1px solid var(--border-btn-card);
+    border-radius: .8rem;
+
+    background: none;
+    
+    cursor: pointer;
+}
+
+.btn-mark:hover{
+    color: var(--font-btn-card-hover);
+
+    background: var(--border-btn-card);
+}
+
+.position-forms{
+    padding: 7.7rem 10.4rem 17rem;
+}
+
+.position-content-schedule{
+    width: 70rem;
+    margin: 7rem 10.4rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.card-schedule{
+    display: flex;
+    align-items: center;
+    padding: 10rem 3rem 3rem;
+
+    gap: 4rem;
+
+    border-radius: 1.9rem;
+    box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.19);
+
+    width: 100%;
+
+    position: relative;
+
+    z-index: 0;
+}
+
+.card-schedule::before{
+    content: '';
+    width: 100%;
+    height: 7rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: -1;
+
+    background-color: var(--bg-header-card);
+
+    border-radius: 1.9rem 1.9rem 0 0;
+}
+
+.appointment-information{
+    width: 100%;
+}
+
+.appointment-information p{
+    line-height: 145%;
+}
+
+.appointment-information div {
+    margin-top: .5rem;
+}
+
+.appointment-information div p{
+    display: inline;
+    margin-right: .5rem;
+}
+
+.appointment-information span,.appointment-information span a{
+    color: var(--font-color-third);
+}
+
+.appointment-information span a{
+    text-decoration: none;
+}
+
+.icons-shedule{
+    display: flex;
+    flex-direction: column;
+    gap: 5.5rem;
+    align-items: center;
+}
+
+.icon-delete-profile{
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+}
+
+.btn-add-pet, .close{
+    position: absolute;
+}
+
+.btn-add-pet{
+    right: 5.9rem;
+    bottom: 4.1rem;
+}
+
+.close{
+    right: 3rem;
+    top: 3rem;
+}

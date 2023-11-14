@@ -55,6 +55,14 @@ function searchUser($email, $pdo){
     return $user->fetch();
 }
 
+function searchUserCatSitter($user, $pdo){
+    $user_catsitter = $pdo->prepare('select * from cat_sitters where cod_usuario = :user');
+    $user_catsitter->bindValue(':user', $user);
+    $user_catsitter->execute();
+    
+    return $user_catsitter->fetch();
+}
+
 function emailConfirmRegistration($email, $pdo){
     require "PHPMailer/src/PHPMailer.php";
     require "PHPMailer/src/SMTP.php";
@@ -176,7 +184,7 @@ function sendEmailToChangePassword($email, $key, $pdo){
 
     $hash = md5($email);
     $title = "Alteração de senha";
-    $message = "Você solicitou a alteração de senha da nossa plataforma, clique no link a seguir para inserir sua nova senha. <a href='http://localhost/catsitter/formToEnterNewPassword.php?email=$hash&confirmacao=$key' >Criar nova senha</a>";
+    $message = "Você solicitou a alteração de senha da nossa plataforma, clique no link a seguir para inserir sua nova senha. <a href='http://localhost/catsitter/set_new_password_page.php?email=$hash&confirmation=$key' >Criar nova senha</a>";
 
     $mail = new PHPMailer();
 
@@ -345,6 +353,4 @@ function deleteRequest($email, $key, $pdo){
 
 //     $mail->send();
 // }
-
-
 ?>

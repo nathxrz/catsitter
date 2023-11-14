@@ -23,22 +23,23 @@
 
 }
 
-header{
+.header-content-login{
     padding: 4.4rem 10.3rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header nav{
+.header-content-login ul{
     display: flex;
     flex-direction: row;
     gap: 3rem;
     font-size: 1.8rem;
     letter-spacing: .1rem;
+    list-style: none;
 }
 
-header nav a{
+.header-content-login li a{
     text-decoration: none;
     color: var(--font-color-nav-home);
 
@@ -49,18 +50,14 @@ header nav a{
     font-weight: bold;
 }
 
-header nav a:hover{
+.header-content-login nav a:hover{
     color: var(--font-color-nav-home-hover);
     border-bottom: .2rem solid var(--font-color-nav-home-hover);
     padding-bottom: 1rem;
 
 }
 
-.position-content-login{
-    padding: 7.7rem 10.4rem 17rem;
-}
-
-.content-box h1, h2{
+.content-box h1, .content-box h2{
     font-family: var(--font-family-title);
     line-height: 130%;
     color: var(--font-color-title);
@@ -69,12 +66,11 @@ header nav a:hover{
 .content-box h1{
     font-size: 3.9rem;   
     font-weight: medium;
-
-    margin-bottom: 4.1rem;
 }
 
 .content-box h2{
     font-size: 2.5rem;
+    font-weight: 400;
 }
 
 .input-container input:focus{
@@ -88,7 +84,7 @@ header nav a:hover{
     color: rgba(0, 0, 0, 0.5);
 }
 
-#btn-login{
+/* #btn-login{
     width: 100%;
     padding: 1.6rem;
     margin: 3.3rem 0;
@@ -103,7 +99,7 @@ header nav a:hover{
 
 #btn-login:hover{
     background-color: var(--bg-color-btn-hover);
-}
+} */
 
 .links-container{
     display: flex;
@@ -176,4 +172,8 @@ header nav a:hover{
 
 .input-row .medium{
     width: 50%;
+}
+
+.gap-no-label{
+    gap: 2rem;
 }

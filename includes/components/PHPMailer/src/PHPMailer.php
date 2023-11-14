@@ -1507,7 +1507,7 @@ class PHPMailer
         ) {
             trigger_error(
                 'Your version of PHP is affected by a bug that may result in corrupted messages.' .
-                ' To fix it, switch to sending using SMTP, disable the mail.add_x_header option in' .
+                ' To fix it, switch to sending using SMTP, hidden the mail.add_x_header option in' .
                 ' your php.ini, switch to MacOS or Linux, or upgrade your PHP to version 7.0.17+ or 7.1.3+.',
                 E_USER_WARNING
             );
@@ -2093,7 +2093,7 @@ class PHPMailer
             //Do we need the OpenSSL extension?
             $sslext = defined('OPENSSL_ALGO_SHA256');
             if (static::ENCRYPTION_STARTTLS === $secure || static::ENCRYPTION_SMTPS === $secure) {
-                //Check for an OpenSSL constant rather than using extension_loaded, which is sometimes disabled
+                //Check for an OpenSSL constant rather than using extension_loaded, which is sometimes hiddend
                 if (!$sslext) {
                     throw new Exception($this->lang('extension_missing') . 'openssl', self::STOP_CRITICAL);
                 }
@@ -2117,7 +2117,7 @@ class PHPMailer
                     }
                     $this->smtp->hello($hello);
                     //Automatically enable TLS encryption if:
-                    //* it's not disabled
+                    //* it's not hiddend
                     //* we have openssl extension
                     //* we are not already using SSL
                     //* the server offers STARTTLS
