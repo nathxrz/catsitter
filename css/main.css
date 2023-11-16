@@ -14,7 +14,9 @@
 
     --font-color-primary: #326B73;
     --font-color-secondary: #5A9DA6;
+    --font-color-third: #878D96;
     --font-color-title: #326B73;
+    --font-color-neutral: #000;
     --font-color-links-footer-primary: #65B5BF;
     --font-color-links-footer-secondary: #fff;
 
@@ -37,6 +39,11 @@ body{
     font-family: var(--font-family-primary);
     
     position: relative;
+}
+
+main{
+    height: auto;
+    min-height: calc(100vh - 1rem);
 }
 
 main::before{
@@ -75,7 +82,7 @@ main::after{
 }
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 .filter{
@@ -96,7 +103,7 @@ main::after{
     filter: opacity(32%);
 }
 
-.reset-btn{
+.reset-btn-decoration{
     background: none;
     border: none;
 
@@ -104,7 +111,7 @@ main::after{
     transition: all 0.3s;
 }
 
-.reset-btn:hover{
+.reset-btn-decoration:hover{
     transform: scale(1.1);
 }
 
@@ -153,8 +160,8 @@ main::after{
 
 .content-box{
     background-color: var(--bg-color-forms);
-    border-radius: 4.4rem;
-    padding: 6.6rem;
+    border-radius: 2.4rem;
+    padding: 4.5rem 3.6rem;
 
     width: 49rem;
 
@@ -171,12 +178,27 @@ main::after{
     font-weight: 400;
 }
 
+.position-forms{
+    padding: 7.7rem 10.4rem 17rem;
+}
+
 .form-container{
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
 
     margin: 2.3rem 0 3.9rem;
+}
+
+.input-container input:focus{
+    outline: 2px solid var(--border-color-focus);
+}
+
+.input-container::placeholder{
+    font-family: var(--font-family-primary);
+    font-size: 1.4rem;
+    line-height: 140%;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .input-container label{
@@ -186,7 +208,7 @@ main::after{
     line-height: 1.6rem;
 }
 
-.input-container input, .input-container select{
+.input-container input, .input-container select, .input-container textarea{
     background-color: var(--bg-color-input);
     border: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.25);
@@ -205,9 +227,22 @@ main::after{
     outline: 2px solid var(--border-color-focus);
 }
 
-/* .radio-container{
-    display: grid;
-} */
+.input-row{
+    display: flex;
+    gap: 2.4rem;
+}
+
+.input-row .large{
+    width: 70%;
+}
+
+.input-row .small{
+    width: 30%;
+}
+
+.input-row .medium{
+    width: 50%;
+}
 
 .center{
     text-align: center;
@@ -267,6 +302,36 @@ main::after{
     border: 1px solid var(--border-color);
 }
 
+.profile{
+    background-color: var(--bg-color-forms);
+    border-radius: 2.4rem;
+    padding: 5rem;
+
+    width: 90%;
+
+    box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.19);
+
+    position: relative;
+
+    z-index: 0;
+}
+
+.profile::before{
+    content: '';
+    width: 100%;
+    height: 9rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: -1;
+
+    background-color: var(--bg-header-card);
+
+    border-radius: 2.3rem 2.3rem 0 0;
+}
+
 .btn-submit{
     color: var(--font-color-links-footer-secondary);
     font-family: var(--font-family-primary);
@@ -292,12 +357,80 @@ main::after{
     background-color: var(--bg-color-btn-hover);
 }
 
+.card-profile-content{
+    display: flex;
+    gap: 6rem;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.user-info{
+    display: inline-block;
+    text-align: center;
+    
+    margin-left: 2rem;
+
+    position: relative;
+}
+
+.user-info h3{
+    font-size: 2.4rem;
+    font-weight: bold;
+
+    color: var(--font-color-primary);
+
+    margin-top: 1.3rem;
+}
+
+.btn-edit-image{
+    position: absolute;
+    top: 7rem;
+    right: 4.5rem;
+
+    z-index: 0;
+}
+
+.profile-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+
+    width: calc(33.333% - 4rem) !important;
+}
+
+.info-container-profile p{
+    color: var(--font-color-neutral);
+}
+
+.info-container-profile span{
+    color: var(--font-color-third);
+}
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+
+    z-index: 1;
+}
+
 
 footer{
     background-color: var(--bg-footer);
     font-family: var(--font-family-footer);
 
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.19);
+
+    width: 100%;
+
+    position: relative;
+    bottom: 0;
 }
 
 .footer-container{

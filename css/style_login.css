@@ -73,16 +73,7 @@
     font-weight: 400;
 }
 
-.input-container input:focus{
-    outline: 2px solid var(--border-color-focus);
-}
 
-.input-container::placeholder{
-    font-family: var(--font-family-primary);
-    font-size: 1.4rem;
-    line-height: 140%;
-    color: rgba(0, 0, 0, 0.5);
-}
 
 /* #btn-login{
     width: 100%;
@@ -157,22 +148,7 @@
     justify-content: space-between;
 }
 
-.input-row{
-    display: flex;
-    gap: 2.4rem;
-}
 
-.input-row .large{
-    width: 70%;
-}
-
-.input-row .small{
-    width: 30%;
-}
-
-.input-row .medium{
-    width: 50%;
-}
 
 .gap-no-label{
     gap: 2rem;

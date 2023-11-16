@@ -46,7 +46,7 @@
                     if($user_catsitter){
                         $_SESSION["cod_usuario"]=$user_catsitter['cod_catsitter'];
                         sendLoginEmail($email);
-                        header("Location:catsitter_home_page.php");
+                        header("Location:sitter_home_page.php");
                     }else{
                         sendLoginEmail($email);
                         header("Location:tutor_home_page.php");

@@ -104,7 +104,7 @@
                             </div>
                             <div class="input-container">
                                 <label for="telephone">Telefone</label>
-                                <input type="text" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx" autocomplete="off" required>
+                                <input type="tel" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
@@ -112,13 +112,13 @@
                     <!-- form 3 --> 
                     <div class="hidden">
                         <h2>Endereço</h2>
-                        <div class='input-container'>
+                        <div class='form-container'>
                             <div class="input-container">
                                 <label for="cep">CEP</label>
                                 <input type="text" id="cep" name="cep" placeholder="xxxxx-xxx" autocomplete="off" required>
                             </div>
 
-                            <div class="input-row">
+                            <div class="input-container input-row">
                                 <div class='large'>
                                     <label for="street">Rua</label>
                                     <input type="text" id="street" name="street" placeholder="Bento Martins" autocomplete="off" required>
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div class="input-row">
+                            <div class="input-container input-row">
                                 <div class='medium'>
                                     <label for="city">Cidade</label>
                                     <input type="text" id="city" name="city" placeholder="Pelotas" autocomplete="off" required>
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
 
-                            <div class="input-row">
+                            <div class="input-container input-row">
                                 <div class='small'>
                                     <label for="country">País</label>
                                     <input type="text" id="country" name="country" placeholder="Brasil" autocomplete="off" required>

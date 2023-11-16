@@ -1,6 +1,6 @@
 <?php
     $style ="style";
-    $title = 'Agenda';
+    $title = 'Agendamentos';
 
     require("./includes/components/head.php");
 
