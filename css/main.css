@@ -400,10 +400,24 @@ main::after{
 
 .info-container-profile p{
     color: var(--font-color-neutral);
+    margin-bottom: .5rem;
 }
 
 .info-container-profile span{
     color: var(--font-color-third);
+}
+
+.info-container-profile a{
+    text-decoration: none;
+    color: var(--font-color-third);
+
+    display: block;
+
+    margin-bottom: 1.3rem;
+}
+
+.info-container-profile a:hover{
+    color: var(--font-color-primary);
 }
 
 .modal{
