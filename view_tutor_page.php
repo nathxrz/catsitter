@@ -1,6 +1,6 @@
 <?php
     $style ="style";
-    $title = 'Perfil';
+    $title = 'Tutor';
 
     require("./includes/components/head.php");
 
@@ -99,10 +99,9 @@
                     </div>
                 </div>                
                 <div class="content-box profile-content">
-                        <h2>Informações de Cadastro</h2>
+                        <h2>Pets</h2>
     
                         <div class='info-container-profile'>
-                            <p>Pets: </p>
                               <a href="view_pet_page.php">Bartholomeu</a>
                               <a href="view_pet_page.php">Bartholomeu</a>
                         </div>

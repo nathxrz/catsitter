@@ -247,7 +247,7 @@
 
     background-color: var(--bg-header-card);
 
-    border-radius: 1.9rem 1.9rem 0 0;
+    border-radius: 1.4rem 1.4rem 0 0;
 }
 
 .appointment-information{
@@ -293,8 +293,8 @@
 }
 
 .btn-profile-position{
-    right: 5.9rem;
-    bottom: 4.1rem;
+    right: 3.9rem;
+    bottom: 3.1rem;
 }
 
 .close{
@@ -315,3 +315,28 @@
     gap: 1.3rem;
     width: 50%;
 }
+
+.input-filter{
+    border: 1px solid red;
+
+    width: 49rem;
+
+    display: flex;
+
+    justify-content: end;
+    align-items: center;
+
+    gap: 2rem;
+}
+
+.input-filter input{
+    width: 80%;
+    margin: 0;
+}
+
+.input-filter button{
+    width: 20%;
+    padding: 1.3rem;
+    margin: 0;
+}
+

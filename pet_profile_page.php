@@ -306,7 +306,7 @@
         </section>
 
                 <!-- form galeria-->
-                <section class="position-forms modal hidden">
+        <section class="position-forms modal hidden">
             <div class="content-box">
                 <form action="pet_profile_page.php" method="POST">
 

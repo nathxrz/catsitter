@@ -1,6 +1,6 @@
 <?php
     $style ="style";
-    $title = 'Pet';
+    $title = 'Cat sitter';
 
     require("./includes/components/head.php");
 
@@ -24,57 +24,90 @@
 
             <div class='user-info'>
                 <img class="img-profile" src="images/foto.png" alt="">
-                <h3>Bartholomeu</h3>
+                <h3>Maria Fagundes</h3>
             </div>
 
             <div class='card-profile-content'>
 
                 <div class="content-box profile-content">
                     <h2>Informações básicas</h2>
-
+    
                     <div class='info-container-profile'>
                         <p>Data de nascimento: </p>
-                        <span>11/11/1111</span>
+                        <span>20/03/1999</span>
+                    </div>
+    
+                    <div class='info-container-profile'>
+                        <p>Gênero: </p>
+                        <span>Femino</span>
+                    </div>
+    
+                    <div class='info-container-profile'>
+                        <p>CPF: </p>
+                        <span>XXX.XXX.XXX.XX</span>
                     </div>
 
                     <div class='info-container-profile'>
-                        <p>Sexo: </p>
-                        <span>Macho</span>
-                    </div>
-
-                    <div class='info-container-profile'>
-                        <p>Raça: </p>
-                        <span>Viralata</span>
-                    </div>
-                </div>
-    
-                <!-- fazer modal -->
-                <div class="content-box profile-content">
-                    <h2>Rotina</h2>
-    
-                    <div class='info-container-profile'>
-                        <p>Nenhuma rotina informada.</p>
-                    </div>
-                </div>
-
-                <!-- fazer modal -->
-                <div class="content-box profile-content">
-                    <h2>Ficha médica</h2>
-    
-                    <div class='info-container-profile'>
-                        <p>Nenhuma ficha médica informada.</p>
+                        <p>Telefone: </p>
+                        <span>(XX) XXXXX-XXXX</span>
                     </div>
                 </div>
 
                 <div class="content-box profile-content">
-                    <h2>Contato de emergência</h2>
+                    <h2>Endereço</h2>
 
                     <div class='info-container-profile'>
-                        <p>(XX) XXXXX-XXXX</p>
+                        <p>CEP: </p>
+                        <span>XXXXX-XXX</span>
+                    </div>
+
+                    <div class='info-group-container'>
+                        <div class='info-group'>
+                            <div class='info-container-profile'>
+                                <p>Rua: </p>
+                                <span>Almirante Barroso</span>
+                            </div>
+    
+                            <div class='info-container-profile'>
+                                <p>Cidade: </p>
+                                <span>Pelotas</span>
+                            </div>
+    
+                            <div class='info-container-profile'>
+                                <p>País: </p>
+                                <span>Brasil</span>
+                            </div>
+            
+                        </div>
+                        
+                        <div class='info-group'>
+                            <div class='info-container-profile'>
+                                <p>nº: </p>
+                                <span>2733</span>
+                            </div>
+        
+                            <div class='info-container-profile'>
+                                <p>Estado: </p>
+                                <span>Rio Grande do Sul</span>
+                            </div>
+    
+                            <div class='info-container-profile'>
+                                <p>Complemento: </p>
+                                <span>ap. 301b</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                
+                <div class="content-box profile-content">
+                    <h2>Distintivos</h2>
+    
+                    <div class='info-container-profile'>
+                        <p>Emergencial: </p>
+                        <span>Está disponível para atendimentos emergenciais.</span>
                     </div>
                 </div>
 
-                <!-- fazer modal -->
                 <div class="content-box profile-content">
                     <h2>Galeira de fotos</h2>
     
@@ -82,9 +115,9 @@
                         <p>Nenhuma foto adicionada.</p>
                     </div>
                 </div>
+
             </div>
         </section>
-
     </main>
 
     <?php
