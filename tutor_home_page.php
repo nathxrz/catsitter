@@ -27,6 +27,7 @@
                             <label class='radio-input'>
                                 <input type="radio" id="diaria" name="type" value="diaria" checked/>
                                 
+                                <!-- precisa do for no p? -->
                                 <div>
                                     <p for="diaria">Diária:</p>
                                     <span>Visitas com duração de 45 min a 1h e 30min.</span>
@@ -97,10 +98,10 @@
 
         <section class=''>
             <div class='content-box position-content'>
-                <div class='input-container input-filter'>
-                        <input type="text">
+                <div class='input-container position-filter'>
+                        <input type="text" placeholder='Pesquisar Cat sitter'>
                 </div>
-
+                
                 <!-- modal de confirmação de agendamento -->
                 <div class='card-content'>
                     <div class="card-profile">

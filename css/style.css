@@ -80,6 +80,22 @@
     margin-top: .5rem;
 }
 
+.radio-adm-content{
+    display: flex;
+
+    justify-content: end;
+    gap: 4rem;
+
+    align-items: center;
+}
+
+.radio-adm-input{
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+}
+
 .checkbox-input{
     padding-left: 1rem;
     display: flex;
@@ -316,27 +332,19 @@
     width: 50%;
 }
 
-.input-filter{
-    border: 1px solid red;
-
-    width: 49rem;
-
+.position-filter{
     display: flex;
-
     justify-content: end;
+    margin-right: 1.2rem;
+
     align-items: center;
 
-    gap: 2rem;
+    gap: 4rem;
+
+    margin: 0 1.2rem 2rem;
 }
 
-.input-filter input{
-    width: 80%;
-    margin: 0;
-}
-
-.input-filter button{
-    width: 20%;
-    padding: 1.3rem;
-    margin: 0;
+.input-container input{
+   width: 32rem;
 }
 
