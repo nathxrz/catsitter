@@ -3,11 +3,89 @@
     $title = 'Perfil';
 
     require("./includes/components/head.php");
+    require('./includes/components/authenticator.php');
+    require('./includes/components/connect.php');
+    require('./includes/components/functions.php');
 
+    $_SESSION["msg_error"] = '';
+
+    if(isset($_GET['editBasicInfo'])){
+        if(isset($_POST['name']) and isset($_POST['lastname']) and isset($_POST['birth']) and isset($_POST['gender']) and isset($_POST['cpf']) and isset($_POST['telephone'])){
+            $name = $_POST['name'];
+            $lastname = $_POST['lastname'];
+            $birth = $_POST['birth'];
+            $gender = $_POST['gender'];
+            $cpf = $_POST['cpf'];
+            $telephone = $_POST['telephone'];
+            $array = [$name, $lastname, $birth, $gender, $cpf, $_SESSION['cod_usuario']];
+
+            updateInfoBasic($array, $pdo);
+            updateFone($_SESSION['cod_usuario'], $telephone, $pdo);
+
+            $link = "tutor_profile_page.php";
+            redirect($link);
+        }else{
+            $_SESSION["msg_error"] = 'Preencha todos os campos obrigatórios. *';
+        }        
+    }
+
+    if(isset($_GET['editAddress'])){
+        if(isset($_POST['cep']) and isset($_POST['street']) and isset($_POST['number']) and isset($_POST['city']) and isset($_POST['state']) and isset($_POST['country']) and isset($_POST['complement'])){
+            $cep = $_POST['cep'];
+            $street = $_POST['street'];
+            $number = $_POST['number'];
+            $city = $_POST['city'];
+            $state = $_POST['state'];
+            $country = $_POST['country'];
+            $complement = $_POST['complement'];
+            $array = [$cep, $street, $number, $city, $state, $country, $complement, $_SESSION['cod_usuario']];
+
+            updateAddress($array, $pdo);
+
+            $link = "tutor_profile_page.php";
+            redirect($link);
+        }else{
+            $_SESSION["msg_error"] = 'Preencha todos os campos obrigatórios. *';
+        }        
+    }
+
+    if(isset($_SESSION["cod_usuario"])){
+        $profile = searchUser($_SESSION["email"], $pdo);
+        $foneUser = getFoneById($_SESSION["cod_usuario"], $pdo);
+    }
+
+    if(isset($_GET['newPassword'])){
+        if(isset($_POST['password']) and isset($_POST['new_password'])){
+            if(password_verify($_POST['password'], $profile['senha'])){
+                $password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+                $array = [$password, md5($_SESSION['email'])];
+                updatePassword($array, $pdo);
+
+                $link = "tutor_profile_page.php";
+                redirect($link);
+            }else{
+                $_SESSION['msg_error'] = 'Senha atual incorreta.';
+            }
+        }else{
+            $_SESSION['msg_error'] = 'Preencha todos os campos obrigatórios. *';
+        }   
+    }
+
+    if(isset($_GET['editFoto'])){
+        $user = $_SESSION['cod_usuario'];
+
+        $source_file_name = $_FILES['file']['name'];  
+        $file_size = $_FILES['file']['size']; 
+        $temporary_file = $_FILES['file']['tmp_name'];
+        $file_name = date('YmdHisu') . '.' . pathinfo($source_file_name, PATHINFO_EXTENSION);
+        move_uploaded_file($temporary_file, "images/$file_name"); 
+
+        updateFotoUser($user, $file_name, $pdo);
+
+        $link = "tutor_profile_page.php";
+        redirect($link);
+    }
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php
@@ -23,8 +101,10 @@
             </a>
 
             <div class='user-info'>
-                <img class="img-profile" src="images/foto.png" alt="">
-                <h3>Nathalia Machado</h3>
+                <div class='profile-user'>
+                    <img class="img-profile" src="images/<?php echo $profile['foto']?>" alt="">
+                    <h3><?php echo $profile['nome'] ." ". $profile['sobrenome']?></h3>
+                </div>
                 <button class='reset-btn-decoration btn-edit-image'>
                     <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="13.5" cy="13.5" r="13.5" fill="#BF6C2C"/>
@@ -47,22 +127,22 @@
     
                     <div class='info-container-profile'>
                         <p>Data de nascimento: </p>
-                        <span>20/03/1999</span>
+                        <span><?php echo $profile['dt_nascimento']?></span>
                     </div>
     
                     <div class='info-container-profile'>
                         <p>Gênero: </p>
-                        <span>Femino</span>
+                        <span><?php echo $profile['genero']?></span>
                     </div>
     
                     <div class='info-container-profile'>
                         <p>CPF: </p>
-                        <span>XXX.XXX.XXX.XX</span>
+                        <span><?php echo $profile['cpf']?></span>
                     </div>
 
                     <div class='info-container-profile'>
                         <p>Telefone: </p>
-                        <span>(XX) XXXXX-XXXX</span>
+                        <span><?php echo $foneUser['telefone']?></span>
                     </div>
     
                     <button class='reset-btn-decoration btn-profile-position'>
@@ -84,24 +164,24 @@
 
                     <div class='info-container-profile'>
                         <p>CEP: </p>
-                        <span>XXXXX-XXX</span>
+                        <span><?php echo $profile['cep']?></span>
                     </div>
 
                     <div class='info-group-container'>
                         <div class='info-group'>
                             <div class='info-container-profile'>
                                 <p>Rua: </p>
-                                <span>Almirante Barroso</span>
+                                <span><?php echo $profile['rua']?></span>
                             </div>
     
                             <div class='info-container-profile'>
                                 <p>Cidade: </p>
-                                <span>Pelotas</span>
+                                <span><?php echo $profile['cidade']?></span>
                             </div>
     
                             <div class='info-container-profile'>
                                 <p>País: </p>
-                                <span>Brasil</span>
+                                <span><?php echo $profile['pais']?></span>
                             </div>
             
                         </div>
@@ -109,18 +189,20 @@
                         <div class='info-group'>
                             <div class='info-container-profile'>
                                 <p>nº: </p>
-                                <span>2733</span>
+                                <span><?php echo $profile['numero']?></span>
                             </div>
         
                             <div class='info-container-profile'>
                                 <p>Estado: </p>
-                                <span>Rio Grande do Sul</span>
+                                <span><?php echo $profile['estado']?></span>
                             </div>
-    
-                            <div class='info-container-profile'>
-                                <p>Complemento: </p>
-                                <span>ap. 301b</span>
-                            </div>
+
+                            <?php if(!$profile['complemento'] == ''){ ?>
+                                <div class='info-container-profile'>
+                                    <p>Complemento: </p>
+                                    <span><?php echo $profile['complemento']?></span>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -139,17 +221,17 @@
                     </button>
                 </div>                
                 <div class="content-box profile-content">
-                        <h2>Informações de Cadastro</h2>
-    
-                        <div class='info-container-profile'>
-                            <p>E-mail: </p>
-                            <span>nathyrezendemachado@gmail.com</span>
-                        </div>
-    
-                        <button class='reset-password-btn'>
-                            Redefinir senha
-                        </button>
+                    <h2>Informações de Cadastro</h2>
+
+                    <div class='info-container-profile'>
+                        <p>E-mail: </p>
+                        <span><?php echo $profile['email']?></span>
                     </div>
+
+                    <button class='reset-password-btn'>
+                        Redefinir senha
+                    </button>
+                </div>
             </div>
 
         </section>
@@ -157,7 +239,7 @@
         <!-- form info pessoal -->
         <section class="position-forms modal hidden">
             <div class="content-box">
-                <form action="tutor_profile_page.php" method="POST">
+                <form action="tutor_profile_page.php?editBasicInfo" method="POST">
 
                     <button class='close reset-btn-decoration'>
                         <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,33 +250,33 @@
                     <h2>Informações pessoais</h2>
                     <div class="form-container">
                         <div class="input-container">
-                            <label for="name">Nome</label>
-                            <input type="text" id="name" name="name" placeholder="Nome do usuário" autocomplete="off" required>
+                            <label for="name">Nome *</label>
+                            <input type="text" id="name" name="name" placeholder="Nome do usuário" autocomplete="off" value="<?php echo $profile['nome']?>" required>
                         </div>
                         <div class="input-container">
-                            <label for="lastname">Sobrenome</label>
-                            <input type="text" id="lastname" name="lastname" placeholder="Sobrenome" autocomplete="off" required>
+                            <label for="lastname">Sobrenome *</label>
+                            <input type="text" id="lastname" name="lastname" placeholder="Sobrenome" autocomplete="off" value="<?php echo $profile['sobrenome']?>" required>
                         </div>
                         <div class="input-container">
-                            <label for="birth">Data de nascimento</label>
-                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" required>
+                            <label for="birth">Data de nascimento *</label>
+                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" value="<?php echo $profile['dt_nascimento']?>" required>
                         </div>
                         <div class="input-container">
-                            <label for="gender">Gênero</label>
+                            <label for="gender">Gênero *</label>
                             <select name="gender" id="gender">
-                                <option value="Feminino">Feminino</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Outro">Outro</option>
-                                <option value="Não informado">Não informado</option>
+                                <option value="Feminino" <?php if($profile['genero'] == 'Feminino') echo "selected"?>>Feminino</option>
+                                <option value="Masculino" <?php if($profile['genero'] == 'Masculino') echo "selected"?>>Masculino</option>
+                                <option value="Outro" <?php if($profile['genero'] == 'Outro') echo "selected"?>>Outro</option>
+                                <option value="Não informado" <?php if($profile['genero'] == 'Não informado') echo "selected"?>>Não informado</option>
                             </select>
                         </div>
                         <div class="input-container">
-                            <label for="cpf">CPF</label>
-                            <input type="text" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" autocomplete="off" required>
+                            <label for="cpf">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" autocomplete="off" value="<?php echo $profile['cpf']?>" required>
                         </div>
                         <div class="input-container">
-                            <label for="telephone">Telefone</label>
-                            <input type="tel" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx" autocomplete="off" required>
+                            <label for="telephone">Telefone *</label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx" autocomplete="off" value="<?php echo $foneUser['telefone']?>" required>
                         </div>
                     </div>
     
@@ -203,13 +285,20 @@
                     </button>
                     
                 </form>
+
+                <div class='msg'>
+                    <span class="msg-error">
+                        <?php echo ($_SESSION["msg_error"]); ?>
+                    </span>
+                </div>
+
             </div>
         </section>
 
         <!-- form endereço -->
         <section class="position-forms modal hidden">
             <div class="content-box">
-                <form action="tutor_profile_page.php" method="POST">
+                <form action="tutor_profile_page.php?editAddress" method="POST">
 
                     <button class='close reset-btn-decoration'>
                         <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -221,39 +310,39 @@
                     <div class='form-container'>
                         <div class="input-container">
                             <label for="cep">CEP</label>
-                            <input type="text" id="cep" name="cep" placeholder="xxxxx-xxx" autocomplete="off" required>
+                            <input type="text" id="cep" name="cep" placeholder="xxxxx-xxx" autocomplete="off" value="<?php echo $profile['cep']?>" required>
                         </div>
 
                         <div class="input-container input-row">
                             <div class='large'>
                                 <label for="street">Rua</label>
-                                <input type="text" id="street" name="street" placeholder="Bento Martins" autocomplete="off" required>
+                                <input type="text" id="street" name="street" placeholder="Bento Martins" autocomplete="off" value="<?php echo $profile['rua']?>" required>
                             </div>
                             <div class='small'>
                                 <label for="number">nº</label>
-                                <input type="text" id="number" name="number" placeholder="12345" autocomplete="off" required>
+                                <input type="text" id="number" name="number" placeholder="12345" autocomplete="off" value="<?php echo $profile['numero']?>" required>
                             </div>
                         </div>
 
                         <div class="input-container input-row">
                             <div class='medium'>
                                 <label for="city">Cidade</label>
-                                <input type="text" id="city" name="city" placeholder="Pelotas" autocomplete="off" required>
+                                <input type="text" id="city" name="city" placeholder="Pelotas" autocomplete="off" value="<?php echo $profile['cidade']?>" required>
                             </div>
                             <div class='medium'>
                                 <label for="state">Estado</label>
-                                <input type="text" id="state" name="state" placeholder="RS" autocomplete="off" required>
+                                <input type="text" id="state" name="state" placeholder="RS" autocomplete="off" value="<?php echo $profile['estado']?>" required>
                             </div>
                         </div>
 
                         <div class="input-container input-row">
                             <div class='small'>
                                 <label for="country">País</label>
-                                <input type="text" id="country" name="country" placeholder="Brasil" autocomplete="off" required>
+                                <input type="text" id="country" name="country" placeholder="Brasil" autocomplete="off" value="<?php echo $profile['pais']?>" required>
                             </div>
                             <div class='large'>
                                 <label for="complement">Complemento</label>
-                                <input type="text" id="complement" name="complement" placeholder="bloco 2" autocomplete="off">
+                                <input type="text" id="complement" name="complement" placeholder="bloco 2" value="<?php echo $profile['complemento']?>" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -263,13 +352,47 @@
                     </button>
                     
                 </form>
+
+                <div class='msg'>
+                    <span class="msg-error">
+                        <?php echo ($_SESSION["msg_error"]); ?>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+                <!-- form foto -->
+        <section class="position-forms modal hidden">
+            <div class="content-box">
+                <form action="tutor_profile_page.php?editFoto" method="POST" enctype="multipart/form-data">
+
+                    <button type='button' class='close reset-btn-decoration'>
+                        <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.6742 18.5L30.3867 8.8029C30.677 8.5126 30.8401 8.11886 30.8401 7.70831C30.8401 7.29777 30.677 6.90403 30.3867 6.61373C30.0964 6.32343 29.7027 6.16034 29.2921 6.16034C28.8816 6.16034 28.4879 6.32343 28.1976 6.61373L18.5005 16.3262L8.80339 6.61373C8.51309 6.32343 8.11936 6.16034 7.70881 6.16034C7.29826 6.16034 6.90453 6.32343 6.61423 6.61373C6.32392 6.90403 6.16083 7.29777 6.16083 7.70831C6.16083 8.11886 6.32392 8.5126 6.61423 8.8029L16.3267 18.5L6.61423 28.1971C6.46973 28.3404 6.35504 28.5109 6.27677 28.6988C6.1985 28.8866 6.1582 29.0881 6.1582 29.2916C6.1582 29.4952 6.1985 29.6967 6.27677 29.8845C6.35504 30.0724 6.46973 30.2429 6.61423 30.3862C6.75754 30.5307 6.92805 30.6454 7.11592 30.7237C7.30379 30.802 7.50529 30.8423 7.70881 30.8423C7.91233 30.8423 8.11383 30.802 8.3017 30.7237C8.48956 30.6454 8.66007 30.5307 8.80339 30.3862L18.5005 20.6737L28.1976 30.3862C28.3409 30.5307 28.5114 30.6454 28.6993 30.7237C28.8871 30.802 29.0886 30.8423 29.2921 30.8423C29.4957 30.8423 29.6972 30.802 29.885 30.7237C30.0729 30.6454 30.2434 30.5307 30.3867 30.3862C30.5312 30.2429 30.6459 30.0724 30.7242 29.8845C30.8025 29.6967 30.8427 29.4952 30.8427 29.2916C30.8427 29.0881 30.8025 28.8866 30.7242 28.6988C30.6459 28.5109 30.5312 28.3404 30.3867 28.1971L20.6742 18.5Z" fill="#326B73"/>
+                        </svg>
+                    </button>
+                
+                    <h2>Foto de perfil</h2>
+                    <div class='form-container'>
+                    <img class="img-profile img-position-form" src="images/<?php echo $profile['foto']?>" alt="">
+                         <div class="input-container">
+                            <label for="file">Adicione uma foto de perfil: *</label>
+                            <input type="file" id="file" name="file" accept=".png, .jpg, .jpeg" required>
+                        </div>
+                    </div>
+    
+                    <button type="submit" class="btn-submit" name="login" value="login">
+                        Editar!
+                    </button>
+                    
+                </form>
             </div>
         </section>
 
         <!-- form troca senha-->
         <section class="position-forms modal hidden">
             <div class="content-box">
-                <form action="tutor_profile_page.php" method="POST">
+                <form action="tutor_profile_page.php?newPassword" method="POST">
 
                     <button class='close reset-btn-decoration'>
                         <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -278,7 +401,7 @@
                     </button>
                 
                     <h2>Redefinir nova senha</h2>
-                    <div class="form-container" >
+                    <div class="form-container">
                         <div class="input-container">
                             <label for="password">Senha atual</label>
                             <input type="password" id="password" name="password" placeholder="********" autocomplete="off" required>
@@ -294,6 +417,13 @@
                     </button>
                     
                 </form>
+
+                <div class='msg'>
+                    <span class="msg-error">
+                        <?php echo ($_SESSION["msg_error"]); ?>
+                    </span>
+                </div>
+
             </div>
         </section>
     </main>

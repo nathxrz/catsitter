@@ -1,7 +1,4 @@
 <?php
-
-session_start();
-
     require("./includes/components/functions.php");
     
     if(isset($_GET['email'])){

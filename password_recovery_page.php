@@ -2,11 +2,9 @@
     $style ="style_login";
     $title = 'Esqueceu a senha?';
 
-session_start();
+    $_SESSION["email_enviado"] = "";
 
-$_SESSION["msg_envia-email"] = "";
-$_SESSION["msg_error"] = "";
-
+    $_SESSION["msg_error"] = "";
 
     require("./includes/components/functions.php");
     require("./includes/components/head.php");
@@ -21,19 +19,14 @@ $_SESSION["msg_error"] = "";
             createRequestToChangePassword($email, $key, $pdo);
             sendEmailToChangePassword($email, $key, $pdo);
 
-            $_SESSION["msg_envia-email"] = "E-mail enviado!";
+            $_SESSION["email_enviado"] = "E-mail enviado!";
 
             header("Location:login.php");
         }else{
-          $_SESSION["msg"] = "E-mail inválido";
+          $_SESSION["msg_error"] = "E-mail inválido";
         }
     }
-
-    
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php
@@ -57,6 +50,12 @@ $_SESSION["msg_error"] = "";
                         </button>
                     </div>
                 </form>
+
+                <div class="msg">
+                    <span class="msg-error">
+                        <?php echo ($_SESSION["msg_error"]); ?>
+                    </span>
+                </div>
             </div>
 
             <div class="content-box hidden">
@@ -64,14 +63,7 @@ $_SESSION["msg_error"] = "";
             </div>
 
             <div>
-                <span class="msg-error">
-                <?php
-                    echo ($_SESSION["msg_confirma"]);
-                ?>
-                <?php
-                    echo ($_SESSION["msg_error"]);
-                ?>
-                </span>
+                
             </div>
         </section>
     </main>

@@ -2,10 +2,14 @@
     $style ="style_login";
     $title = 'Alteração de senha';
 
-    session_start();
+    
 
     require("./includes/components/functions.php");
     require("./includes/components/head.php");
+
+    $_SESSION["senha_atualizada"] = "";
+
+    $_SESSION["senha_atualizada_error"] = "";
 
     $email= $_GET['email'];
     $key = $_GET['confirmation'];
@@ -28,11 +32,11 @@
             if($update_password){
                 deleteRequest($email, $key, $pdo);
 
-                $_SESSION["senha_atualizada_msg"] = "Senha atualizada com sucesso!";
+                $_SESSION["senha_atualizada"] = "Senha atualizada com sucesso!";
 
                 header("Location:login.php");
             }else{
-                $_SESSION["senha_atualizada_msg"] = "Erro ao atualizar a senha";
+                $_SESSION["senha_atualizada_error"] = "Erro ao atualizar a senha";
 
                 header("Location:login.php");
             }
@@ -42,9 +46,6 @@
     }
     
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php

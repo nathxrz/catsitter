@@ -2,28 +2,35 @@
     $style ="style_login";
     $title = 'Login';
 
-    session_start();
+    
 
     require("./includes/components/head.php");
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
 
 
-    $_SESSION["msg"] = "";
+    $_SESSION["msg_error"] = "";
     
-
-    if(!isset($_SESSION['msg_envia-email'])){
-        $_SESSION["msg_envia-email"] = "";
+    
+    if(!isset($_SESSION['msg_confirma_email'])){
+        $_SESSION["msg_confirma_email"] = "";
     }
-    
+
     if(!isset($_SESSION['msg_confirma'])){
         $_SESSION["msg_confirma"] = "";
     }
     
-    if(!isset($_SESSION["senha_atualizada_msg"])){
-        $_SESSION["senha_atualizada_msg"] = "";
+    if(!isset($_SESSION["senha_atualizada"])){
+        $_SESSION["senha_atualizada"] = "";
     }
 
+    if(!isset($_SESSION["email_enviado"])){
+        $_SESSION["email_enviado"] = "";
+    }
+
+    if(!isset($_SESSION["senha_atualizada_error"])){
+        $_SESSION["senha_atualizada_error"] = "";
+    }
 
     if(isset($_POST['email']) and isset($_POST['password'])){
         $email=$_POST["email"];
@@ -35,34 +42,39 @@
             $user = searchUser($email, $pdo);
 
             if($login){
+
                 if($user['confirma_email'] == 1){
                     
                     $_SESSION["logged"]=true;
                     $_SESSION["email"]=$email;
                     $_SESSION["cod_usuario"]=$user['cod_usuario'];
 
+
+                    if($user['adm'] == 1){
+                        $_SESSION["adm"]=true;
+                        header("Location:adm_home_page.php");
+                        exit;
+                    }
+
                     $user_catsitter = searchUserCatSitter($user["cod_usuario"], $pdo);
 
                     if($user_catsitter){
-                        $_SESSION["cod_usuario"]=$user_catsitter['cod_catsitter'];
+                        $_SESSION["cod_catsitter"]=$user_catsitter['cod_catsitter'];
                         sendLoginEmail($email);
-                        header("Location:sitter_home_page.php");
+                        header("Location:sitter_schedule_page.php");
                     }else{
                         sendLoginEmail($email);
                         header("Location:tutor_home_page.php");
                     }
                 }else{
-                    $_SESSION["msg"]="Confirme seu e-mail!";
+                    $_SESSION["msg_confirma_email"]="Confirme seu e-mail!";
                 }
             }else{
-                $_SESSION["msg"]="Usuário ou senha inválidos!";
+                $_SESSION["msg_error"]="Usuário ou senha inválidos!";
             }
         }
     }
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php
@@ -93,29 +105,40 @@
                     <a href="create_account.php">Criar uma conta</a>
                     <a href="password_recovery_page.php">Esqueceu a senha?</a>
                 </div>
-            </div>
-    
-            <div>
-                <span class="msg-error">
-                    <?php
-                        echo $_SESSION["msg"];
-                    ?>
-                </span>
-                <span class="msg-error">
-                    <?php
-                        echo $_SESSION["msg_confirma"];
-                    ?>
-                </span>
-                <span class="msg-sucess">
-                    <?php
-                        echo $_SESSION["senha_atualizada_msg"];
-                    ?>
-                </span>
-                <span class="msg-sucess">
-                    <?php
-                        echo $_SESSION["msg_envia-email"];
-                    ?>
-                </span>
+
+                <div class='msg'>
+                    <span class="msg-error">
+                        <?php
+                            echo $_SESSION["msg_error"];
+                        ?>
+                    </span>
+                    <span class="msg-error">
+                        <?php
+                            echo $_SESSION["msg_confirma_email"];
+                        ?>
+                    </span>
+                    <span class="msg-error">
+                        <?php
+                            echo $_SESSION["senha_atualizada_error"];
+                        ?>
+                    </span>
+                    <span class="msg-sucess">
+                        <?php
+                            echo $_SESSION["senha_atualizada"];
+                        ?>
+                    </span>
+                    <span class="msg-sucess">
+                        <?php
+                            echo $_SESSION["email_enviado"];
+                        ?>
+                    </span>
+                    <span class="msg-sucess">
+                        <?php
+                            echo $_SESSION['msg_confirma'];
+                        ?>
+                    </span>
+                </div>
+
             </div>
         </section>
        
@@ -123,6 +146,16 @@
 
     <?php
         require("./includes/components/footer.php");
+
+        $_SESSION["senha_atualizada"] = "";
+
+        $_SESSION["senha_atualizada_error"] = "";
+
+        $_SESSION["email_enviado"] = "";
+
+        $_SESSION['msg_confirma'] = "";
+
+        $_SESSION["msg_confirma_email"] = "";
     ?>        
     
 </body>

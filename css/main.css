@@ -262,7 +262,8 @@ main::after{
     border-radius: 1.9rem;
     padding: 6.7rem 3.3rem 4.4rem;
 
-    width: 30%;
+    /* width: 30%; */
+    width: 20%;
 
     text-align: center;
 
@@ -302,6 +303,8 @@ main::after{
 .img-profile{
     border-radius: 50%;
     width: 10.2rem;
+    height: 10.2rem;
+    object-fit: cover;
 
     border: 1px solid var(--border-color);
 }
@@ -378,7 +381,7 @@ main::after{
 }
 
 .user-info h3{
-    font-size: 2.4rem;
+    font-size: 2.1rem;
     font-weight: bold;
 
     color: var(--font-color-primary);
@@ -386,12 +389,21 @@ main::after{
     margin-top: 1.3rem;
 }
 
-.btn-edit-image{
+.btn-edit-image, .btn-edit-image-pet{
     position: absolute;
     top: 7rem;
     right: 4.5rem;
 
     z-index: 0;
+}
+
+.btn-edit-image-pet{
+    top: 8.2rem;
+    right: 0.6rem;
+}
+
+.img-position-form{
+    margin: 1rem auto;
 }
 
 .profile-content{
@@ -404,7 +416,7 @@ main::after{
 
 .info-container-profile p{
     color: var(--font-color-neutral);
-    margin-bottom: .5rem;
+    margin: 1rem 0;
 }
 
 .info-container-profile span{
@@ -437,6 +449,7 @@ main::after{
 
     z-index: 1;
 }
+
 footer{
     background-image: linear-gradient( 45deg, rgba(14, 61, 67, 1) 30%, var(--bg-footer) 70%);
     font-family: var(--font-family-footer);
@@ -516,6 +529,9 @@ footer{
     font-size: 1.4rem;
 }
 
+.profile-user{
+    width: 20.1rem;
+}
 
 /* componentes */
 
@@ -571,4 +587,21 @@ footer{
     gap: 2rem;
     justify-content: start;
     flex-wrap: wrap;
+}
+
+.msg{
+    margin: 2rem 0;
+    text-align: start; 
+}
+
+.msg span{
+    display: block;
+}
+
+.msg-error{
+    color: #cc0000;
+}
+
+.msg-sucess{
+    color: rgb(20, 142, 26);
 }

@@ -3,11 +3,49 @@
     $title = 'Pets';
 
     require("./includes/components/head.php");
+    require('./includes/components/authenticator.php');
+    require("./includes/components/functions.php");
 
+    $_SESSION["msg_error"] = '';
+
+    if(isset($_GET['addPet'])){
+        if(isset($_POST['name']) and isset($_POST['sex']) and isset($_POST['breed'])){
+            $name = $_POST['name'];
+            $sex = $_POST['sex'];
+            $breed = $_POST['breed'];
+            if(isset($_POST['birth'])){
+                $birth = $_POST['birth'];
+            }else{
+                $birth = '';
+            }
+    
+            $source_file_name = $_FILES['file']['name'];  
+            $file_size = $_FILES['file']['size']; 
+            $temporary_file = $_FILES['file']['tmp_name'];
+            $file_name = date('YmdHisu') . '.' . pathinfo($source_file_name, PATHINFO_EXTENSION);
+            move_uploaded_file($temporary_file, "images/$file_name");
+    
+            $array = [$name, $birth, $sex, $breed, $file_name, $_SESSION['cod_usuario']];
+            $registerPet = registerPet($array, $pdo);
+    
+            if($registerPet){
+                $link = "pet_page.php.php";
+                redirect($link);
+            }else{
+                $_SESSION['msg_error'] = "Não foi possível adicionar seu pet :(";
+            }
+        }else{
+            $_SESSION['msg_error'] = "Preencha todos os campos obrigatórios. *";
+        }
+    }
+    
+    if (isset($_GET['delete'])) {
+        $cod_pet = $_GET['delete'];
+        $delete_pet = deletePet($_SESSION['cod_usuario'], $cod_pet, $pdo);
+    }
+
+    $pets = searchPets($_SESSION['cod_usuario'], $pdo);
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php
@@ -17,40 +55,39 @@
     <main>
         <section class=''>
             <div class="content-box position-content">
+                <?php if(!$pets){ ?>
+                    <div class=''>
+                        <p>Nenhum gato cadastrado.</p>
+                    </div>
+                <?php }else{ ?>
+
                 <div class='card-content'>
+                <?php foreach ($pets as $pet) { ?>
                     <div class="card-profile">
                         
-                        <a href="pet_profile_page.php">
-                            <img class="img-profile" src="images/foto.png" alt="">
+                        <a href="pet_profile_page.php?pet=<?php echo ($pet['cod_pet'])?>">
+                            <img class="img-profile" src="images/<?php echo ($pet['foto'])?>" alt="">
                             
-                            <p>Bartholomeu</p>
+                            <p><?php echo ($pet['nome']) ?></p>
                         </a>
                         
-                        <button class='icon-delete-profile reset-btn-decoration'>
+                        <a href="pet_page.php?delete=<?php echo ($pet['cod_pet'])?>" class='icon-delete-profile' >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 18C10.2652 18 10.5196 17.8946 10.7071 17.7071C10.8946 17.5196 11 17.2652 11 17V11C11 10.7348 10.8946 10.4804 10.7071 10.2929C10.5196 10.1054 10.2652 10 10 10C9.73478 10 9.48043 10.1054 9.29289 10.2929C9.10536 10.4804 9 10.7348 9 11V17C9 17.2652 9.10536 17.5196 9.29289 17.7071C9.48043 17.8946 9.73478 18 10 18ZM20 6H16V5C16 4.20435 15.6839 3.44129 15.1213 2.87868C14.5587 2.31607 13.7956 2 13 2H11C10.2044 2 9.44129 2.31607 8.87868 2.87868C8.31607 3.44129 8 4.20435 8 5V6H4C3.73478 6 3.48043 6.10536 3.29289 6.29289C3.10536 6.48043 3 6.73478 3 7C3 7.26522 3.10536 7.51957 3.29289 7.70711C3.48043 7.89464 3.73478 8 4 8H5V19C5 19.7956 5.31607 20.5587 5.87868 21.1213C6.44129 21.6839 7.20435 22 8 22H16C16.7956 22 17.5587 21.6839 18.1213 21.1213C18.6839 20.5587 19 19.7956 19 19V8H20C20.2652 8 20.5196 7.89464 20.7071 7.70711C20.8946 7.51957 21 7.26522 21 7C21 6.73478 20.8946 6.48043 20.7071 6.29289C20.5196 6.10536 20.2652 6 20 6ZM10 5C10 4.73478 10.1054 4.48043 10.2929 4.29289C10.4804 4.10536 10.7348 4 11 4H13C13.2652 4 13.5196 4.10536 13.7071 4.29289C13.8946 4.48043 14 4.73478 14 5V6H10V5ZM17 19C17 19.2652 16.8946 19.5196 16.7071 19.7071C16.5196 19.8946 16.2652 20 16 20H8C7.73478 20 7.48043 19.8946 7.29289 19.7071C7.10536 19.5196 7 19.2652 7 19V8H17V19ZM14 18C14.2652 18 14.5196 17.8946 14.7071 17.7071C14.8946 17.5196 15 17.2652 15 17V11C15 10.7348 14.8946 10.4804 14.7071 10.2929C14.5196 10.1054 14.2652 10 14 10C13.7348 10 13.4804 10.1054 13.2929 10.2929C13.1054 10.4804 13 10.7348 13 11V17C13 17.2652 13.1054 17.5196 13.2929 17.7071C13.4804 17.8946 13.7348 18 14 18Z" fill="white"/>
                             </svg>
-                        </button>
-                    </div>
-                    <div class="card-profile">
-                        
-                        <a href="pet_profile_page.php">
-                            <img class="img-profile" src="images/foto.png" alt="">
-                            
-                            <p>Patrick</p>
                         </a>
-                        
-                        <button class='icon-delete-profile reset-btn-decoration'>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 18C10.2652 18 10.5196 17.8946 10.7071 17.7071C10.8946 17.5196 11 17.2652 11 17V11C11 10.7348 10.8946 10.4804 10.7071 10.2929C10.5196 10.1054 10.2652 10 10 10C9.73478 10 9.48043 10.1054 9.29289 10.2929C9.10536 10.4804 9 10.7348 9 11V17C9 17.2652 9.10536 17.5196 9.29289 17.7071C9.48043 17.8946 9.73478 18 10 18ZM20 6H16V5C16 4.20435 15.6839 3.44129 15.1213 2.87868C14.5587 2.31607 13.7956 2 13 2H11C10.2044 2 9.44129 2.31607 8.87868 2.87868C8.31607 3.44129 8 4.20435 8 5V6H4C3.73478 6 3.48043 6.10536 3.29289 6.29289C3.10536 6.48043 3 6.73478 3 7C3 7.26522 3.10536 7.51957 3.29289 7.70711C3.48043 7.89464 3.73478 8 4 8H5V19C5 19.7956 5.31607 20.5587 5.87868 21.1213C6.44129 21.6839 7.20435 22 8 22H16C16.7956 22 17.5587 21.6839 18.1213 21.1213C18.6839 20.5587 19 19.7956 19 19V8H20C20.2652 8 20.5196 7.89464 20.7071 7.70711C20.8946 7.51957 21 7.26522 21 7C21 6.73478 20.8946 6.48043 20.7071 6.29289C20.5196 6.10536 20.2652 6 20 6ZM10 5C10 4.73478 10.1054 4.48043 10.2929 4.29289C10.4804 4.10536 10.7348 4 11 4H13C13.2652 4 13.5196 4.10536 13.7071 4.29289C13.8946 4.48043 14 4.73478 14 5V6H10V5ZM17 19C17 19.2652 16.8946 19.5196 16.7071 19.7071C16.5196 19.8946 16.2652 20 16 20H8C7.73478 20 7.48043 19.8946 7.29289 19.7071C7.10536 19.5196 7 19.2652 7 19V8H17V19ZM14 18C14.2652 18 14.5196 17.8946 14.7071 17.7071C14.8946 17.5196 15 17.2652 15 17V11C15 10.7348 14.8946 10.4804 14.7071 10.2929C14.5196 10.1054 14.2652 10 14 10C13.7348 10 13.4804 10.1054 13.2929 10.2929C13.1054 10.4804 13 10.7348 13 11V17C13 17.2652 13.1054 17.5196 13.2929 17.7071C13.4804 17.8946 13.7348 18 14 18Z" fill="white"/>
-                            </svg>
-                        </button>
                     </div>
-                    
-                </div>
+                <?php } ?>
             
-                <div class='hidden'>
-                    <p>Nenhum gato cadastrado.</p>
+            </div>
+            
+           <?php } ?>
+                    
+
+                <div class='msg'>
+                    <span class="msg-error">
+                        <?php echo ($_SESSION["msg_error"]); ?>
+                    </span>
                 </div>
 
                 <button class='btn-profile-position reset-btn-decoration'>
@@ -62,7 +99,7 @@
             </div>
         </section>
 
-        <section class="position-forms hidden">
+        <section class="position-forms modal hidden">
             <div class='content-box'>
                 <button class='close reset-btn-decoration'>
                     <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,40 +107,32 @@
                     </svg>
                 </button>
                 
-                <form action="login.php" method="POST">
+                <form action="pet_page.php?addPet" method="POST" enctype="multipart/form-data">
                     <h2>Informações do seu pet</h2>
                     <div class="form-container">
                         <div class="input-container">
-                            <label for="name">Qual o nome do seu gatinho(a)?</label>
-                            <input type="text" id="name" name="name" placeholder="Bartholomeu" autocomplete="off" required>
+                            <label for="name">Qual o nome do seu gatinho(a)? *</label>
+                            <input type="text" id="name" name="name" placeholder="Bartholomeu"  required>
                         </div>
                         <div class="input-container">
-                            <label for="sex">Qual o sexo?</label>
-                            <select name="sex" id="sex">
+                            <label for="sex">Qual o sexo? *</label>
+                            <select name="sex" id="sex" required>
                                 <option value="Fêmea">Fêmea</option>
                                 <option value="Macho">Macho</option>
                             </select>
                         </div>
                         <div class="input-container">
                             <label for="birth">Data de nascimento:</label>
-                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" required>
-                        </div>
-                        <div class='checkbox-input'>
-                                <input type="checkbox" id='check-birth'> 
-                                <label for="check-birth">Não sei</label>
+                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" >
                         </div>
                         <div class="input-container">
-                            <label for="breed">Qual a raça do seu felino?</label>
-                            <input type="text" id="breed" name="breed" placeholder="Bartholomeu" autocomplete="off" required>
+                            <label for="breed">Qual a raça do seu felino? *</label>
+                            <input type="text" id="breed" name="breed" placeholder="Bartholomeu"  required>
                         </div>
 
-                        <div class="link-form">
-                            <a href="">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.25 7.5C14.0511 7.5 13.8603 7.57902 13.7197 7.71967C13.579 7.86032 13.5 8.05109 13.5 8.25V10.785L12.39 9.675C11.9981 9.28616 11.4683 9.06797 10.9163 9.06797C10.3642 9.06797 9.83443 9.28616 9.4425 9.675L8.9175 10.2075L7.0575 8.34C6.66557 7.95116 6.13584 7.73297 5.58375 7.73297C5.03166 7.73297 4.50193 7.95116 4.11 8.34L3 9.4575V5.25C3 5.05109 3.07902 4.86032 3.21967 4.71967C3.36032 4.57902 3.55109 4.5 3.75 4.5H9.75C9.94891 4.5 10.1397 4.42098 10.2803 4.28033C10.421 4.13968 10.5 3.94891 10.5 3.75C10.5 3.55109 10.421 3.36032 10.2803 3.21967C10.1397 3.07902 9.94891 3 9.75 3H3.75C3.15326 3 2.58097 3.23705 2.15901 3.65901C1.73705 4.08097 1.5 4.65326 1.5 5.25V14.415C1.50198 14.9674 1.72228 15.4965 2.11287 15.8871C2.50345 16.2777 3.03263 16.498 3.585 16.5H12.915C13.1182 16.4984 13.3202 16.4681 13.515 16.41C13.9481 16.2885 14.3293 16.0283 14.6003 15.6693C14.8713 15.3103 15.0169 14.8723 15.015 14.4225V8.25C15.015 8.15023 14.9951 8.05147 14.9565 7.95948C14.9179 7.86749 14.8613 7.78414 14.7901 7.7143C14.7188 7.64445 14.6344 7.58952 14.5416 7.55273C14.4489 7.51593 14.3497 7.498 14.25 7.5ZM3.75 15C3.55109 15 3.36032 14.921 3.21967 14.7803C3.07902 14.6397 3 14.4489 3 14.25V11.5725L5.1675 9.405C5.27711 9.296 5.42541 9.23481 5.58 9.23481C5.73459 9.23481 5.88289 9.296 5.9925 9.405L11.595 15H3.75ZM13.5 14.25C13.4952 14.3952 13.4483 14.5359 13.365 14.655L9.975 11.25L10.5075 10.725C10.5613 10.6701 10.6255 10.6265 10.6963 10.5968C10.7671 10.567 10.8432 10.5517 10.92 10.5517C10.9968 10.5517 11.0729 10.567 11.1437 10.5968C11.2146 10.6265 11.2787 10.6701 11.3325 10.725L13.5 12.9075V14.25ZM15.75 3H15V2.25C15 2.05109 14.921 1.86032 14.7803 1.71967C14.6397 1.57902 14.4489 1.5 14.25 1.5C14.0511 1.5 13.8603 1.57902 13.7197 1.71967C13.579 1.86032 13.5 2.05109 13.5 2.25V3H12.75C12.5511 3 12.3603 3.07902 12.2197 3.21967C12.079 3.36032 12 3.55109 12 3.75C12 3.94891 12.079 4.13968 12.2197 4.28033C12.3603 4.42098 12.5511 4.5 12.75 4.5H13.5V5.25C13.5 5.44891 13.579 5.63968 13.7197 5.78033C13.8603 5.92098 14.0511 6 14.25 6C14.4489 6 14.6397 5.92098 14.7803 5.78033C14.921 5.63968 15 5.44891 15 5.25V4.5H15.75C15.9489 4.5 16.1397 4.42098 16.2803 4.28033C16.421 4.13968 16.5 3.94891 16.5 3.75C16.5 3.55109 16.421 3.36032 16.2803 3.21967C16.1397 3.07902 15.9489 3 15.75 3Z" fill="#326B73"/>
-                                </svg>
-                                <span>Adicionar foto de perfil do pet</span>
-                            </a>
+                        <div class="input-container">
+                            <label for="file">Adicione uma foto do pet: *</label>
+                            <input type="file" id="file" name="file" accept=".png, .jpg, .jpeg" required>
                         </div>
                     </div>
 
@@ -112,10 +141,15 @@
                     </button>
         
                 </form>
+
+                <div class='msg'>
+                    <span class="msg-error">
+                        <?php echo ($_SESSION["msg_error"]); ?>
+                    </span>
+                </div>
             </div>
 
         </section>
-       
     </main>
 
     <?php

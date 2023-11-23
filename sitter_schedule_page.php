@@ -3,11 +3,8 @@
     $title = 'Agendamentos';
 
     require("./includes/components/head.php");
-
+    require('./includes/components/authenticator.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php

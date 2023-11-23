@@ -6,21 +6,27 @@ use PHPMailer\PHPMailer\SMTP;
 require("connect.php");
 
 function registerUser($user, $cpf, $email, $telephone, $array, $pdo){
-    $query_registration = $pdo->prepare('select * from usuarios where cpf = :cpf or email = :email'); //o cat sitter pode ja ter cadastro como tutor, preciso validar aqui!
+    $query_registration = $pdo->prepare('select * from usuarios where cpf = :cpf or email = :email');
     $query_registration->bindValue(':cpf', $cpf);
     $query_registration->bindValue(':email', $email);
     $query_registration->execute();
 
     if($query_registration->rowCount() === 0){
-        $registre_user = $pdo->prepare('insert into usuarios (nome, sobrenome, dt_nascimento, genero, cpf, cep, rua, numero, cidade, estado, pais, complemento, email, senha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $registre_user->execute($array);
+        $register_user = $pdo->prepare('insert into usuarios (nome, sobrenome, dt_nascimento, genero, cpf, cep, rua, numero, cidade, estado, pais, complemento, email, senha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $register_user->execute($array);
+
+        $cod_user= $pdo->lastInsertId();
+
+        $register_fone = $pdo->prepare('insert into telefones (telefone, cod_usuario) values (:telephone, :user)');
+        $register_fone->bindValue(':telephone', $telephone);
+        $register_fone->bindValue(':user', $cod_user);
+        $register_fone->execute();
 
         if($user == 'catsitter'){
-            $cod_user = searchUser($email, $pdo);
 
-            $registre_user_catssiter = $pdo->prepare('insert into cat_sitters (cod_usuario) values (:cod_usuario)');
-            $registre_user_catssiter->bindValue(':cod_usuario', $cod_user['cod_usuario']);
-            $registre_user_catssiter->execute();
+            $register_user_catssiter = $pdo->prepare('insert into cat_sitters (cod_usuario) values (:cod_usuario)');
+            $register_user_catssiter->bindValue(':cod_usuario', $cod_user);
+            $register_user_catssiter->execute();
 
             return true;
         }
@@ -30,37 +36,6 @@ function registerUser($user, $cpf, $email, $telephone, $array, $pdo){
     }else{
         return false;
     }
-}
-
-function validateLogin($email, $formPassword, $pdo){
-    $query= searchUser($email, $pdo);
-  
-    if($query){
-        $storedPassword = $query['senha'];
-        if(password_verify($formPassword, $storedPassword)){
-            return $query;      
-        }else{
-            return false;
-        }
-    }else{
-        return false;
-    }
-}
-
-function searchUser($email, $pdo){
-    $user = $pdo->prepare('select * from usuarios where email = :email');
-    $user->bindValue(':email', $email);
-    $user->execute();
-    
-    return $user->fetch();
-}
-
-function searchUserCatSitter($user, $pdo){
-    $user_catsitter = $pdo->prepare('select * from cat_sitters where cod_usuario = :user');
-    $user_catsitter->bindValue(':user', $user);
-    $user_catsitter->execute();
-    
-    return $user_catsitter->fetch();
 }
 
 function emailConfirmRegistration($email, $pdo){
@@ -110,6 +85,59 @@ function emailConfirmRegistration($email, $pdo){
     $mail->isHTML(true);
 
     $mail->send();
+}
+
+function validateLogin($email, $formPassword, $pdo){
+    $query= searchUser($email, $pdo);
+  
+    if($query){
+        $storedPassword = $query['senha'];
+        if(password_verify($formPassword, $storedPassword)){
+            return $query;      
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
+function searchUser($email, $pdo){
+    $user = $pdo->prepare('select * from usuarios where email = :email');
+    $user->bindValue(':email', $email);
+    $user->execute();
+    
+    return $user->fetch();
+}
+
+function getFoneById($cod_usuario, $pdo){
+    $fone = $pdo->prepare('select * from telefones where cod_usuario = :cod_usuario');
+    $fone->bindValue(':cod_usuario', $cod_usuario);
+    $fone->execute();
+    
+    return $fone->fetch();
+}
+
+function searchUserCatSitter($user, $pdo){
+    $user_catsitter = $pdo->prepare('select * from cat_sitters where cod_usuario = :user');
+    $user_catsitter->bindValue(':user', $user);
+    $user_catsitter->execute();
+    
+    return $user_catsitter->fetch();
+}
+
+function updateInfoBasic($array, $pdo){
+    $updateInfo = $pdo->prepare('update usuarios set nome = ?, sobrenome = ?, dt_nascimento = ?, genero = ?, cpf = ? where cod_usuario = ?');
+    $updateInfo->execute($array);
+
+    return $updateInfo;
+}
+
+function updateAddress($array, $pdo){
+    $updateAddress = $pdo->prepare('update usuarios set cep = ?, rua = ?, numero = ?, cidade = ?, estado = ?, pais = ?, complemento = ? where cod_usuario = ?');
+    $updateAddress->execute($array);
+
+    return $updateAddress;
 }
 
 function confirmRegistration($email, $pdo){
@@ -243,114 +271,181 @@ function deleteRequest($email, $key, $pdo){
     $delete_request->execute();
 }
 
+function registerPet($array, $pdo){
+    $registre_pet = $pdo->prepare('insert into gatos (nome, dt_nascimento, sexo, raca, foto, cod_usuario) values (?, ?, ?, ?, ?, ?)');
+    $registre_pet->execute($array);
+    return $registre_pet;
+}
 
-// function pesquisaPessoas($nome, $pdo){
-//     $pessoas = $pdo->prepare('select * from pessoa where nome like :nome"%" and adm = 0 order by nome asc');
-//     $pessoas->bindValue(':nome', $nome);
-//     $pessoas->execute();
+function searchPets($user, $pdo){
+    $pet = $pdo->prepare('select * from gatos where cod_usuario = :user');
+    $pet->bindValue(':user', $user);
+    $pet->execute();
+    
+    return $pet->fetchAll();
+}
 
-//     if($pessoas->rowCount() === 0){
-//         return false;
-//     }else{
-//         return $pessoas->fetchAll();
-//     }
-// }
+function getPetById($cod_pet, $pdo){
+    $pet = $pdo->prepare('select * from gatos where cod_pet = :cod_pet');
+    $pet->bindValue(':cod_pet', $cod_pet);
+    $pet->execute();
+    
+    return $pet->fetch();
+}
 
-// function excluiUsuario($codpessoa, $pdo){
-//     $excluiUsuario = $pdo->prepare('delete from pessoa where codpessoa = :codpessoa');
-//     $excluiUsuario->bindValue(':codpessoa', $codpessoa);
-//     $excluiUsuario->execute();
+function deletePet($user, $cod_pet, $pdo){
+    $delete = $pdo->prepare('delete from gatos where cod_pet = :cod_pet and cod_usuario = :user');
+    $delete->bindValue(':cod_pet', $cod_pet);
+    $delete->bindValue(':user', $user);
+    $delete->execute();
 
-//     return true;
-// }
+    return true;
+}
 
-// function selecionaPessoa($codpessoa, $pdo){
-//     $pessoa = $pdo->prepare('select * from pessoa where codpessoa = :codpessoa');
-//     $pessoa->bindValue(':codpessoa', $codpessoa);
-//     $pessoa->execute();
+function updateRoutine($user, $cod_pet, $routine, $pdo){
+    $add_routine = $pdo->prepare('update gatos set rotina = :routine where cod_pet = :cod_pet and cod_usuario = :user');
+    $add_routine->bindValue(':routine', $routine);
+    $add_routine->bindValue(':cod_pet', $cod_pet);
+    $add_routine->bindValue(':user', $user);
+    $add_routine->execute();
 
-//     return $pessoa->fetch();
-// }
+    return true;
+}
 
-// function verificaAdm($email, $pdo){
-//     $pessoa = $pdo->prepare('select * from pessoa where email = :email and adm = 1');
-//     $pessoa->bindValue(':email', $email);
-//     $pessoa->execute();
+function updateMedicalRecord($user, $cod_pet, $medical_record, $pdo){
+    $add_medical_record = $pdo->prepare('update gatos set ficha_medica = :medical_record where cod_pet = :cod_pet and cod_usuario = :user');
+    $add_medical_record->bindValue(':medical_record', $medical_record);
+    $add_medical_record->bindValue(':cod_pet', $cod_pet);
+    $add_medical_record->bindValue(':user', $user);
+    $add_medical_record->execute();
 
-//     if($pessoa->rowCount() === 1){
-//         return true;
-//     }else{
-//         return false;
-//     }
-// }
+    return true;
+}
 
-// function editaPerfil($codpessoa, $nome, $cpf, $email, $pdo){
-//     $pesquisaDuplicacaoPessoa = $pdo->prepare('select * from pessoa where (cpf = :cpf or email = :email) and codpessoa != :codpessoa');
-//     $pesquisaDuplicacaoPessoa->bindValue(':cpf', $cpf);
-//     $pesquisaDuplicacaoPessoa->bindValue(':email', $email);
-//     $pesquisaDuplicacaoPessoa->bindValue(':codpessoa', $codpessoa);
-//     $pesquisaDuplicacaoPessoa->execute();
+function updateFone($user, $telephone, $pdo){
+    $updateTel = $pdo->prepare('update telefones set telefone = :telephone where cod_usuario = :user');
+    $updateTel->bindValue(':telephone', $telephone);
+    $updateTel->bindValue(':user', $user);
+    $updateTel->execute();
 
-//     if($pesquisaDuplicacaoPessoa->rowCount() === 0){
-//         $editaPessoa = $pdo->prepare('update pessoa set nome = :nome, cpf = :cpf, email = :email where codpessoa = :codpessoa');
-//         $editaPessoa->bindValue(':nome', $nome);
-//         $editaPessoa->bindValue(':cpf', $cpf);
-//         $editaPessoa->bindValue(':email', $email);
-//         $editaPessoa->bindValue(':codpessoa', $codpessoa);
-//         $editaPessoa->execute();
+    return true;
+}
 
-//         return true;
-//     }else{
-//         return false;
-//     }
-// }
+function updateInfoPet($array, $pdo){
+    $updatePet = $pdo->prepare('update gatos set nome = ?, dt_nascimento = ?, sexo = ?, raca = ? where cod_pet = ? and cod_usuario = ?');
+    $updatePet->execute($array);
+
+    return true;
+}
+
+function updateFotoPet($user, $cod_pet, $file_name, $pdo){
+    $updateFoto = $pdo->prepare('update gatos set foto = :file_name where cod_pet = :cod_pet and cod_usuario = :user');
+    $updateFoto->bindValue(':file_name', $file_name);
+    $updateFoto->bindValue(':cod_pet', $cod_pet);
+    $updateFoto->bindValue(':user', $user);
+    $updateFoto->execute();
+
+    return true;
+}
+
+function updateFotoUser($user, $file_name, $pdo){
+    $updateFoto = $pdo->prepare('update usuarios set foto = :file_name where cod_usuario = :user');
+    $updateFoto->bindValue(':file_name', $file_name);
+    $updateFoto->bindValue(':user', $user);
+    $updateFoto->execute();
+
+    return true;
+}
+
+function redirect($link){
+    header('Location: ' . $link);
+    exit();
+}
+
+function badgeSearch($pdo){
+    $badges = $pdo->prepare('select * from distintivos');
+    $badges->execute();
+
+    return $badges->fetchAll();
+}
+
+function addYourBadges($user, $yourBadges, $pdo){
+    $deleteBagdes = $pdo->prepare('delete from distintivo_catsitter where cod_usuario = :user');
+    $deleteBagdes->bindValue(':user', $user);
+    $deleteBagdes->execute();
+
+    foreach ($yourBadges as $badge) {
+        $addbadges = $pdo->prepare('insert into distintivo_catsitter (cod_distintivo, cod_usuario) values (:badge, :user)');
+        $addbadges->bindValue(':badge', $badge);
+        $addbadges->bindValue(':user', $user);
+        $addbadges->execute();
+    }
+    return true;
+}
+
+function searchYourBadges($user, $pdo){
+    $yourBadges = $pdo->prepare('select * from distintivos join distintivo_catsitter using(cod_distintivo) where cod_usuario = :user');
+    $yourBadges->bindValue(':user', $user);
+    $yourBadges->execute();
+
+    return $yourBadges->fetchAll();
+}
+function deleteBadge($cod_badge, $pdo){
+    $delBadge = $pdo->prepare('delete from distintivos where cod_distintivo = :cod_badge');
+    $delBadge->bindValue(':cod_badge', $cod_badge);
+    $delBadge->execute();
+
+    return true;
+}
+
+function registerBadge($array, $pdo){
+    $addBadge = $pdo->prepare('insert into distintivos (nome, descricao) values ( ?, ?)');
+    $addBadge->execute($array);
+
+    return true;
+}
+
+function searchUsers($pdo){
+    $users = $pdo->prepare('select * from usuarios order by nome asc');
+    $users->execute();
+
+    return $users->fetchAll();
+}
+
+function deleteUser($user, $pdo){
+
+    if(searchUserCatSitter($user, $pdo)){
+        $delSitter = $pdo->prepare('delete from cat_sitters where cod_usuario = :user');
+        $delSitter->bindValue(':user', $user);
+        $delSitter->execute();
+    }
+
+    $delUser = $pdo->prepare('delete from usuarios where cod_usuario = :user');
+    $delUser->bindValue(':user', $user);
+    $delUser->execute();
+
+    return true;
+}
+
+function searchUsersName($search, $type, $pdo){
+    $all = "select * from usuarios where nome like :nome or sobrenome like :sobrenome";
+    $tutor = "select * from usuarios where (nome like :nome or sobrenome like :sobrenome) and not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
+    $catsitter = "select * from usuarios join cat_sitters using(cod_usuario) where nome like :nome or sobrenome like :sobrenome order by usuarios.nome asc";
+
+    if($type == 'tudo') {
+        $query = $all;
+    }else if($type == 'tutor'){
+        $query = $tutor;
+    }else {
+        $query = $catsitter;
+    }
 
 
+    $users = $pdo->prepare($query);
+    $users->bindValue(':nome', $search . '%');
+    $users->bindValue(':sobrenome', $search . '%');
+    $users->execute();
 
-// function enviaEmailParaEditarSenha($email, $pdo){
-
-//     require "PHPMailer/src/PHPMailer.php";
-//     require "PHPMailer/src/SMTP.php";
-//     require "PHPMailer/src/Exception.php";
-
-//     $hash = md5($email);
-//     $assunto = "Recuperação de senha";
-//     $mensagem = "<a href='https://aulatsiaula.000webhostapp.com/projeto/formEditaSenha.php?email=$hash' >RECUPERAR SENHA</a>";
-
-//     $mail = new PHPMailer();
-
-//     $mail->isSMTP();
-
-//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
-//     $mail->SMTPDebug = 0;
-//     $mail->SMTPAuth = true;
-
-//     $mail->Host = 'smtp.gmail.com';
-//     $mail->Port = 587;
-//     $mail->SMTPOptions = [
-//         'ssl' => [
-//             'verify_peer' => false,
-//             'verify_peer_name' => false,
-//             'allow_self_signed' => true,
-//         ]
-//     ];
-
-//     $mail->Username = 'nathaliaMailerPhp@gmail.com';
-//     $mail->Password = 'v m m u d a r r w s e o d z i t';
-
-//     $mail->setFrom('nathaliaMailerPhp@gmail.com','Catsitters');
-
-//     $mail->addAddress($email);
-
-//     $mail->CharSet = "utf-8";
-
-//     $mail->Subject = $assunto;
-
-//     $mail->Body = $mensagem;
-
-//     $mail->isHTML(true);
-
-//     $mail->send();
-// }
+    return $users->fetchAll();
+}
 ?>

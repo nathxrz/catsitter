@@ -69,11 +69,11 @@ create table distintivos(
     descricao varchar(200) not null)
 
 create table distintivo_catsitter(
-    cod_catsitter int,
+    cod_usuario int,
     cod_distintivo int,
-    PRIMARY KEY (cod_catsitter, cod_distintivo),
-    CONSTRAINT fk_relacao_sitter FOREIGN KEY (cod_catsitter) REFERENCES cat_sitters (cod_catsitter) on update cascade,
-    CONSTRAINT fk_relacao_distintivo FOREIGN KEY (cod_distintivo) REFERENCES distintivos (cod_distintivo) on update cascade)
+    PRIMARY KEY (cod_usuario, cod_distintivo),
+    CONSTRAINT fk_relacao_sitter FOREIGN KEY (cod_usuario) REFERENCES usuarios (cod_usuario) on update cascade,
+    CONSTRAINT fk_relacao_distintivo FOREIGN KEY (cod_distintivo) REFERENCES distintivos (cod_distintivo) on update cascade on delete cascade)
 
 create table servicos(
     cod_servico int AUTO_INCREMENT not null PRIMARY KEY,

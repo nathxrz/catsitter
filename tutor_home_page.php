@@ -2,17 +2,14 @@
     $style ="style";
     $title = 'Home';
 
-    session_start();
+    
 
     require("./includes/components/head.php");
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
-
+    require('./includes/components/authenticator.php');
 
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <body>
     <?php
