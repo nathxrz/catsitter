@@ -1,14 +1,25 @@
 <?php
     $style ="style";
     $title = 'Home';
-
-    
-
     require("./includes/components/head.php");
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
     require('./includes/components/authenticator.php');
 
+    if(isset($_SESSION["cod_usuario"])){
+        $pets = searchPets($_SESSION["cod_usuario"], $pdo);
+        $profile = searchUser($_SESSION["email"], $pdo);
+    }
+
+    if(isset($_POST['type']) and isset($_POST['address']) and isset($_POST['start-date']) and isset($_POST['end-date']) and isset($_POST['pets'])){
+        $type = $_POST['type'];
+        $address = $_POST['address'];
+        $start_date = $_POST['start-date'];
+        $end_date = $_POST['end-date'];
+        $pets = $_POST['pets'];
+
+        $searchCatSitters();
+    }
 ?>
 
 <body>
@@ -26,7 +37,7 @@
                                 
                                 <!-- precisa do for no p? -->
                                 <div>
-                                    <p for="diaria">Diária:</p>
+                                    <p>Diária:</p>
                                     <span>Visitas com duração de 45 min a 1h e 30min.</span>
                                 </div>
                             </label>
@@ -34,7 +45,7 @@
                             <label class='radio-input'>
                                 <input type="radio" id="retorno" name="type" value="retorno"/>
                                 <div>
-                                    <p for="retorno">Diária com retorno:</p>
+                                    <p>Diária com retorno:</p>
                                     <span>Visitas que necessitem que o cat sitter retorne no mesmo dia.</span>
                                 </div>
                             </label>
@@ -42,7 +53,7 @@
                             <label class='radio-input'>
                                 <input type="radio" id="emergencial" name="type" value="emergencial"/>
                                 <div>
-                                    <p for="emergencial">Emergencial:</p>
+                                    <p>Emergencial:</p>
                                     <span>Busca cat sitters que estão disponíveis para atendimentos emergenciais.</span>
                                 </div>
                             </label>
@@ -50,7 +61,7 @@
                             <label class='radio-input'>
                                 <input type="radio" id="transporte" name="type" value="transporte"/>
                                 <div>
-                                    <p for="transporte">Transporte:</p>
+                                    <p>Transporte:</p>
                                     <span>Busca cat sitters que estão disponíveis para atendimentos emergenciais.</span>
                                 </div>
                             </label>
@@ -58,7 +69,7 @@
                             <label class='radio-input disable'>
                                 <input type="radio" id="especial" name="type" value="especial" disabled/>
                                 <div>
-                                    <p for="especial">Especial:</p>
+                                    <p>Especial:</p>
                                     <span>Combinação de tipos de visitas em um determinado período.</span>
                                 </div>
                             </label>
@@ -66,7 +77,8 @@
 
                         <div class='input-container form-details-container-position'>
                             <select name="address" id="address" required>
-                                <option value="">Endereço</option>
+                                <option value="">Selecione seu endereço:</option>
+                                <option value=""><?php echo $profile['rua'] . ", " . $profile['numero'] . ". " .  $profile['cidade'] ?></option>
                             </select>
                             <input type="date" id="start-date" class="date-width" name="start-date" placeholder="De: " autocomplete="off" required>
                             <input type="date" id="end-date" class="date-width" name="end-date" placeholder="Até: " autocomplete="off" required>
@@ -74,14 +86,13 @@
                         </div>
 
                         <div class='form-details-container-position'>
-                            <label class='checkbox-container'>
-                                <input type="checkbox" id='pets1'> 
-                                <p for="pets1">Gato1</p>
-                            </label>
-                            <label class='checkbox-container'>
-                                <input type="checkbox" id='pets2'>
-                                <p for="pets2">Gato2</p>
-                            </label>
+                            <?php 
+                                foreach($pets as $pet){ ?>
+                                <label class='checkbox-container'>
+                                    <input type="checkbox" name='pets[]'> 
+                                    <p><?php echo $pet['nome']?></p>
+                                </label>
+                            <?php } ?>
                         </div>
                         
                         <button type="submit" class="btn-submit search" name="btn-search" value="submit">

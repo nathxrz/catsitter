@@ -2,12 +2,9 @@
     $style ="style_login";
     $title = 'Login';
 
-    
-
     require("./includes/components/head.php");
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
-
 
     $_SESSION["msg_error"] = "";
     

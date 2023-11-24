@@ -29,7 +29,7 @@
             $registerPet = registerPet($array, $pdo);
     
             if($registerPet){
-                $link = "pet_page.php.php";
+                $link = "pet_page.php";
                 redirect($link);
             }else{
                 $_SESSION['msg_error'] = "Não foi possível adicionar seu pet :(";
@@ -139,7 +139,6 @@
                     <button type="submit" class="btn-submit" name="submit" value="submit">
                         Adicionar pet!
                     </button>
-        
                 </form>
 
                 <div class='msg'>
