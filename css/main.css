@@ -215,7 +215,7 @@ main::after{
 .input-container input, .input-container select, .input-container textarea{
     background-color: var(--bg-color-input);
     border: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.25);
+    /* box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.25); */
 
     padding: 1.5rem 1rem;
     border-radius: .6rem;
@@ -389,7 +389,7 @@ main::after{
     margin-top: 1.3rem;
 }
 
-.btn-edit-image, .btn-edit-image-pet{
+.btn-edit-image{
     position: absolute;
     top: 7rem;
     right: 4.5rem;
@@ -397,10 +397,6 @@ main::after{
     z-index: 0;
 }
 
-.btn-edit-image-pet{
-    top: 8.2rem;
-    right: 0.6rem;
-}
 
 .img-position-form{
     margin: 1rem auto;

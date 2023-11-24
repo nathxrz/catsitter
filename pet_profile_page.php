@@ -104,7 +104,7 @@
                     <img class="img-profile" src="images/<?php echo $pet_profile['foto']?>" alt="">
                     <h3><?php echo $pet_profile['nome']?></h3>
                 </div>
-                <button class='reset-btn-decoration btn-edit-image-pet'>
+                <button class='reset-btn-decoration btn-edit-image'>
                     <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="13.5" cy="13.5" r="13.5" fill="#BF6C2C"/>
                         <g clip-path="url(#clip0_208_14979)">
