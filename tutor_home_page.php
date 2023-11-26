@@ -18,7 +18,7 @@
         $end_date = $_POST['end-date'];
         $pets = $_POST['pets'];
 
-        $searchCatSitters();
+        // $searchCatSitters();
     }
 ?>
 
@@ -76,13 +76,26 @@
                         </div>
 
                         <div class='input-container form-details-container-position'>
-                            <select name="address" id="address" required>
-                                <option value="">Selecione seu endereço:</option>
-                                <option value=""><?php echo $profile['rua'] . ", " . $profile['numero'] . ". " .  $profile['cidade'] ?></option>
-                            </select>
-                            <input type="date" id="start-date" class="date-width" name="start-date" placeholder="De: " autocomplete="off" required>
-                            <input type="date" id="end-date" class="date-width" name="end-date" placeholder="Até: " autocomplete="off" required>
+                            <label class='width-input-schedule'>
+                                <p>Endereço:</p>
+                                <select name="address" id="address" required>
+                                    <option value="">Selecione seu endereço:</option>
+                                    <option value=""><?php echo $profile['rua'] . ", " . $profile['numero'] . ". " .  $profile['cidade'] ?></option>
+                                </select>
+                            </label>
 
+                            <label class='width-input-schedule'>
+                                <p>Data de Início:</p>
+                                <input type="date" id="start-date" name="start-date" placeholder="De: " autocomplete="off" min="<?php echo date('Y-m-d')?>" required>
+                            </label>
+                            <label class='width-input-schedule'>
+                                <p>Data de Fim:</p>
+                                <input type="date" id="end-date" name="end-date" placeholder="Até: " autocomplete="off" min="<?php echo date('Y-m-d')?>" required>
+                            </label>  
+                            <label class='width-input-schedule'>
+                                <p>Horário:</p>
+                                <input type="time" name="time" placeholder="Horário: " autocomplete="off" required> 
+                            </label>                     
                         </div>
 
                         <div class='form-details-container-position'>

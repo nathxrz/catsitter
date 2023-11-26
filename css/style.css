@@ -106,10 +106,6 @@
     gap: 2.7rem;
 }
 
-.date-width{
-    width: 30% !important;
-}
-
 .search{
     width: 20%;
     margin: 2rem auto 0;
@@ -370,7 +366,6 @@
     fill: #fff;
 }
 
-/* .input-container input{
-   width: 32rem;
-} */
-
+.width-input-schedule{
+    width: 100%;
+}
