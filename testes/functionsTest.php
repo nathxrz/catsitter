@@ -16,7 +16,7 @@ final class FunctionsTest extends TestCase
         $this->assertIsArray($pet);
 
         //traz as informações do pet
-        $this->assertArrayHasKey('w', $pet);
+        $this->assertArrayHasKey('nome', $pet);
         $this->assertArrayHasKey('sexo', $pet);
         $this->assertArrayHasKey('raca', $pet);
     }
@@ -28,6 +28,6 @@ final class FunctionsTest extends TestCase
         $pet = getPetById(1, $pdo);
 
         //verifica se não existe o pet (false)
-        $this->assertSame(true, $pet);
+        $this->assertSame(false, $pet);
     }
 }
