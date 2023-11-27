@@ -476,13 +476,13 @@ footer{
     gap: 1rem;
 }
 
-.info-container h4 a{
+.info-container h2 a{
     font-family: var(--font-family-title);
     font-size: 2.5rem;
     font-weight: 400;
 }
 
-.info-container h4 a, .info-container svg path {
+.info-container h2 a, .info-container svg path {
     color: var(--font-color-links-footer-primary);
     fill: var(--font-color-links-footer-primary);
     stroke: var(--font-color-links-footer-primary);

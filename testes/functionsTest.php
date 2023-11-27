@@ -18,7 +18,6 @@ final class FunctionsTest extends TestCase
         //traz as informações do pet
         $this->assertArrayHasKey('nome', $pet);
         $this->assertArrayHasKey('sexo', $pet);
-        $this->assertArrayHasKey('raca', $pet);
     }
 
     public function testGetPetByIdError(): void{

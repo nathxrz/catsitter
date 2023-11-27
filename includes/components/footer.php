@@ -1,7 +1,7 @@
 <footer>
     <div class="footer-container" >
         <div class="info-container" >
-            <h4><a href="">CatSitters</h4></a>
+            <h2><a href="">CatSitters</h2></a>
             <p>Segurança e muito amor para seu bichano!</p>
     
             <div>
