@@ -269,7 +269,7 @@
     margin-right: .5rem;
 }
 
-.appointment-information span,.appointment-information span a{
+.appointment-information span,.appointment-information span a, .price-view{
     color: var(--font-color-third);
 }
 

@@ -126,6 +126,30 @@ function searchUserCatSitter($user, $pdo){
     return $user_catsitter->fetch();
 }
 
+function searchUserCatSitterSchedule($user, $pdo){
+    $user_catsitter = $pdo->prepare('select * from usuarios u left join cat_sitters c using (cod_usuario) where cod_catsitter = :user');
+    $user_catsitter->bindValue(':user', $user);
+    $user_catsitter->execute();
+    
+    return $user_catsitter->fetch();
+}
+
+function searchPetsSchedule($cod_agend, $pdo){
+    $pets = $pdo->prepare('select * from gatos g left join agendamento_pets ap using (cod_pet) where ap.cod_agendamento = :cod_agend');
+    $pets->bindValue(':cod_agend', $cod_agend);
+    $pets->execute();
+    
+    return $pets->fetchAll();
+}
+
+function deleteSchedule($cod_schedule, $pdo){
+    $delete_schedule = $pdo->prepare('delete from agendamentos where cod_agendamento = :cod_schedule');
+    $delete_schedule->bindValue('cod_schedule', $cod_schedule);
+    $delete_schedule->execute();
+
+    return true;
+}
+
 function updateInfoBasic($array, $pdo){
     $updateInfo = $pdo->prepare('update usuarios set nome = ?, sobrenome = ?, dt_nascimento = ?, genero = ?, cpf = ? where cod_usuario = ?');
     $updateInfo->execute($array);
@@ -138,6 +162,67 @@ function updateAddress($array, $pdo){
     $updateAddress->execute($array);
 
     return $updateAddress;
+}
+
+function updateInfoWork($array, $pdo){
+    $updatePrice = $pdo->prepare('update cat_sitters set preco = ? where cod_catsitter = ?');
+    $updatePrice->execute($array);
+
+    return $updatePrice;
+}
+
+function searchCatSitters($array, $pdo){
+    $catsitters = $pdo->prepare('select * from cat_sitters c inner join usuarios u where c.cod_usuario = u.cod_usuario and c.preco is not null and not exists (select * from agendamentos a where dt_agendamento = ? and horario = ? and a.cod_catsitter = c.cod_catsitter )');
+    $catsitters->execute($array);
+
+    return $catsitters->fetchAll();
+}
+
+function searchCatSittersFilter($array, $pdo){
+    $catsitters = $pdo->prepare('select * from cat_sitters c inner join usuarios u join distintivo_catsitter d where c.cod_usuario = u.cod_usuario and d.cod_usuario = c.cod_usuario and d.cod_distintivo = ? and c.preco is not null and not exists (select * from agendamentos a where dt_agendamento = ? and horario = ? and a.cod_catsitter = c.cod_catsitter)');
+    $catsitters->execute($array);
+
+    return $catsitters->fetchAll();
+}
+
+
+function newSchedule($array, $pets_schedule, $pdo){
+    $createSchedule = $pdo->prepare('insert into agendamentos (cod_servico, dt_agendamento, horario, cod_catsitter, cod_usuario) values (?,?,?,?,?)');
+    $createSchedule->execute($array);
+    $cod_agendamento = $pdo->lastInsertId();
+
+    foreach($pets_schedule as $pet){
+        $insert_pets = $pdo->prepare('insert into agendamento_pets (cod_agendamento, cod_pet) values (:cod_agendamento, :cod_pet)');    
+        $insert_pets->bindValue(':cod_agendamento', $cod_agendamento);
+        $insert_pets->bindValue(':cod_pet', $pet);
+        $insert_pets->execute();
+    }
+
+    return true;
+}
+
+function searchSchedule($user, $pdo){
+    $search_schedule = $pdo->prepare('select * from agendamentos where cod_usuario = :user');
+    $search_schedule->bindValue(':user', $user);
+    $search_schedule->execute();
+
+    return $search_schedule->fetchAll();
+}
+
+function searchScheduleSitter($user, $pdo){
+    $search_schedule = $pdo->prepare('select * from agendamentos where cod_catsitter = :user');
+    $search_schedule->bindValue(':user', $user);
+    $search_schedule->execute();
+
+    return $search_schedule->fetchAll();
+}
+
+function searchTutor($user, $pdo){
+    $tutor = $pdo->prepare('select * from usuarios where cod_usuario = :user');
+    $tutor->bindValue(':user', $user);
+    $tutor->execute();
+
+    return $tutor->fetch();
 }
 
 function confirmRegistration($email, $pdo){

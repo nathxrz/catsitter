@@ -7,8 +7,6 @@
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
 
-    
-
     if (isset($_GET['delete'])) {
         $cod_badge= $_GET['delete'];
         $delete_badge = deleteBadge($cod_badge, $pdo);

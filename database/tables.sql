@@ -97,7 +97,7 @@ create table agendamento_pets(
     cod_agendamento int,
     cod_pet int,
     PRIMARY KEY (cod_agendamento, cod_pet),
-    CONSTRAINT fk_agend FOREIGN KEY (cod_agendamento) REFERENCES agendamentos (cod_agendamento) on delete RESTRICT on update cascade,
+    CONSTRAINT fk_agend_pet FOREIGN KEY (cod_agendamento) REFERENCES agendamentos (cod_agendamento) on delete cascade on update cascade,
     CONSTRAINT fk_pet FOREIGN KEY (cod_pet) REFERENCES gatos (cod_pet) on delete RESTRICT on update cascade);  
     
 create table relatorios(
