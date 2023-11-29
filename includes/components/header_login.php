@@ -1,6 +1,6 @@
 <header class="header-content-login">
     <a href="login.php">
-        <img class="" src="./images/icons/iconBack.svg" alt="Ícone de voltar.">
+        <img id='arrow-back-login' src="./images/icons/iconBack.svg" alt="Ícone de voltar.">
     </a>
     <nav>
         <ul>

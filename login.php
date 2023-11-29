@@ -81,18 +81,18 @@
     <main>
         <section class="position-forms">
             <div class="content-box center">
-                <form action="login.php" method="POST">
+                <form action="login.php" onsubmit="return valida_form()" method="POST">
                     <h1>Bem-vindo(a)!</h1>
                     <div class='form-container gap-no-label'>
                         <div class="input-container" >
-                            <input type="email" name="email" required placeholder="email@exemplo.com">
+                            <input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']?>" placeholder="email@exemplo.com">
                         </div>
                         <div class="input-container">
-                            <input type="password" name="password" required placeholder="********">
+                            <input type="password" name="password" id="password" value="<?php if(isset($_POST['password'])) echo $_POST['password']?>" required placeholder="********">
                         </div>
                     </div>
     
-                    <button type="submit" class="btn-submit" name="login" value="login">
+                    <button type="submit" class="btn-submit" id="btn-forms" name="login" value="login">
                         <img src="images/icons/arrowIcon.svg" alt="Ícone de uma seta para indicar o botão de avanço">
                     </button>
     

@@ -60,7 +60,7 @@
             <div class="content-box">
                 <form action="create_account.php?create" method="POST">
                 <!-- form 1 -->   
-                    <div class=""> 
+                    <div id="form-01" class=""> 
                         <h2>Você é tutor ou cat sitter?</h2>
                         <div class='radio-container'>
                             <div class="input-radio">
@@ -75,7 +75,7 @@
                     </div>
     
                     <!-- form 2 --> 
-                    <div class="" >
+                    <div id="form-02" class="" >
                         <h2>Informações pessoais</h2>
                         <div class="form-container">
                             <div class="input-container">
@@ -111,7 +111,7 @@
                     </div>
                     
                     <!-- form 3 --> 
-                    <div class="">
+                    <div id="form-03" class="">
                         <h2>Endereço</h2>
                         <div class='form-container'>
                             <div class="input-container">
@@ -122,29 +122,29 @@
                             <div class="input-container input-row">
                                 <div class='large'>
                                     <label for="street">Rua *</label>
-                                    <input type="text" id="street" name="street" placeholder="Bento Martins" autocomplete="off" required>
+                                    <input type="text" id="street" name="street" id='street' placeholder="Bento Martins" autocomplete="off" required>
                                 </div>
                                 <div class='small'>
                                     <label for="number">nº *</label>
-                                    <input type="text" id="number" name="number" placeholder="12345" autocomplete="off" required>
+                                    <input type="text" id="number" name="number" id='number' placeholder="12345" autocomplete="off" required>
                                 </div>
                             </div>
 
                             <div class="input-container input-row">
                                 <div class='medium'>
                                     <label for="city">Cidade *</label>
-                                    <input type="text" id="city" name="city" placeholder="Pelotas" autocomplete="off" required>
+                                    <input type="text" id="city" name="city" id='city' placeholder="Pelotas" autocomplete="off" required>
                                 </div>
                                 <div class='medium'>
                                     <label for="state">Estado *</label>
-                                    <input type="text" id="state" name="state" placeholder="RS" autocomplete="off" required>
+                                    <input type="text" id="state" name="state" id='state' placeholder="RS" autocomplete="off" required>
                                 </div>
                             </div>
 
                             <div class="input-container input-row">
                                 <div class='small'>
                                     <label for="country">País *</label>
-                                    <input type="text" id="country" name="country" placeholder="Brasil" autocomplete="off" required>
+                                    <input type="text" id="country" name="country" id='country' placeholder="Brasil" autocomplete="off" required>
                                 </div>
                                 <div class='large'>
                                     <label for="complement">Complemento</label>
@@ -155,7 +155,7 @@
                      </div>
     
                     <!-- form 4 -->
-                    <div class="">
+                    <div id="form-04" class="">
                         <h2>Cadastro</h2>
                         <div class="form-container" >
                             <div class="input-container">
@@ -178,7 +178,8 @@
                         </button>
                     </div>
                     <div class='arrows'>
-                        <img src="images/icons/iconLeft.svg" alt="Ícone para voltar.">
+                        <img src="images/icons/iconLeft.svg" id="arrow-left" alt="Ícone para voltar.">
+                        <img src="images/icons/iconRight.svg" id="arrow-Right" alt="Ícone para Avançar.">
                     </div>
                 </form>
 
@@ -194,6 +195,10 @@
     <?php
         require("./includes/components/footer.php");
     ?>    
+
+    <script>
+        <script src="js/script.js"></script>
+    </script>
     
 </body>
 </html>

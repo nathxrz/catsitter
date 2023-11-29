@@ -202,7 +202,7 @@ function newSchedule($array, $pets_schedule, $pdo){
 }
 
 function searchSchedule($user, $pdo){
-    $search_schedule = $pdo->prepare('select * from agendamentos where cod_usuario = :user');
+    $search_schedule = $pdo->prepare('select * from agendamentos where cod_usuario = :user order by dt_agendamento asc, horario asc');
     $search_schedule->bindValue(':user', $user);
     $search_schedule->execute();
 
@@ -210,7 +210,7 @@ function searchSchedule($user, $pdo){
 }
 
 function searchScheduleSitter($user, $pdo){
-    $search_schedule = $pdo->prepare('select * from agendamentos where cod_catsitter = :user');
+    $search_schedule = $pdo->prepare('select * from agendamentos where cod_catsitter = :user order by dt_agendamento asc, horario asc');
     $search_schedule->bindValue(':user', $user);
     $search_schedule->execute();
 

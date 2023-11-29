@@ -14,19 +14,20 @@
     --font-color-primary: #326B73;
     --font-color-secondary: #5A9DA6;
     --font-color-third: #878D96;
+    --font-color-radio: #878D96;
     --font-color-neutral: #000;
+    --font-color-neutral-light: #ffff;
     --font-btn-card: #BF6C2C;
     --font-btn-card-hover: #fff;
-
-    
+    --font-color-input: #000;
 
     --bg-header: #fff;
     --bg-color-forms: #fff;
     --bg-color-input: #fff;
     --bg-header-card: #5A9DA6;
-    --bg-footer: rgba(8, 35, 39, 1);
     --bg-color-btn: #326B73;
     --bg-color-btn-hover: #155159;
+    --bg-color-card: #fff;
 
     --bg-color-third: #878d9643;
 
@@ -36,6 +37,30 @@
 
     --line-copyright-color: rgba(63, 176, 191, 0.17);
     --copyright-color: rgba(63, 176, 191, 0.338);
+}
+
+.dark{
+    --font-color-primary: #FFF;
+    --font-color-secondary: #5A9DA6;
+    --font-color-third: #696969;
+    --font-color-radio: #3a3a3a;
+    --font-color-neutral: #cecece;
+    --font-btn-card: #1e737e;
+    --font-btn-card-hover: #fff;
+    
+
+    --bg-header: #292a2d;
+    --bg-color-forms: #292a2d;
+    --bg-color-input: #83868e;
+    --bg-header-card: #31555a;
+    --bg-color-btn: #15525a;
+    --bg-color-btn-hover: #1f7581;
+    --bg-color-third: #c0c5d4;
+    --bg-color-card: #292a2d;
+
+    --border-color: #15525a;
+    --border-color-focus: #1e737e;
+    --border-btn-card: #1e737e;
 }
 
 .radio-container{
@@ -50,6 +75,7 @@
     align-items: center;
     gap: 2rem;
     padding: 2.5rem;
+    background-color: var(--bg-color-input);
 
     border-radius: 1.9rem;
     /* box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.19); */
@@ -68,6 +94,7 @@
     font-family: var(--font-family-primary);
     font-weight: 400;
     line-height: 1.6rem;
+    color: var(--font-color-input);
 }
 
 .radio-input p, .checkbox-container p{
@@ -77,7 +104,7 @@
 .radio-input span, .checkbox-container span{
     font-size: 1.4rem;
     font-weight: 400;
-    color: var(--font-color-third);
+    color: var(--font-color-radio);
 
     display: block;
     margin-top: .5rem;
@@ -223,6 +250,7 @@
     display: flex;
     align-items: center;
     padding: 10rem 3rem 3rem;
+    background-color: var(--bg-color-card);
 
     gap: 4rem;
 
@@ -258,6 +286,7 @@
 
 .appointment-information p{
     line-height: 145%;
+    color: var(--font-color-neutral);
 }
 
 .appointment-information div {
@@ -368,4 +397,34 @@
 
 .width-input-schedule{
     width: 100%;
+}
+
+.search-input-filter select{
+    margin: 0;
+    border-radius:  0.6rem 0 0 0.6rem;
+    height: 5rem;
+}
+
+.search-input-filter{
+    display: flex;
+    align-items: center;
+}
+
+#theme-btn{
+    border-radius: 43.9rem;
+    width: 10rem;
+    cursor: pointer;
+    padding: .5rem 0;
+    font-family: var(--font-family-subtitle);
+    font-weight: bold;
+    font-size: 1.6rem;
+    background: none;
+    border: 1px solid var(--bg-color-btn);
+    color: var(--font-color-secondary);
+}
+
+#theme-btn:hover{
+    border: 1px solid var(--bg-color-btn-hover);
+    color: var(--font-color-neutral-light);
+    background: var(--bg-color-btn-hover);
 }

@@ -1,3 +1,4 @@
+<script src="./js/script.js"></script>
 <footer>
     <div class="footer-container" >
         <div class="info-container" >

@@ -20,6 +20,7 @@
                 <li><a href="adm_home_page.php">Home</a></li>
                 <li><a href="adm_profile_page.php">Perfil</a></li>
             <?php } ?>
+                <li><button id='theme-btn'>Tema</button></li>
         </ul>
     </nav>
 </header>

@@ -73,25 +73,6 @@
     font-weight: 400;
 }
 
-
-
-/* #btn-login{
-    width: 100%;
-    padding: 1.6rem;
-    margin: 3.3rem 0;
-
-    background-color: var(--bg-color-btn);
-
-    border: 1px solid var(--bg-color-btn);
-    border-radius: .6rem;
-
-    cursor: pointer;
-}
-
-#btn-login:hover{
-    background-color: var(--bg-color-btn-hover);
-} */
-
 .links-container{
     display: flex;
     flex-direction: column;
@@ -141,8 +122,6 @@
 .arrows{
     justify-content: space-between;
 }
-
-
 
 .gap-no-label{
     gap: 2rem;
