@@ -251,11 +251,11 @@
                     <div class="form-container">
                         <div class="input-container">
                             <label for="name">Nome *</label>
-                            <input type="text" id="name" name="name" placeholder="Nome do usuário" autocomplete="off" value="<?php echo $profile['nome']?>" required>
+                            <input type="text" class="validateString" id="name" name="name" placeholder="Nome do usuário" autocomplete="off" value="<?php echo $profile['nome']?>" required>
                         </div>
                         <div class="input-container">
                             <label for="lastname">Sobrenome *</label>
-                            <input type="text" id="lastname" name="lastname" placeholder="Sobrenome" autocomplete="off" value="<?php echo $profile['sobrenome']?>" required>
+                            <input type="text" class="validateString" id="lastname" name="lastname" placeholder="Sobrenome" autocomplete="off" value="<?php echo $profile['sobrenome']?>" required>
                         </div>
                         <div class="input-container">
                             <label for="birth">Data de nascimento *</label>
@@ -316,29 +316,29 @@
                         <div class="input-container input-row">
                             <div class='large'>
                                 <label for="street">Rua</label>
-                                <input type="text" id="street" name="street" placeholder="Bento Martins" autocomplete="off" value="<?php echo $profile['rua']?>" required>
+                                <input type="text" class="validateString" id="street" name="street" placeholder="Bento Martins" autocomplete="off" value="<?php echo $profile['rua']?>" required>
                             </div>
                             <div class='small'>
                                 <label for="number">nº</label>
-                                <input type="text" id="number" name="number" placeholder="12345" autocomplete="off" value="<?php echo $profile['numero']?>" required>
+                                <input type="text" class="validateNumbers" id="number" name="number" placeholder="12345" autocomplete="off" value="<?php echo $profile['numero']?>" required>
                             </div>
                         </div>
 
                         <div class="input-container input-row">
                             <div class='medium'>
                                 <label for="city">Cidade</label>
-                                <input type="text" id="city" name="city" placeholder="Pelotas" autocomplete="off" value="<?php echo $profile['cidade']?>" required>
+                                <input type="text" class="validateString" id="city" name="city" placeholder="Pelotas" autocomplete="off" value="<?php echo $profile['cidade']?>" required>
                             </div>
                             <div class='medium'>
                                 <label for="state">Estado</label>
-                                <input type="text" id="state" name="state" placeholder="RS" autocomplete="off" value="<?php echo $profile['estado']?>" required>
+                                <input type="text" class="validateString" id="state" name="state" placeholder="RS" autocomplete="off" value="<?php echo $profile['estado']?>" required>
                             </div>
                         </div>
 
                         <div class="input-container input-row">
                             <div class='small'>
                                 <label for="country">País</label>
-                                <input type="text" id="country" name="country" placeholder="Brasil" autocomplete="off" value="<?php echo $profile['pais']?>" required>
+                                <input type="text" class="validateString" id="country" name="country" placeholder="Brasil" autocomplete="off" value="<?php echo $profile['pais']?>" required>
                             </div>
                             <div class='large'>
                                 <label for="complement">Complemento</label>

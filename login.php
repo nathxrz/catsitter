@@ -1,6 +1,7 @@
 <?php
     $style ="style_login";
     $title = 'Login';
+    $showArrow = false;
 
     require("./includes/components/head.php");
     require('./includes/components/connect.php');

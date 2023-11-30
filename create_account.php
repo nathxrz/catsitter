@@ -2,6 +2,7 @@
     $style ="style_login";
     $title = 'Cadastro';
     $msg_error = '';
+    $showArrow = true;
 
     require("./includes/components/functions.php");
     require("./includes/components/head.php");
@@ -57,10 +58,10 @@
     ?>  
     <main>
         <section class="position-forms">
-            <div class="content-box">
-                <form action="create_account.php?create" method="POST">
+            <div class="content-box form-step-container">
+                <form action="create_account.php?create" onsubmit="return validaCreateAccount()" method="POST">
                 <!-- form 1 -->   
-                    <div id="form-01" class=""> 
+                    <div id="form-01" class="form-step"> 
                         <h2>Você é tutor ou cat sitter?</h2>
                         <div class='radio-container'>
                             <div class="input-radio">
@@ -75,16 +76,16 @@
                     </div>
     
                     <!-- form 2 --> 
-                    <div id="form-02" class="" >
+                    <div id="form-02" class="form-step hidden">
                         <h2>Informações pessoais</h2>
                         <div class="form-container">
                             <div class="input-container">
                                 <label for="name">Nome *</label>
-                                <input type="text" id="name" name="name" placeholder="Nome do usuário" autocomplete="off" required>
+                                <input type="text" id="name" class="validateString" name="name" placeholder="Nome do usuário" autocomplete="off" required>
                             </div>
                             <div class="input-container">
                                 <label for="lastname">Sobrenome *</label>
-                                <input type="text" id="lastname" name="lastname" placeholder="Sobrenome" autocomplete="off" required>
+                                <input type="text" id="lastname" class="validateString" name="lastname" placeholder="Sobrenome" autocomplete="off" required>
                             </div>
                             <div class="input-container">
                                 <label for="birth">Data de nascimento *</label>
@@ -111,7 +112,7 @@
                     </div>
                     
                     <!-- form 3 --> 
-                    <div id="form-03" class="">
+                    <div id="form-03" class="form-step hidden">
                         <h2>Endereço</h2>
                         <div class='form-container'>
                             <div class="input-container">
@@ -122,29 +123,29 @@
                             <div class="input-container input-row">
                                 <div class='large'>
                                     <label for="street">Rua *</label>
-                                    <input type="text" id="street" name="street" id='street' placeholder="Bento Martins" autocomplete="off" required>
+                                    <input type="text" class="validateString" id="street" name="street" id='street' placeholder="Bento Martins" autocomplete="off" required>
                                 </div>
                                 <div class='small'>
                                     <label for="number">nº *</label>
-                                    <input type="text" id="number" name="number" id='number' placeholder="12345" autocomplete="off" required>
+                                    <input type="text" class="validateNumbers" id="number" name="number" id='number' placeholder="12345" autocomplete="off" required>
                                 </div>
                             </div>
 
                             <div class="input-container input-row">
                                 <div class='medium'>
                                     <label for="city">Cidade *</label>
-                                    <input type="text" id="city" name="city" id='city' placeholder="Pelotas" autocomplete="off" required>
+                                    <input type="text" class="validateString" id="city" name="city" id='city' placeholder="Pelotas" autocomplete="off" required>
                                 </div>
                                 <div class='medium'>
                                     <label for="state">Estado *</label>
-                                    <input type="text" id="state" name="state" id='state' placeholder="RS" autocomplete="off" required>
+                                    <input type="text" class="validateString" id="state" name="state" id='state' placeholder="RS" autocomplete="off" required>
                                 </div>
                             </div>
 
                             <div class="input-container input-row">
                                 <div class='small'>
                                     <label for="country">País *</label>
-                                    <input type="text" id="country" name="country" id='country' placeholder="Brasil" autocomplete="off" required>
+                                    <input type="text" class="validateString" id="country" name="country" id='country' placeholder="Brasil" autocomplete="off" required>
                                 </div>
                                 <div class='large'>
                                     <label for="complement">Complemento</label>
@@ -155,7 +156,7 @@
                      </div>
     
                     <!-- form 4 -->
-                    <div id="form-04" class="">
+                    <div id="form-04" class="form-step hidden">
                         <h2>Cadastro</h2>
                         <div class="form-container" >
                             <div class="input-container">
@@ -173,13 +174,17 @@
         
                         </div>
                         
-                        <button type="submit" class='btn-submit'>
+                        <button type="submit" id="btn-account" class='btn-submit'>
                             Criar conta!
                         </button>
                     </div>
                     <div class='arrows'>
-                        <img src="images/icons/iconLeft.svg" id="arrow-left" alt="Ícone para voltar.">
-                        <img src="images/icons/iconRight.svg" id="arrow-Right" alt="Ícone para Avançar.">
+                        <div>
+                            <img class="arrow-left hidden" src="images/icons/iconLeft.svg" id="arrow-left" alt="Ícone para voltar.">
+                        </div>
+                        <div>
+                            <img class="arrow-right" src="images/icons/iconRight.svg" id="arrow-Right" alt="Ícone para Avançar.">
+                        </div>
                     </div>
                 </form>
 
@@ -195,10 +200,6 @@
     <?php
         require("./includes/components/footer.php");
     ?>    
-
-    <script>
-        <script src="js/script.js"></script>
-    </script>
     
 </body>
 </html>

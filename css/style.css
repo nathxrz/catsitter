@@ -78,7 +78,6 @@
     background-color: var(--bg-color-input);
 
     border-radius: 1.9rem;
-    /* box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 0.19); */
     border: 1px solid rgba(0, 0, 0, 0.15);
     
     width: 30%;

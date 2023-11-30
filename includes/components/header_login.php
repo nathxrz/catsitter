@@ -1,12 +1,14 @@
 <header class="header-content-login">
     <a href="login.php">
-        <img id='arrow-back-login' src="./images/icons/iconBack.svg" alt="Ícone de voltar.">
+        <?php if(isset($showArrow) && $showArrow === true) {?>
+            <img id='arrow-back-login' src="./images/icons/iconBack.svg" alt="Ícone de voltar.">
+        <?php } ?>
     </a>
     <nav>
         <ul>
             <li><a href="login.php">Home</a></li>
-            <li><a href="services.php">Serviços</a></li>
-            <li><a href="contact.php">Contato</a></li>
+            <li><a href="">Serviços</a></li>
+            <li><a href="">Contato</a></li>
         </ul>
     </nav>
 </header>

@@ -1,6 +1,7 @@
 <?php
     $style ="style_login";
     $title = 'Esqueceu a senha?';
+    $showArrow = true;
 
     $_SESSION["email_enviado"] = "";
 

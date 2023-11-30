@@ -112,7 +112,7 @@
                     <div class="form-container">
                         <div class="input-container">
                             <label for="name">Qual o nome do seu gatinho(a)? *</label>
-                            <input type="text" id="name" name="name" placeholder="Bartholomeu"  required>
+                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu"  required>
                         </div>
                         <div class="input-container">
                             <label for="sex">Qual o sexo? *</label>
@@ -127,7 +127,7 @@
                         </div>
                         <div class="input-container">
                             <label for="breed">Qual a raça do seu felino? *</label>
-                            <input type="text" id="breed" name="breed" placeholder="Bartholomeu"  required>
+                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Bartholomeu"  required>
                         </div>
 
                         <div class="input-container">

@@ -1,6 +1,7 @@
 <?php
     $style ="style_login";
     $title = 'Alteração de senha';
+    $showArrow = true;
 
     
 
