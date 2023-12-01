@@ -19,7 +19,3 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 </head>
-    
-<?php 
-    session_start();
-?>

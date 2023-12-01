@@ -1,8 +1,8 @@
 <?php
+    session_start();
     $style ="style";
     $title = 'Perfil';
 
-    require("./includes/components/head.php");
     require('./includes/components/authenticator.php');
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
@@ -28,6 +28,7 @@
             $_SESSION['msg_error'] = 'Preencha todos os campos obrigatórios. *';
         }   
     }
+    require("./includes/components/head.php");
 ?>
 
 <body>

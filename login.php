@@ -1,9 +1,9 @@
 <?php
+    session_start();
     $style ="style_login";
     $title = 'Login';
     $showArrow = false;
 
-    require("./includes/components/head.php");
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
 
@@ -72,6 +72,7 @@
             }
         }
     }
+    require("./includes/components/head.php");
 ?>
 
 <body>

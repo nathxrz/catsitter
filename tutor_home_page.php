@@ -1,12 +1,14 @@
 <?php
+    session_start();
     $style ="style";
     $title = 'Home';
-    require("./includes/components/head.php");
+    
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
     require('./includes/components/authenticator.php');
 
     $_SESSION["msg_error"] = "";
+    $_SESSION["redirect"] = "tutor_home_page.php";
 
     if(isset($_SESSION["cod_usuario"])){
         $pets = searchPets($_SESSION["cod_usuario"], $pdo);
@@ -50,6 +52,7 @@
 
         $sittersInfo = searchUserCatSitter($_SESSION["cod_usuario"], $pdo);
     }
+    require("./includes/components/head.php");
 ?>
 
 <body>
@@ -211,8 +214,10 @@
                                     ?>
                             <div class="card-profile">
                                 <form action="tutor_home_page.php?schedule" method="POST">
-                                    <a href=""><img class="img-profile" src="images/<?php echo $sitters['foto']?>" alt=""></a>
-                                    <p><?php echo $sitters['nome'] . " " . $sitters['sobrenome']?></p>
+                                    <a href="view_sitter_page.php?user=<?php echo $sitters['cod_usuario']?>"><img class="img-profile" src="images/<?php echo $sitters['foto']?>" alt=""></a>
+                                    <a href="view_sitter_page.php?user=<?php echo $sitters['cod_usuario']?>">
+                                        <p><?php echo $sitters['nome'] . " " . $sitters['sobrenome']?></p>
+                                    </a>
                                     <p class='price-view'>R$ <?php echo $sitters['preco']?></p>
                                     <input type="hidden" name='sitter' value='<?php echo $sitters['cod_catsitter']?>'>
                                     <input type="hidden" name='type' value='<?php echo $_POST['type']?>'>

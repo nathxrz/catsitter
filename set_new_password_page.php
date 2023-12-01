@@ -1,12 +1,10 @@
 <?php
+    session_start();
     $style ="style_login";
     $title = 'Alteração de senha';
     $showArrow = true;
 
-    
-
     require("./includes/components/functions.php");
-    require("./includes/components/head.php");
 
     $_SESSION["senha_atualizada"] = "";
 
@@ -45,7 +43,7 @@
         }
 
     }
-    
+    require("./includes/components/head.php"); 
 ?>
 
 <body>

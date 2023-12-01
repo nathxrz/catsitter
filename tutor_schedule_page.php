@@ -1,10 +1,12 @@
 <?php
+    session_start();
     $style ="style";
     $title = 'Agenda';
 
-    require("./includes/components/head.php");
     require('./includes/components/authenticator.php');
     require('./includes/components/functions.php');
+
+    $_SESSION["redirect"] = "tutor_schedule_page.php";
 
     if (isset($_GET['delete'])) {
         $cod_schedule = $_GET['delete'];
@@ -16,7 +18,7 @@
         $profile = searchUser($_SESSION["email"], $pdo);      
     }
 
-
+    require("./includes/components/head.php");
 ?>
 
 <body>
@@ -38,11 +40,14 @@
                         ?>
                 <div class="card-schedule">
 
-                    <a href=""><img class="img-profile" src="images/<?php echo $catsitter['foto']?>" alt=""></a>
+                    <a href="view_sitter_page.php?user=<?php echo $catsitter['cod_usuario']?>">
+                        <img class="img-profile" src="images/<?php echo $catsitter['foto']?>" alt="">
+                    </a>
 
                     <div class='appointment-information'>
-                        
-                        <p><?php echo $catsitter['nome'] . " " . $catsitter['sobrenome'] ?></p>
+                        <a href="view_sitter_page.php?user=<?php echo $catsitter['cod_usuario']?>">
+                            <p><?php echo $catsitter['nome'] . " " . $catsitter['sobrenome'] ?></p>
+                        </a>
                         <div>
                             <p>Dia: </p>
                             <span><?php echo date('d/m/Y', strtotime($schedule['dt_agendamento'])) ?></span>
@@ -67,7 +72,7 @@
                         <?php 
                             foreach($pets as $pet){
                         ?>
-                            <span><a href=""><?php echo $pet['nome'] ?></a></span>
+                            <span><a href="pet_profile_page.php?pet=<?php echo ($pet['cod_pet'])?>"><?php echo $pet['nome'] ?></a></span>
                         <?php } ?>
                         </div>
                     </div>

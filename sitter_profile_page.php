@@ -1,8 +1,8 @@
 <?php
+    session_start();
     $style ="style";
     $title = 'Perfil';
 
-    require("./includes/components/head.php");
     require('./includes/components/authenticator.php');
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
@@ -112,6 +112,7 @@
         $link = "sitter_profile_page.php";
         redirect($link);
     }
+    require("./includes/components/head.php");
 ?>
 <body>
     <?php

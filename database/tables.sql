@@ -27,7 +27,7 @@ create table usuarios(
 )
 
 create table telefones(
-    telefone varchar(14) not null,
+    telefone varchar(15) not null,
     cod_usuario int,
     primary key (telefone, cod_usuario),
     constraint fk_telefones foreign key (cod_usuario) references usuarios (cod_usuario) on delete cascade on update cascade);
@@ -72,7 +72,7 @@ create table distintivo_catsitter(
     cod_usuario int,
     cod_distintivo int,
     PRIMARY KEY (cod_usuario, cod_distintivo),
-    CONSTRAINT fk_relacao_sitter FOREIGN KEY (cod_usuario) REFERENCES usuarios (cod_usuario) on update cascade,
+    CONSTRAINT fk_relacao_sitter FOREIGN KEY (cod_usuario) REFERENCES usuarios (cod_usuario) on update cascade on delete cascade,
     CONSTRAINT fk_relacao_distintivo FOREIGN KEY (cod_distintivo) REFERENCES distintivos (cod_distintivo) on update cascade on delete cascade)
 
 create table servicos(

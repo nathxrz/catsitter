@@ -1,8 +1,8 @@
 <?php
+    session_start();
     $style ="style";
     $title = 'Pets';
 
-    require("./includes/components/head.php");
     require('./includes/components/authenticator.php');
     require("./includes/components/functions.php");
 
@@ -44,7 +44,10 @@
         $delete_pet = deletePet($_SESSION['cod_usuario'], $cod_pet, $pdo);
     }
 
-    $pets = searchPets($_SESSION['cod_usuario'], $pdo);
+    if(isset($_SESSION['cod_usuario'])){
+        $pets = searchPets($_SESSION['cod_usuario'], $pdo);
+    }
+    require("./includes/components/head.php");
 ?>
 
 <body>
@@ -127,7 +130,7 @@
                         </div>
                         <div class="input-container">
                             <label for="breed">Qual a raça do seu felino? *</label>
-                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Bartholomeu"  required>
+                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Viralata"  required>
                         </div>
 
                         <div class="input-container">

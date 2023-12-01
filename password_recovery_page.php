@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $style ="style_login";
     $title = 'Esqueceu a senha?';
     $showArrow = true;
@@ -8,7 +9,6 @@
     $_SESSION["msg_error"] = "";
 
     require("./includes/components/functions.php");
-    require("./includes/components/head.php");
     
     if(isset($_POST['email'])){
         $email=$_POST["email"];
@@ -27,6 +27,7 @@
           $_SESSION["msg_error"] = "E-mail inválido";
         }
     }
+    require("./includes/components/head.php");
 ?>
 
 <body>

@@ -283,6 +283,10 @@
     width: 100%;
 }
 
+.appointment-information a{
+    text-decoration: none;
+}
+
 .appointment-information p{
     line-height: 145%;
     color: var(--font-color-neutral);

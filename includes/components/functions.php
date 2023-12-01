@@ -70,7 +70,7 @@ function emailConfirmRegistration($email, $pdo){
     ];
 
     $mail->Username = 'nathaliaMailerPhp@gmail.com';
-    $mail->Password = 'v m m u d a r r w s e o d z i t';
+    $mail->Password = 'ggex vuer fngu pver';
 
     $mail->setFrom('nathaliaMailerPhp@gmail.com','CatSitters');
 
@@ -105,6 +105,14 @@ function validateLogin($email, $formPassword, $pdo){
 function searchUser($email, $pdo){
     $user = $pdo->prepare('select * from usuarios where email = :email');
     $user->bindValue(':email', $email);
+    $user->execute();
+    
+    return $user->fetch();
+}
+
+function searchUserCod($cod, $pdo){
+    $user = $pdo->prepare('select * from usuarios where cod_usuario = :cod');
+    $user->bindValue(':cod', $cod);
     $user->execute();
     
     return $user->fetch();
@@ -259,7 +267,7 @@ function sendLoginEmail($email){
     ];
 
     $mail->Username = 'nathaliaMailerPhp@gmail.com';
-    $mail->Password = 'v m m u d a r r w s e o d z i t';
+    $mail->Password = 'ggex vuer fngu pver';
 
     $mail->setFrom('nathaliaMailerPhp@gmail.com','Catsitters');
 
@@ -319,7 +327,7 @@ function sendEmailToChangePassword($email, $key, $pdo){
     ];
 
     $mail->Username = 'nathaliaMailerPhp@gmail.com';
-    $mail->Password = 'v m m u d a r r w s e o d z i t';
+    $mail->Password = 'ggex vuer fngu pver';
 
     $mail->setFrom('nathaliaMailerPhp@gmail.com','Catsitters');
 

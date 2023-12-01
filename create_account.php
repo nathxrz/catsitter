@@ -1,11 +1,11 @@
 <?php
+    session_start();
     $style ="style_login";
     $title = 'Cadastro';
     $msg_error = '';
     $showArrow = true;
 
     require("./includes/components/functions.php");
-    require("./includes/components/head.php");
 
     $_SESSION["msg_error"] = "";
 
@@ -49,7 +49,7 @@
             $_SESSION["msg_error"] = "* Preencha todos os campos obrigatórios.";
         }
     }
-        
+    require("./includes/components/head.php");   
 ?>
 
 <body>

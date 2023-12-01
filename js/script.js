@@ -13,6 +13,7 @@ window.onload = function(){
     const inputStrings = document.querySelector('.validateString');
     const inputNumbers= document.querySelector('.validateNumbers');
     const buttonSubmit = document.getElementById("btn-account");
+    const redirectBtn =  document.getElementById('close-btn');
     const toggle = document.getElementById('theme-btn');
     const theme = window.localStorage.getItem('theme');
 
@@ -34,6 +35,12 @@ window.onload = function(){
 
     if(buttonSubmit){
         buttonSubmit.addEventListener("click", verifyPassword);
+    }
+
+    if(redirectBtn){
+        redirectBtn.addEventListener('click', function() {
+            history.back();
+        })
     }
 
     if(inputStrings){
@@ -82,10 +89,17 @@ function searchData(){
         })
         .then(function(data){
     
-            document.getElementById("street").value=data.logradouro
-            document.getElementById("city").value=data.localidade
-            document.getElementById("state").value=data.uf
-            document.getElementById("country").value="Brasil"
+            if(data.erro){
+                document.getElementById("street").value=""
+                document.getElementById("city").value=""
+                document.getElementById("state").value=""
+                document.getElementById("country").value=""    
+            }else{
+                document.getElementById("street").value=data.logradouro
+                document.getElementById("city").value=data.localidade
+                document.getElementById("state").value=data.uf
+                document.getElementById("country").value="Brasil"
+            }
     
          })
         .catch(function(e) {
@@ -193,13 +207,8 @@ function mascaraPRICE(e){
         e.preventDefault();
     }
 
-    let value = this.value.replace(',','')
-
-    if(this.value.length == 2){
-        this.value = value.replace(',','') + ",";
-    }
     if(this.value.length == 3){
-        this.value = value.replace(',','') + ",";
+        this.value = this.value + ",";
     }
 }
 

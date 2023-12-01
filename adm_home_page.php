@@ -1,8 +1,8 @@
 <?php
+    session_start();
     $style ="style";
     $title = 'Home';
 
-    require("./includes/components/head.php");
     require('./includes/components/authenticator.php');
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
@@ -64,6 +64,7 @@
             $users = searchUsersName($search, $type, $pdo);
         }
     }
+    require("./includes/components/head.php");
 ?>
 
 <body>
