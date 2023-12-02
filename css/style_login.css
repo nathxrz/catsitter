@@ -23,6 +23,29 @@
 
 }
 
+.dark{
+    --font-color-primary: #FFF;
+    --font-color-secondary: #5A9DA6;
+    --font-color-third: #696969;
+    --font-color-radio: #3a3a3a;
+    --font-color-neutral: #cecece;
+    --font-btn-card: #1e737e;
+    --font-btn-card-hover: #fff;
+    
+
+    --bg-header: #292a2d;
+    --bg-color-forms: #292a2d;
+    --bg-color-input: #83868e;
+    --bg-header-card: #31555a;
+    --bg-color-btn: #15525a;
+    --bg-color-btn-hover: #1f7581;
+    --bg-color-third: #c0c5d4;
+    --bg-color-card: #292a2d;
+
+    --border-color: #15525a;
+    --border-color-focus: #1e737e;
+}
+
 .header-content-login{
     padding: 4.4rem 10.3rem 0;
     display: flex;

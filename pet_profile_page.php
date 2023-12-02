@@ -127,7 +127,7 @@
                     <?php if(!$pet_profile['dt_nascimento'] == ''){ ?>
                         <div class='info-container-profile'>
                             <p>Data de nascimento: </p>
-                            <span><?php echo $pet_profile['dt_nascimento']?></span>
+                            <span><?php echo date('d/m/Y', strtotime($pet_profile['dt_nascimento']))?></span>
                         </div>
                     <?php } ?>
     
@@ -379,7 +379,7 @@
                     <div class="form-container">
                         <div class="input-container">
                             <label for="name">Qual o nome do seu gatinho(a)? *</label>
-                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu" value="<?php echo $pet_profile['nome']?>" required>
+                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu" value="<?php echo $pet_profile['nome']?>" autocomplete="off" required>
                         </div>
                         <div class="input-container">
                             <label for="sex">Qual o sexo? *</label>
@@ -390,11 +390,11 @@
                         </div>
                         <div class="input-container">
                             <label for="birth">Data de nascimento:</label>
-                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" value="<?php echo $pet_profile['dt_nascimento']?>">
+                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" value="<?php echo date('d/m/Y', strtotime($pet_profile['dt_nascimento']))?>">
                         </div>
                         <div class="input-container">
                             <label for="breed">Qual a raça do seu felino? *</label>
-                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Bartholomeu" value="<?php echo $pet_profile['raca']?>" required>
+                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Bartholomeu" value="<?php echo $pet_profile['raca']?>" autocomplete="off" required>
                         </div>
                     </div>
 
@@ -456,7 +456,7 @@
                     <h2>Selecionar Fotos</h2>
                     <div class='form-container'>
                         <div class="input-container">
-                            <input type="file" id="foto" accept=".png, .jpg, .jpeg" multiple name="foto" autocomplete="off">
+                            <input type="file" id="foto" accept=".png, .jpg, .jpeg" multiple name="foto">
                         </div>
                     </div>
     

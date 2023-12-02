@@ -154,7 +154,7 @@
 
                 <div class='info-container-profile'>
                     <p>Data de nascimento: </p>
-                    <span><?php echo $profile['dt_nascimento']?></span>
+                    <span><?php echo date('d/m/Y', strtotime($profile['dt_nascimento']))?></span>
                 </div>
 
                 <div class='info-container-profile'>
@@ -283,7 +283,7 @@
                 <?php 
                     if(!$yourBadges){ ?>
                         <div class='info-container-profile'>
-                            <p>Nenhum distintivo selecionado.</p>
+                            <p class='color-text'>Nenhum distintivo selecionado.</p>
                         </div>
                 <?php }else{ 
                     foreach($yourBadges as $ybadges){ ?>
@@ -380,7 +380,7 @@
                         </div>
                         <div class="input-container">
                             <label for="birth">Data de nascimento *</label>
-                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" value="<?php echo $profile['dt_nascimento']?>" required>
+                            <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" value="<?php echo date('d/m/Y', strtotime($profile['dt_nascimento']))?>" required>
                         </div>
                         <div class="input-container">
                             <label for="gender">Gênero *</label>

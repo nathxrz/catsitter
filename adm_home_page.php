@@ -58,10 +58,12 @@
     }
 
     if(isset($_GET["searchUsers"])){
+        $search = $_POST["search"];
+        $type = $_POST["type"];
         if($_POST["search"] != ''){
-            $search = $_POST["search"];
-            $type = $_POST["type"];
             $users = searchUsersName($search, $type, $pdo);
+        }else{
+            $users = searchUsersFilter( $type, $pdo);
         }
     }
     require("./includes/components/head.php");
@@ -81,7 +83,7 @@
                 <?php 
                     if(!$badges){ ?>
                         <div class='info-container-profile'>
-                            <p>Nenhum distintivo selecionado.</p>
+                            <p class='color-text'>Nenhum distintivo selecionado.</p>
                         </div>
                 <?php }else{ 
                     
@@ -146,23 +148,23 @@
                     <div class='position-filter'>
                         <div class='radio-adm-content'>
                             <label class='radio-adm-input'>
-                                <input type="radio" id="tudo" name="type" value="tudo" checked/>
+                                <input type="radio" id="tudo" name="type" value="tudo" <?php if(isset($_POST['type']) and $_POST['type'] == 'tudo') echo 'checked' ?> checked/>
                                 <p>Tudo</p>
                             </label>
     
                             <label class='radio-adm-input'>
-                                <input type="radio" id="tutor" name="type" value="tutor"/>
+                                <input type="radio" id="tutor" name="type" value="tutor" <?php if(isset($_POST['type']) and $_POST['type'] == 'tutor') echo 'checked' ?>/>
                                 <p>Tutor</p>
                             </label>
     
                             <label class='radio-adm-input'>
-                                <input type="radio" id="catsitter" name="type" value="catsitter"/>
+                                <input type="radio" id="catsitter" name="type" value="catsitter" <?php if(isset($_POST['type']) and $_POST['type'] == 'catsitter') echo 'checked' ?>/>
                                 <p>Cat sitter</p>
                             </label>
                         </div>
     
                         <div class='search-input badges-width'>
-                            <input class="" type="text" placeholder='Pesquisar usuários' name='search'>
+                            <input class="" type="text" placeholder='Pesquisar usuários' name='search' autocomplete="off">
                             <button type="submit" class="btn-search" name="submit" value="submit">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11C18 12.8858 17.2543 14.5974 16.0417 15.8561C16.0073 15.8825 15.9743 15.9114 15.9428 15.9429C15.9113 15.9744 15.8824 16.0074 15.856 16.0418C14.5973 17.2543 12.8857 18 11 18C7.13401 18 4 14.866 4 11ZM16.6176 18.0319C15.078 19.2635 13.125 20 11 20C6.02944 20 2 15.9706 2 11C2 6.02944 6.02944 2 11 2C15.9706 2 20 6.02944 20 11C20 13.125 19.2635 15.0781 18.0319 16.6177L21.707 20.2929C22.0975 20.6834 22.0975 21.3166 21.707 21.7071C21.3165 22.0976 20.6833 22.0976 20.2928 21.7071L16.6176 18.0319Z" fill="#326B73"/>
@@ -177,7 +179,7 @@
                     <?php
                         if(isset($users) and !$users){ ?>
                             <div class='info-container-profile'>
-                            <p>Nenhum usuário encontrado.</p>
+                            <p class='color-text'>Nenhum usuário encontrado.</p>
                         </div>
                     <?php } else {
                         foreach($users as $user){ ?>

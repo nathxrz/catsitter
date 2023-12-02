@@ -41,7 +41,7 @@
                     <h2>Informações básicas</h2>
                     <div class='info-container-profile'>
                         <p>Data de nascimento: </p>
-                        <span><?php echo $profile['dt_nascimento']?></span>
+                        <span><?php echo date('d/m/Y', strtotime($profile['dt_nascimento']))?></span>
                     </div>
 
                     <div class='info-container-profile'>
@@ -119,7 +119,7 @@
                     <?php 
                         if(!$yourBadges){ ?>
                             <div class='info-container-profile'>
-                                <p>Nenhum distintivo selecionado.</p>
+                                <p class='color-text'>Nenhum distintivo selecionado.</p>
                             </div>
                     <?php }else{ 
                         foreach($yourBadges as $ybadges){ ?>

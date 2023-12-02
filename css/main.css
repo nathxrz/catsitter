@@ -20,6 +20,11 @@
     --font-color-neutral-light: #ffff;
     --font-color-links-footer-primary: #65B5BF;
     --font-color-links-footer-secondary: #fff;
+    --font-color-error: #cc0000;
+    --font-color-sucess: rgb(20, 142, 26);
+    --font-color-placeholder: #73787f;
+
+    --color-arrow: #155159;
 
     --placeholder-color: rgba(0, 0, 0, 0.5);
 
@@ -54,8 +59,16 @@
     --font-color-primary: #FFF;
     --font-color-secondary: #5A9DA6;
     --font-color-third: #696969;
+    --font-color-error: #931212;
+    --font-color-sucess: rgb(16, 88, 19);
+    --font-color-neutral: #cecece;
+    --font-color-placeholder: #2b2b2b;
+
+    --color-arrow: #BF6C2C;
+    
     --font-btn-card: #fff;
     --font-btn-card-hover: #fff;
+    
 
     --placeholder-color: rgba(0, 0, 0, 0.848);
 
@@ -638,11 +651,11 @@ footer{
 }
 
 .msg-error{
-    color: #cc0000;
+    color: var(--font-color-error);
 }
 
 .msg-sucess{
-    color: rgb(20, 142, 26);
+    color: var(--font-color-sucess);
 }
 
 .error {
@@ -652,4 +665,17 @@ footer{
 .error-message {
     color: #D99A4E;
     padding: 6px 0;
+}
+
+.color-text{
+    color: var(--font-color-neutral);
+}
+
+input::placeholder{
+    color: var(--font-color-placeholder);
+}
+
+.color-arrows svg path{
+    color: var(--color-arrow);
+    fill: var(--color-arrow);
 }

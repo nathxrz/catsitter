@@ -40,7 +40,7 @@
         
                     <div class='info-container-profile'>
                         <p>Data de nascimento: </p>
-                        <span><?php echo $profile['dt_nascimento']?></span>
+                        <span><?php echo date('d/m/Y', strtotime($profile['dt_nascimento']))?></span>
                     </div>
 
                     <div class='info-container-profile'>
@@ -117,7 +117,7 @@
 
                     <?php if(!$pets){ ?>
                         <div>
-                            <p>Nenhum gato cadastrado.</p>
+                            <p class='color-text'>Nenhum gato cadastrado.</p>
                         </div>
                     <?php }else{ ?>
                     <div class='info-container-profile'>

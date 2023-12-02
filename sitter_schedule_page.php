@@ -29,7 +29,7 @@
                 <?php
                     if(isset($schedules) and !$schedules){ ?>
                         <div>
-                            <p>Nenhum agendamento cadastrado.</p>
+                            <p class='color-text'>Nenhum agendamento cadastrado.</p>
                         </div>
                 <?php } else { 
                         foreach($schedules as $schedule) { 

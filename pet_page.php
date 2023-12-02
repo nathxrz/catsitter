@@ -41,7 +41,13 @@
     
     if (isset($_GET['delete'])) {
         $cod_pet = $_GET['delete'];
-        $delete_pet = deletePet($_SESSION['cod_usuario'], $cod_pet, $pdo);
+        $searchSchedule = searchSchedulePet($_SESSION['cod_usuario'], $cod_pet, $pdo);
+
+        if(!$searchSchedule){
+            $delete_pet = deletePet($_SESSION['cod_usuario'], $cod_pet, $pdo);
+        }else{
+            $_SESSION["msg_error"] = 'Não foi possível deletar o pet, pois ele está vínculado a um (ou mais) agendamento(s)!';
+        }
     }
 
     if(isset($_SESSION['cod_usuario'])){
@@ -60,7 +66,7 @@
             <div class="content-box position-content">
                 <?php if(!$pets){ ?>
                     <div class=''>
-                        <p>Nenhum gato cadastrado.</p>
+                        <p class='color-text'>Nenhum gato cadastrado.</p>
                     </div>
                 <?php }else{ ?>
 
@@ -115,7 +121,7 @@
                     <div class="form-container">
                         <div class="input-container">
                             <label for="name">Qual o nome do seu gatinho(a)? *</label>
-                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu"  required>
+                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu" autocomplete="off" required>
                         </div>
                         <div class="input-container">
                             <label for="sex">Qual o sexo? *</label>
@@ -130,7 +136,7 @@
                         </div>
                         <div class="input-container">
                             <label for="breed">Qual a raça do seu felino? *</label>
-                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Viralata"  required>
+                            <input type="text" class="validateString" id="breed" name="breed" placeholder="Viralata" autocomplete="off" required>
                         </div>
 
                         <div class="input-container">

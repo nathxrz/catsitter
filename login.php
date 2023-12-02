@@ -87,10 +87,10 @@
                     <h1>Bem-vindo(a)!</h1>
                     <div class='form-container gap-no-label'>
                         <div class="input-container" >
-                            <input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']?>" placeholder="email@exemplo.com">
+                            <input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']?>" placeholder="email@exemplo.com" autocomplete="off">
                         </div>
                         <div class="input-container">
-                            <input type="password" name="password" id="password" value="<?php if(isset($_POST['password'])) echo $_POST['password']?>" required placeholder="********">
+                            <input type="password" name="password" id="password" value="<?php if(isset($_POST['password'])) echo $_POST['password']?>" required placeholder="********" autocomplete="off">
                         </div>
                     </div>
     

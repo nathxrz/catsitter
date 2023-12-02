@@ -217,6 +217,19 @@ function searchSchedule($user, $pdo){
     return $search_schedule->fetchAll();
 }
 
+function searchSchedulePet($user, $codpet, $pdo){
+    $search_schedule = $pdo->prepare('select * from agendamento_pets ap join agendamentos a using(cod_agendamento) where a.cod_usuario = :user and ap.cod_pet = :codpet');
+    $search_schedule->bindValue(':user', $user);
+    $search_schedule->bindValue(':codpet', $codpet);
+    $search_schedule->execute();
+
+    if($search_schedule->rowCount() > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function searchScheduleSitter($user, $pdo){
     $search_schedule = $pdo->prepare('select * from agendamentos where cod_catsitter = :user order by dt_agendamento asc, horario asc');
     $search_schedule->bindValue(':user', $user);
@@ -371,7 +384,7 @@ function registerPet($array, $pdo){
 }
 
 function searchPets($user, $pdo){
-    $pet = $pdo->prepare('select * from gatos where cod_usuario = :user');
+    $pet = $pdo->prepare('select * from gatos where cod_usuario = :user order by nome asc');
     $pet->bindValue(':user', $user);
     $pet->execute();
     
@@ -521,7 +534,7 @@ function deleteUser($user, $pdo){
 }
 
 function searchUsersName($search, $type, $pdo){
-    $all = "select * from usuarios where nome like :nome or sobrenome like :sobrenome";
+    $all = "select * from usuarios where nome like :nome or sobrenome like :sobrenome order by nome asc";
     $tutor = "select * from usuarios where (nome like :nome or sobrenome like :sobrenome) and not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
     $catsitter = "select * from usuarios join cat_sitters using(cod_usuario) where nome like :nome or sobrenome like :sobrenome order by usuarios.nome asc";
 
@@ -537,6 +550,25 @@ function searchUsersName($search, $type, $pdo){
     $users = $pdo->prepare($query);
     $users->bindValue(':nome', $search . '%');
     $users->bindValue(':sobrenome', $search . '%');
+    $users->execute();
+
+    return $users->fetchAll();
+}
+
+function searchUsersFilter($type, $pdo){
+    $all = "select * from usuarios order by nome asc";
+    $tutor = "select * from usuarios where not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
+    $catsitter = "select * from usuarios join cat_sitters using(cod_usuario) order by usuarios.nome asc";
+
+    if($type == 'tudo') {
+        $query = $all;
+    }else if($type == 'tutor'){
+        $query = $tutor;
+    }else {
+        $query = $catsitter;
+    }
+
+    $users = $pdo->prepare($query);
     $users->execute();
 
     return $users->fetchAll();

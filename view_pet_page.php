@@ -41,7 +41,7 @@
                     <?php if(!$pet_profile['dt_nascimento'] == ''){ ?>
                         <div class='info-container-profile'>
                             <p>Data de nascimento: </p>
-                            <span><?php echo $pet_profile['dt_nascimento']?></span>
+                            <span><?php echo date('d/m/Y', strtotime($pet_profile['dt_nascimento']))?></span>
                         </div>
                     <?php } ?>
 
@@ -61,7 +61,7 @@
         
                     <div class='info-container-profile'>
                         <?php if($pet_profile['rotina'] == null){ ?>
-                        <p>Nenhuma rotina informada.</p>
+                        <p class='color-text'>Nenhuma rotina informada.</p>
                         <?php } else { ?>
                         <p><?php echo $pet_profile['rotina']?></p>
                         <?php } ?>
@@ -73,7 +73,7 @@
 
                     <div class='info-container-profile'>
                         <?php if($pet_profile['ficha_medica'] == null){ ?>
-                        <p>Nenhuma rotina informada.</p>
+                        <p class='color-text'>Nenhuma rotina informada.</p>
                         <?php } else { ?>
                         <p><?php echo $pet_profile['ficha_medica']?></p>
                         <?php } ?>

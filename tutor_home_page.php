@@ -204,7 +204,7 @@
                             if(!$sittersAvailable){ ?>
 
                             <div>
-                                <p>Nenhum Cat sitter disponível neste horário</p>
+                                <p class='color-text'>Nenhum Cat sitter disponível neste horário</p>
                             </div>
                             <?php } ?>
                         <!-- modal de confirmação de agendamento -->
