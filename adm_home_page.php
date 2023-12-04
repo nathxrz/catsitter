@@ -64,7 +64,6 @@
         }else{
             $users = searchUsersFilter( $type, $pdo);
         }
-        
     }
     require("./includes/components/head.php");
 ?>

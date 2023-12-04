@@ -48,21 +48,6 @@ window.onload = function(){
     const btnAdmAddBadges = document.getElementById('btn-adm-add-badges');
     const btnCloseAdmAddBadges = document.getElementById('btn-close-adm-add-badges');
 
-    if(btnAdmAddBadges){
-        const form = document.getElementById('form-adm-add-badges');
-        btnAdmAddBadges.addEventListener("click", () => toggleForm(form));
-    }
-
-    if(btnCloseAdmAddBadges){
-        const form = document.getElementById('form-adm-add-badges');
-        btnCloseAdmAddBadges.addEventListener("click", () => toggleForm(form));
-    }
-
-
-
-
-
-
     if(inputCPF){
         inputCPF.addEventListener("keypress", mascaraCPF);
     }
@@ -241,6 +226,15 @@ window.onload = function(){
     }
 
     //adm
+    if(btnAdmAddBadges){
+        const form = document.getElementById('form-adm-add-badges');
+        btnAdmAddBadges.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseAdmAddBadges){
+        const form = document.getElementById('form-adm-add-badges');
+        btnCloseAdmAddBadges.addEventListener("click", () => toggleForm(form));
+    }
 
     formStep();
 }
