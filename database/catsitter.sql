@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/12/2023 às 01:04
+-- Tempo de geração: 04/12/2023 às 06:03
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -36,19 +36,6 @@ CREATE TABLE `agendamentos` (
   `horario` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `agendamentos`
---
-
-INSERT INTO `agendamentos` (`cod_agendamento`, `dt_agendamento`, `cod_servico`, `cod_usuario`, `cod_catsitter`, `horario`) VALUES
-(29, '2023-11-29 00:00:00', 1, 6, 3, '09:30'),
-(30, '2023-11-28 00:00:00', 1, 6, 3, '13:30'),
-(32, '2023-11-28 00:00:00', 2, 6, 3, '09:30'),
-(33, '2023-11-28 00:00:00', 1, 6, 9, '09:30'),
-(34, '2023-11-29 00:00:00', 1, 6, 9, '09:30'),
-(35, '2023-12-01 00:00:00', 1, 6, 9, '08:30'),
-(36, '2023-12-01 00:00:00', 2, 6, 3, '15:30');
-
 -- --------------------------------------------------------
 
 --
@@ -59,21 +46,6 @@ CREATE TABLE `agendamento_pets` (
   `cod_agendamento` int(11) NOT NULL,
   `cod_pet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `agendamento_pets`
---
-
-INSERT INTO `agendamento_pets` (`cod_agendamento`, `cod_pet`) VALUES
-(29, 45),
-(30, 45),
-(32, 45),
-(33, 45),
-(34, 46),
-(35, 45),
-(35, 46),
-(36, 45),
-(36, 46);
 
 -- --------------------------------------------------------
 
@@ -92,10 +64,7 @@ CREATE TABLE `cat_sitters` (
 --
 
 INSERT INTO `cat_sitters` (`cod_catsitter`, `preco`, `cod_usuario`) VALUES
-(3, '40', 10),
-(8, NULL, 24),
-(9, '30', 25),
-(10, NULL, 26);
+(3, '50', 10);
 
 -- --------------------------------------------------------
 
@@ -128,7 +97,11 @@ CREATE TABLE `distintivos` (
 --
 
 INSERT INTO `distintivos` (`cod_distintivo`, `nome`, `descricao`) VALUES
-(14, 'Manipulação de medicamentos', 'Possui habilidade em medicar gatos.');
+(16, 'Manipulação de Medicamentos', 'Realiza medicação via oral em gatinhos dóceis.'),
+(17, 'Fada dos Gatos Idosos', 'Reconhecimento por fornecer cuidados especializados a felinos idosos, garantindo conforto, atenção e tratamentos adaptados às suas necessidades.\r\n\r\n'),
+(18, 'Guardião dos Gatos Especiais', 'Habilidade comprovada em cuidar de gatos com necessidades médicas especiais, oferecendo atenção e administração de tratamentos complexos.'),
+(19, 'Amante de Gatos de Raça', 'Experiência e paixão por cuidar de gatos de raça, atendendo às suas necessidades específicas e oferecendo cuidados personalizados.'),
+(20, 'Cuidador de Gatos Tímidos', 'Habilidade reconhecida em lidar com gatos tímidos ou ansiosos, criando ambientes confortáveis e técnicas para promover confiança e relaxamento');
 
 -- --------------------------------------------------------
 
@@ -140,13 +113,6 @@ CREATE TABLE `distintivo_catsitter` (
   `cod_usuario` int(11) NOT NULL,
   `cod_distintivo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `distintivo_catsitter`
---
-
-INSERT INTO `distintivo_catsitter` (`cod_usuario`, `cod_distintivo`) VALUES
-(10, 14);
 
 -- --------------------------------------------------------
 
@@ -209,8 +175,9 @@ CREATE TABLE `gatos` (
 --
 
 INSERT INTO `gatos` (`cod_pet`, `nome`, `dt_nascimento`, `sexo`, `raca`, `foto`, `rotina`, `ficha_medica`, `cod_usuario`) VALUES
-(45, 'Bartholomeu', '', 'Macho', 'Viralata', '20231121014957000000.jpg', 'aaaaaaaaaaaaaaaa', 'Saúdavel', 6),
-(46, 'Patrick', '2023-11-07', 'Macho', 'Pug', '20231121164215000000.jpg', 'Come e dorme', 'Muita pereba', 6);
+(45, 'Bartholomeu', '', 'Macho', 'Viralata', '20231204045123000000.jpeg', 'aaaaaaaaaaaaaaaa', 'Saúdavel', 6),
+(46, 'Patrick', '2023-11-07', 'Macho', 'Pug', '20231204045140000000.jpg', 'Come e dorme', 'Muita pereba', 6),
+(48, 'Mimi', '', 'Fêmea', 'Viralata', '20231203165053000000.png', 'maravilhoso e gato doorminhoco', 'Feio e esbelto', 6);
 
 -- --------------------------------------------------------
 
@@ -267,7 +234,7 @@ INSERT INTO `servicos` (`cod_servico`, `nome`, `descricao`) VALUES
 --
 
 CREATE TABLE `telefones` (
-  `telefone` varchar(14) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
   `cod_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -277,10 +244,8 @@ CREATE TABLE `telefones` (
 
 INSERT INTO `telefones` (`telefone`, `cod_usuario`) VALUES
 ('(11) 11111-111', 11),
-('(11) 11111-111', 28),
-('(34) 43434-434', 27),
-('2321', 6),
-('333', 10);
+('(11) 11111-1111', 10),
+('(53) 99182-2615', 6);
 
 -- --------------------------------------------------------
 
@@ -315,14 +280,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`cod_usuario`, `nome`, `sobrenome`, `dt_nascimento`, `genero`, `cpf`, `foto`, `reg_date`, `cep`, `rua`, `numero`, `cidade`, `estado`, `pais`, `complemento`, `adm`, `email`, `confirma_email`, `senha`) VALUES
-(6, 'Nathalia', 'tutor', '1999-03-23', 'Masculino', '1', '20231123022905000000.jpeg', '2023-11-20', '96160000', 'Av. Bento Martins', '2332', 'Capão do Leão', 'RS', 'Brasil', '', 0, 'nathyrezendemachado@gmail.com', 1, '$2y$10$kpp4MNXyw.7YkXn8tIl3DON9yxDQQx094SZtEAjRAJL.BtN/Tq5tq'),
-(10, 'Nathalia', 'sitter', '0333-03-31', 'Outro', '33333', '20231123023427000000.jpg', '2023-11-22', '22222', '2222', '222', '222', '22', '22', '', 0, 'nathyrezendemachado@hotmail.com', 1, '$2y$10$l8cOMkhEUHqoBq4dMZv0peAyDiB46c3Nq.7sbmwKwGWE5Mo5kcTv2'),
-(11, 'Administrador', '', '', 'Não informado', '', 'foto.png', '2023-11-01', '', '', '', '', '', '', '', 1, 'adm@gmail.com', 1, '$2y$10$TDYwm3SFDiwx41z1vOrA3.2N0nWk/Bs5fVHECvKKrwRMHxzur49Om'),
-(24, 'João', 'Silva', '1990-05-15', 'Masculino', '123.456.789-10', 'foto.png', '2023-11-25', '12345-678', 'Rua A', '100', 'Cidade A', 'Estado A', 'País A', 'Apt 101', 0, 'joao@email.com', 1, '12345'),
-(25, 'Maria', 'Souza', '1985-09-20', 'Feminino', '987.654.321-10', 'foto.png', '2023-11-25', '54321-098', 'Rua B', '200', 'Cidade B', 'Estado B', 'País B', 'Casa 02', 1, 'maria@email.com', 1, '12345'),
-(26, 'Carlos', 'Ferreira', '1988-12-10', 'Masculino', '456.789.123-10', 'foto.png', '2023-11-25', '13579-246', 'Rua C', '300', 'Cidade C', 'Estado C', 'País C', 'Bloco 03', 0, 'carlos@email.com', 1, '12345'),
-(27, 'NATHALIA', 'MACHADO', '2023-11-09', 'Feminino', '234.234.343-24', 'foto.png', '2023-11-29', '96160000', 'Avenida Bento Martins', '353', 'Capão do Leão', 'RS', 'Brasil', '', 0, 'nathyrezendemachado@teste.com', 0, '$2y$10$jayuKoBmmHsX7H4fiG2YX.PYMaMuBTawToDztqtxPEqFZYojytSz6'),
-(28, 'NATHALIA', 'MACHADO', '2023-11-23', 'Feminino', '123.213.213-21', 'foto.png', '2023-11-29', '96010-280', 'Rua Almirante Barroso', '12323', 'Pelotas', 'RS', 'Brasil', '', 0, 'nathyrezendemachado@testerr.com', 0, '$2y$10$utEwDESyLfxwZV5w1/IjOu0NgA2MF3sfFmWr9DzFmsAmawtDOlQ0y');
+(6, 'Nathalia Rezende', 'Machado', '2007-12-04', 'Feminino', '049.889.280-80', '20231203180358000000.jpg', '2023-11-20', '96020-430', 'Rua Doutor José Bonifácio de Carvalho Costa', '2332', 'Pelotas', 'RS', 'Brasil', '', 0, 'nathyrezendemachado@gmail.com', 1, '$2y$10$zaaL7PFNNJXIPUcZ43POwesXOgl676PWbzf7fID6AAGbabyTS0g3i'),
+(10, 'Luana', 'Pereira', '2000-06-14', 'Feminino', '111.111.111-11', '20231204042159000000.jpg', '2023-11-22', '22222', '2222', '222', '222', '22', '22', 'bloco 2', 0, 'nathyrezendemachado@hotmail.com', 1, '$2y$10$rIORi8swGaFTOayvO481Tu5CEWMyJLZUSADPjKfNJQXNw6QtQkG7q'),
+(11, 'Administrador', '', '', 'Não informado', '', 'foto.png', '2023-11-01', '', '', '', '', '', '', '', 1, 'admin@gmail.com', 1, '$2y$10$GPXuT3cjCaqcYGYXSb33WeSDDoTpT/Z/vjmpBKBKMikKKITSPVGMm');
 
 --
 -- Índices para tabelas despejadas
@@ -450,7 +410,7 @@ ALTER TABLE `agendamentos`
 -- AUTO_INCREMENT de tabela `cat_sitters`
 --
 ALTER TABLE `cat_sitters`
-  MODIFY `cod_catsitter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cod_catsitter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `chat`
@@ -462,7 +422,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT de tabela `distintivos`
 --
 ALTER TABLE `distintivos`
-  MODIFY `cod_distintivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `cod_distintivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `fotos`
@@ -543,7 +503,7 @@ ALTER TABLE `chat`
 --
 ALTER TABLE `distintivo_catsitter`
   ADD CONSTRAINT `fk_relacao_distintivo` FOREIGN KEY (`cod_distintivo`) REFERENCES `distintivos` (`cod_distintivo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_relacao_sitter` FOREIGN KEY (`cod_usuario`) REFERENCES `usuarios` (`cod_usuario`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_relacao_sitter` FOREIGN KEY (`cod_usuario`) REFERENCES `usuarios` (`cod_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Restrições para tabelas `fotos`

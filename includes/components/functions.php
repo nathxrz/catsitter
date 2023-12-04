@@ -152,7 +152,7 @@ function searchPetsSchedule($cod_agend, $pdo){
 
 function deleteSchedule($cod_schedule, $pdo){
     $delete_schedule = $pdo->prepare('delete from agendamentos where cod_agendamento = :cod_schedule');
-    $delete_schedule->bindValue('cod_schedule', $cod_schedule);
+    $delete_schedule->bindValue(':cod_schedule', $cod_schedule);
     $delete_schedule->execute();
 
     return true;
@@ -184,6 +184,18 @@ function searchCatSitters($array, $pdo){
     $catsitters->execute($array);
 
     return $catsitters->fetchAll();
+}
+
+function checksIfTheUserIsASitter($cod, $pdo){
+    $user = $pdo->prepare('select * from cat_sitters where cod_usuario = :cod');
+    $user->bindValue(':cod', $cod);
+    $user->execute();
+
+    if($user->rowCount() == 1){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 function searchCatSittersFilter($array, $pdo){

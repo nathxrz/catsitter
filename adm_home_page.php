@@ -7,6 +7,8 @@
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
 
+    $_SESSION["redirect"] = "adm_home_page.php";
+
     if (isset($_GET['delete'])) {
         $cod_badge= $_GET['delete'];
         $delete_badge = deleteBadge($cod_badge, $pdo);
@@ -62,6 +64,7 @@
         }else{
             $users = searchUsersFilter( $type, $pdo);
         }
+        
     }
     require("./includes/components/head.php");
 ?>
@@ -179,7 +182,9 @@
                         foreach($users as $user){ ?>
 
                         <div class="card-profile">
-                            <a href=""><img class="img-profile" src="images/<?php echo $user['foto']?>" alt=""></a>
+                            <a href="view_<?php if(checksIfTheUserIsASitter($user['cod_usuario'], $pdo)){ echo ('sitter'); } else { echo ('tutor');} ?>_page.php?user=<?php echo $user['cod_usuario']?>">
+                                <img class="img-profile" src="images/<?php echo $user['foto']?>" alt="">
+                            </a>
                             <p><?php echo $user['nome'] . " ". $user['sobrenome']?></p>
 
                             <a href="adm_home_page.php?deleteUser=<?php echo ($user['cod_usuario'])?>" class='icon-delete-profile' >
@@ -192,7 +197,6 @@
                     <?php } } ?>
 
                     </div>
-
                 </form>
             </div>
         </section> 
