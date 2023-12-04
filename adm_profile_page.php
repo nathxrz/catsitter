@@ -59,7 +59,7 @@
                         <span><?php echo $profile['email']?></span>
                     </div>
 
-                    <button class='reset-password-btn'>
+                    <button id="btn-reset-password" class='reset-password-btn'>
                         Redefinir senha
                     </button>
                 </div>
@@ -67,29 +67,27 @@
         </section>
 
         <!-- form troca senha-->
-        <section class="position-forms modal hidden">
+        <section id="form-reset-password" class="position-forms modal <?php if($_SESSION['msg_error'] == 'Senha atual incorreta.' or $_SESSION['msg_error'] == 'Senha mínima de 8 caracteres'){ echo(''); } else { echo('hidden'); }?>">
             <div class="content-box">
-                <form action="tutor_profile_page.php?newPassword" method="POST">
-
-                    <button class='close reset-btn-decoration'>
-                        <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.6742 18.5L30.3867 8.8029C30.677 8.5126 30.8401 8.11886 30.8401 7.70831C30.8401 7.29777 30.677 6.90403 30.3867 6.61373C30.0964 6.32343 29.7027 6.16034 29.2921 6.16034C28.8816 6.16034 28.4879 6.32343 28.1976 6.61373L18.5005 16.3262L8.80339 6.61373C8.51309 6.32343 8.11936 6.16034 7.70881 6.16034C7.29826 6.16034 6.90453 6.32343 6.61423 6.61373C6.32392 6.90403 6.16083 7.29777 6.16083 7.70831C6.16083 8.11886 6.32392 8.5126 6.61423 8.8029L16.3267 18.5L6.61423 28.1971C6.46973 28.3404 6.35504 28.5109 6.27677 28.6988C6.1985 28.8866 6.1582 29.0881 6.1582 29.2916C6.1582 29.4952 6.1985 29.6967 6.27677 29.8845C6.35504 30.0724 6.46973 30.2429 6.61423 30.3862C6.75754 30.5307 6.92805 30.6454 7.11592 30.7237C7.30379 30.802 7.50529 30.8423 7.70881 30.8423C7.91233 30.8423 8.11383 30.802 8.3017 30.7237C8.48956 30.6454 8.66007 30.5307 8.80339 30.3862L18.5005 20.6737L28.1976 30.3862C28.3409 30.5307 28.5114 30.6454 28.6993 30.7237C28.8871 30.802 29.0886 30.8423 29.2921 30.8423C29.4957 30.8423 29.6972 30.802 29.885 30.7237C30.0729 30.6454 30.2434 30.5307 30.3867 30.3862C30.5312 30.2429 30.6459 30.0724 30.7242 29.8845C30.8025 29.6967 30.8427 29.4952 30.8427 29.2916C30.8427 29.0881 30.8025 28.8866 30.7242 28.6988C30.6459 28.5109 30.5312 28.3404 30.3867 28.1971L20.6742 18.5Z" fill="#326B73"/>
-                        </svg>
-                    </button>
-                
+                <button id="btn-close-reset-password" class='close reset-btn-decoration'>
+                    <svg width="25" height="25" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.6742 18.5L30.3867 8.8029C30.677 8.5126 30.8401 8.11886 30.8401 7.70831C30.8401 7.29777 30.677 6.90403 30.3867 6.61373C30.0964 6.32343 29.7027 6.16034 29.2921 6.16034C28.8816 6.16034 28.4879 6.32343 28.1976 6.61373L18.5005 16.3262L8.80339 6.61373C8.51309 6.32343 8.11936 6.16034 7.70881 6.16034C7.29826 6.16034 6.90453 6.32343 6.61423 6.61373C6.32392 6.90403 6.16083 7.29777 6.16083 7.70831C6.16083 8.11886 6.32392 8.5126 6.61423 8.8029L16.3267 18.5L6.61423 28.1971C6.46973 28.3404 6.35504 28.5109 6.27677 28.6988C6.1985 28.8866 6.1582 29.0881 6.1582 29.2916C6.1582 29.4952 6.1985 29.6967 6.27677 29.8845C6.35504 30.0724 6.46973 30.2429 6.61423 30.3862C6.75754 30.5307 6.92805 30.6454 7.11592 30.7237C7.30379 30.802 7.50529 30.8423 7.70881 30.8423C7.91233 30.8423 8.11383 30.802 8.3017 30.7237C8.48956 30.6454 8.66007 30.5307 8.80339 30.3862L18.5005 20.6737L28.1976 30.3862C28.3409 30.5307 28.5114 30.6454 28.6993 30.7237C28.8871 30.802 29.0886 30.8423 29.2921 30.8423C29.4957 30.8423 29.6972 30.802 29.885 30.7237C30.0729 30.6454 30.2434 30.5307 30.3867 30.3862C30.5312 30.2429 30.6459 30.0724 30.7242 29.8845C30.8025 29.6967 30.8427 29.4952 30.8427 29.2916C30.8427 29.0881 30.8025 28.8866 30.7242 28.6988C30.6459 28.5109 30.5312 28.3404 30.3867 28.1971L20.6742 18.5Z" fill="#326B73"/>
+                    </svg>
+                </button>
+                <form action="adm_profile_page.php?newPassword" onsubmit="return verifyLimitPassword()" method="POST">
                     <h2>Redefinir nova senha</h2>
                     <div class="form-container">
                         <div class="input-container">
                             <label for="password">Senha atual</label>
-                            <input type="password" id="password" name="password" placeholder="********" autocomplete="off" required>
+                            <input type="password" id="current-password" name="password" placeholder="********" autocomplete="off" required>
                         </div>
                         <div class="input-container">
-                            <label for="new_password">Confirme sua senha</label>
-                            <input type="password" id="new_password" name="new_password" placeholder="********" autocomplete="off" required>
+                            <label for="new_password">Nova senha</label>
+                            <input type="password" id="new-password" name="new_password" placeholder="********" autocomplete="off" required>
                         </div>
                     </div>
     
-                    <button type="submit" class="btn-submit" name="login" value="login">
+                    <button type="submit" class="btn-submit" name="login">
                         Atualizar!
                     </button>
                     

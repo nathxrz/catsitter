@@ -17,6 +17,52 @@ window.onload = function(){
     const toggle = document.getElementById('theme-btn');
     const theme = window.localStorage.getItem('theme');
 
+    const btnAddPet = document.getElementById('add-pet-btn');
+    const btnCloseAddPet = document.getElementById('btn-close-add-pet');
+    const btnInfoPet = document.getElementById('btn-inf-pet');
+    const btnPetRotina= document.getElementById('btn-rotina');
+    const btnPetFichaMedica = document.getElementById('btn-ficha-medica');
+    const btnPetContatoPet = document.getElementById('btn-contato-pet');
+    const btnFotoPet = document.getElementById('btn-foto-pet');
+    const btnCloseInfoPet = document.getElementById('btn-close-info-pet');
+    const btnCloseRotina = document.getElementById('btn-close-rotina');
+    const btnCloseFichaMedica = document.getElementById('btn-close-ficha-medica');
+    const btnCloseContatoPet = document.getElementById('btn-close-contato-pet');
+    const btnCloseFotoPet = document.getElementById('btn-close-foto-pet');
+
+    const btnFotoProfile = document.getElementById('btn-foto-profile');
+    const btnInfoProfile = document.getElementById('btn-info-profile');
+    const btnInfoAddress = document.getElementById('btn-info-address');
+    const btnResetPassword = document.getElementById('btn-reset-password');
+    const btnCloseInfoProfile = document.getElementById('btn-close-info-profile');
+    const btnCloseAddress = document.getElementById('btn-close-address');
+    const btnCloseFotoProfile = document.getElementById('btn-close-foto-profile');
+    const btnCloseResetPassword = document.getElementById('btn-close-reset-password');
+    const newPassword = document.getElementById('new-password');
+
+    const btnAddBadges = document.getElementById('btn-add-badges');
+    const btnCloseAddBadges = document.getElementById('btn-close-add-badges');
+    const btnInfoWork = document.getElementById('btn-info-work');
+    const btnCloseInfoWork = document.getElementById('btn-close-info-work');
+
+    const btnAdmAddBadges = document.getElementById('btn-adm-add-badges');
+    const btnCloseAdmAddBadges = document.getElementById('btn-close-adm-add-badges');
+
+    if(btnAdmAddBadges){
+        const form = document.getElementById('form-adm-add-badges');
+        btnAdmAddBadges.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseAdmAddBadges){
+        const form = document.getElementById('form-adm-add-badges');
+        btnCloseAdmAddBadges.addEventListener("click", () => toggleForm(form));
+    }
+
+
+
+
+
+
     if(inputCPF){
         inputCPF.addEventListener("keypress", mascaraCPF);
     }
@@ -31,6 +77,10 @@ window.onload = function(){
     }
     if(inputPassword){
         inputPassword.addEventListener("keypress", limitPassword);
+    }
+
+    if(newPassword){
+        newPassword.addEventListener("keypress", limitPassword);
     }
 
     if(buttonSubmit){
@@ -51,11 +101,11 @@ window.onload = function(){
         inputNumbers.addEventListener("keypress", inputNumberValidation);
     }
 
+    // dark mode
     if(theme === "dark"){
         document.body.classList.add("dark");
     }
 
-        
     if(toggle){
         toggle.addEventListener("click", () => {
             document.body.classList.toggle("dark");
@@ -67,7 +117,136 @@ window.onload = function(){
         });
     }
 
+    // pets
+    if(btnAddPet){
+        const form = document.getElementById('form-add-pet');
+        btnAddPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseAddPet){
+        const form = document.getElementById('form-add-pet');
+        btnCloseAddPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnInfoPet){
+        const form = document.getElementById('form-info-pet');
+        btnInfoPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseInfoPet){
+        const form = document.getElementById('form-info-pet');
+        btnCloseInfoPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnPetRotina){
+        const form = document.getElementById('form-rotina');
+        btnPetRotina.addEventListener("click", () => toggleForm(form));
+    } 
+
+    if(btnCloseRotina){
+        const form = document.getElementById('form-rotina');
+        btnCloseRotina.addEventListener("click", () => toggleForm(form));
+    } 
+    
+    if(btnPetFichaMedica){
+        const form = document.getElementById('form-ficha-medica');
+        btnPetFichaMedica.addEventListener("click", () => toggleForm(form));
+    }  
+
+    if(btnCloseFichaMedica){
+        const form = document.getElementById('form-ficha-medica');
+        btnCloseFichaMedica.addEventListener("click", () => toggleForm(form));
+    }  
+    
+    if(btnPetContatoPet){
+        const form = document.getElementById('form-contato-pet');
+        btnPetContatoPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseContatoPet){
+        const form = document.getElementById('form-contato-pet');
+        btnCloseContatoPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnFotoPet){
+        const form = document.getElementById('form-foto-pet');
+        btnFotoPet.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseFotoPet){
+        const form = document.getElementById('form-foto-pet');
+        btnCloseFotoPet.addEventListener("click", () => toggleForm(form));
+    }
+    
+    //tutor e sitter
+    if(btnFotoProfile){
+        const form = document.getElementById('form-foto-profile');
+        btnFotoProfile.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseFotoProfile){
+        const form = document.getElementById('form-foto-profile');
+        btnCloseFotoProfile.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnInfoProfile){
+        const form = document.getElementById('form-info-profile');
+        btnInfoProfile.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseInfoProfile){
+        const form = document.getElementById('form-info-profile');
+        btnCloseInfoProfile.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnInfoAddress){
+        const form = document.getElementById('form-address');
+        btnInfoAddress.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseAddress){
+        const form = document.getElementById('form-address');
+        btnCloseAddress.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnResetPassword){
+        const form = document.getElementById('form-reset-password');
+        btnResetPassword.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseResetPassword){
+        const form = document.getElementById('form-reset-password');
+        btnCloseResetPassword.addEventListener("click", () => toggleForm(form));
+    }
+
+    //sitter
+    if(btnAddBadges){
+        const form = document.getElementById('form-add-badges');
+        btnAddBadges.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseAddBadges){
+        const form = document.getElementById('form-add-badges');
+        btnCloseAddBadges.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnInfoWork){
+        const form = document.getElementById('form-info-work');
+        btnInfoWork.addEventListener("click", () => toggleForm(form));
+    }
+
+    if(btnCloseInfoWork){
+        const form = document.getElementById('form-info-work');
+        btnCloseInfoWork.addEventListener("click", () => toggleForm(form));
+    }
+
+    //adm
+
     formStep();
+}
+
+function toggleForm(element){
+    element.classList.toggle("hidden");
 }
     
 function searchData(){
@@ -212,12 +391,23 @@ function mascaraPRICE(e){
     }
 }
 
-function limitPassword(){
+function limitPassword(e){
     if(this.value.length < 8){
-        document.querySelector('.msg-error').innerHTML = "Senha mínima de 8 caracteres";
+        e.target.offsetParent.querySelector('.msg-error').innerHTML = "Senha mínima de 8 caracteres";
     }else{
-        document.querySelector('.msg-error').innerHTML = "";
+        e.target.offsetParent.querySelector('.msg-error').innerHTML = "";
     }
+}
+
+function verifyLimitPassword(e){
+    const newinputPassword = document.getElementById("new-password");
+
+    if(newinputPassword.value.length < 8){
+        document.querySelector('.msg-error').innerHTML = "Senha mínima de 8 caracteres";
+
+        return false;
+    }
+    return true;
 }
 
 function inputStringValidation(e){
@@ -233,7 +423,7 @@ function inputNumberValidation(e){
 }
 
 function validaCreateAccount(e){
-    verifyPassword(e);
+    return verifyPassword(e);
 }
 
 function verifyPassword(e){

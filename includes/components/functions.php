@@ -512,7 +512,7 @@ function registerBadge($array, $pdo){
 }
 
 function searchUsers($pdo){
-    $users = $pdo->prepare('select * from usuarios order by nome asc');
+    $users = $pdo->prepare('select * from usuarios where adm = 0 order by nome asc');
     $users->execute();
 
     return $users->fetchAll();
@@ -534,8 +534,8 @@ function deleteUser($user, $pdo){
 }
 
 function searchUsersName($search, $type, $pdo){
-    $all = "select * from usuarios where nome like :nome or sobrenome like :sobrenome order by nome asc";
-    $tutor = "select * from usuarios where (nome like :nome or sobrenome like :sobrenome) and not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
+    $all = "select * from usuarios where adm = 0 and nome like :nome or sobrenome like :sobrenome order by nome asc";
+    $tutor = "select * from usuarios where adm = 0 and (nome like :nome or sobrenome like :sobrenome) and not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
     $catsitter = "select * from usuarios join cat_sitters using(cod_usuario) where nome like :nome or sobrenome like :sobrenome order by usuarios.nome asc";
 
     if($type == 'tudo') {
@@ -556,8 +556,8 @@ function searchUsersName($search, $type, $pdo){
 }
 
 function searchUsersFilter($type, $pdo){
-    $all = "select * from usuarios order by nome asc";
-    $tutor = "select * from usuarios where not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
+    $all = "select * from usuarios where adm = 0 order by nome asc";
+    $tutor = "select * from usuarios where adm = 0 and not exists (select * from cat_sitters where usuarios.cod_usuario = cat_sitters.cod_usuario) order by usuarios.nome asc";
     $catsitter = "select * from usuarios join cat_sitters using(cod_usuario) order by usuarios.nome asc";
 
     if($type == 'tudo') {

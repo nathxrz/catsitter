@@ -89,7 +89,7 @@
                             </div>
                             <div class="input-container">
                                 <label for="birth">Data de nascimento *</label>
-                                <input type="date" id="birth" name="birth" placeholder="Data de nascimento" autocomplete="off" required>
+                                <input type="date" id="birth" name="birth" max="<?php echo (date('Y-m-d', strtotime('-16 years'))) ?>" placeholder="Data de nascimento" autocomplete="off" required>
                             </div>
                             <div class="input-container">
                                 <label for="gender">Gênero *</label>
