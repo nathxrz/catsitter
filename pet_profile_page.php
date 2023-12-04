@@ -43,7 +43,6 @@
     }
 
     if(isset($_GET['editInfoPet'])){
-        print_r($_POST);
         if(isset($_POST['name']) and isset($_POST['sex']) and isset($_POST['breed'])){
             $cod_pet = $_GET['pet'];
             $name = $_POST['name'];
@@ -357,7 +356,7 @@
                     <div class="form-container">
                         <div class="input-container">
                             <label for="name">Qual o nome do seu gatinho(a)? *</label>
-                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu" value="<?php echo $pet_profile['nome']?>" autocomplete="off" required>
+                            <input type="text" id="name" name="name" placeholder="Bartholomeu" value="<?php echo $pet_profile['nome']?>" autocomplete="off" required>
                         </div>
                         <div class="input-container">
                             <label for="sex">Qual o sexo? *</label>

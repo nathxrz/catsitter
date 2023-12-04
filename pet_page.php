@@ -121,7 +121,7 @@
                     <div class="form-container">
                         <div class="input-container">
                             <label for="name">Qual o nome do seu gatinho(a)? *</label>
-                            <input type="text" class="validateString" id="name" name="name" placeholder="Bartholomeu" autocomplete="off" required>
+                            <input type="text" id="name" name="name" placeholder="Bartholomeu" autocomplete="off" required>
                         </div>
                         <div class="input-container">
                             <label for="sex">Qual o sexo? *</label>

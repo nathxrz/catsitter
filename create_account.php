@@ -123,7 +123,7 @@
                             <div class="input-container input-row">
                                 <div class='large'>
                                     <label for="street">Rua *</label>
-                                    <input type="text" class="validateString" id="street" name="street" id='street' placeholder="Bento Martins" autocomplete="off" required>
+                                    <input type="text" id="street" name="street" id='street' placeholder="Bento Martins" autocomplete="off" required>
                                 </div>
                                 <div class='small'>
                                     <label for="number">nº *</label>

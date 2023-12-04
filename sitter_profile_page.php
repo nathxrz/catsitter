@@ -428,7 +428,7 @@
                         <div class="input-container input-row">
                             <div class='large'>
                                 <label for="street">Rua</label>
-                                <input type="text" class="validateString" id="street" name="street" placeholder="Bento Martins" autocomplete="off" value="<?php echo $profile['rua']?>" required>
+                                <input type="text" id="street" name="street" placeholder="Bento Martins" autocomplete="off" value="<?php echo $profile['rua']?>" required>
                             </div>
                             <div class='small'>
                                 <label for="number">nº</label>
