@@ -5,7 +5,16 @@
         <?php } ?>
     </a>
     <nav>
-        <ul>
+        <div class='menu-container'>
+            <input type="checkbox" id='checkbox-menu'>
+
+            <label for="checkbox-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+        <ul id="menu">
             <li><a href="login.php">Home</a></li>
             <li><a href="">Serviços</a></li>
             <li><a href="">Contato</a></li>

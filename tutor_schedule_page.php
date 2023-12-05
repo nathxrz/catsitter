@@ -27,7 +27,7 @@
     ?>
 
     <main>
-        <section>
+        <section class='form-home-tutor'>
             <div class="content-box position-content-schedule">
                 <?php
                     if(isset($schedules) and !$schedules){ ?>

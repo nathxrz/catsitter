@@ -149,3 +149,93 @@
 .gap-no-label{
     gap: 2rem;
 }
+
+/* Breakpoints */
+@media screen and ( min-width: 320px) and (max-width: 480px) {
+    .header-content-login{
+        padding: 4rem 2rem 2rem;
+    }
+
+    .header-content-login ul{
+        flex-direction: column;
+        align-items: end;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    /* menu hamburguer */
+    .menu-container{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    
+    .menu-container label{
+        cursor: pointer;
+        position: relative;
+        display: block;
+        height: 2.2rem;
+        width: 2.5rem;
+    }
+    
+    .menu-container label span{
+        position: absolute;
+        display: block;
+        height: .3rem;
+        width: 100%;
+        border-radius: 3rem;
+        background: var(--font-color-neutral-light);
+        transition: 0.25s ease-in-out;
+    }
+    
+    .menu-container label span:nth-child(1){
+        top: 0;
+    }
+    
+    .menu-container label span:nth-child(2){
+        top: .6rem;
+    }
+    
+    .menu-container label span:nth-child(3){
+        top: 1.2rem;
+    }
+
+    #checkbox-menu:checked + label span:nth-child(1){
+        transform: rotate(-45deg);
+        top: .8rem;
+    }
+
+    #checkbox-menu:checked + label span:nth-child(2){
+        opacity: 0;
+    }
+
+    #checkbox-menu:checked + label span:nth-child(3){
+        transform: rotate(45deg);
+        top: .8rem;
+    }
+
+    .content-box h1{
+        font-size: 2.4rem;
+        text-align: start;
+    }
+
+    .content-box h2{
+        font-size: 2rem;
+    }
+
+    .gap-no-label{
+        gap: 1rem;
+    }
+}
+
+@media screen and ( min-width: 481px) and (max-width: 768px) {
+    .header-content-login{
+        padding: 4rem 4rem 2rem;
+    }
+
+    .content-box h1{
+        font-size: 3rem;
+        text-align: start;
+    }
+}

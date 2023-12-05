@@ -137,9 +137,9 @@
     margin: 2rem auto 0;
 }
 
-.radio-input.disable{
+/* .radio-input.disable{
     background-color: var(--bg-color-third);
-}
+} */
 
 .link-form a{
     display: flex;
@@ -340,7 +340,7 @@
 
 .info-group-container{
     display: flex;
-
+    gap: 1rem;
 }
 
 .info-group{
@@ -415,19 +415,160 @@
 
 #theme-btn{
     border-radius: 43.9rem;
-    width: 10rem;
     cursor: pointer;
-    padding: .5rem 0;
+    padding: 1rem;
     font-family: var(--font-family-subtitle);
     font-weight: bold;
     font-size: 1.6rem;
     background: none;
     border: 1px solid var(--bg-color-btn);
     color: var(--font-color-secondary);
+
+    position: absolute;
+    right: 4.8rem;
+    top: 13rem;
 }
 
 #theme-btn:hover{
     border: 1px solid var(--bg-color-btn-hover);
     color: var(--font-color-neutral-light);
     background: var(--bg-color-btn-hover);
+}
+
+@media screen and ( min-width: 320px) and (max-width: 620px) {
+
+    /* body  */
+    .radio-container{
+        flex-direction: column;
+    }
+
+    .radio-input, .checkbox-container{
+        gap: 1rem;
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    .form-details-container-position{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search {
+        width: 80%;
+        margin: 1rem auto 0;
+    }
+
+    .form-home-tutor{
+        padding: 1rem;
+    }
+
+    .card-content{
+        display: flex;
+        justify-content: center;
+    
+    }
+
+    .position-content-schedule{
+        margin: 7rem 0rem;
+        width: 100%;
+    }
+    
+    .card-schedule{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .icons-shedule{
+        flex-direction: row;
+    }
+
+    .close svg {
+        width: 3rem;
+        /* height: 3rem; */
+    }
+
+    .close-form svg{
+        width: 2.2rem;
+        /* height: 2.5rem; */
+    }
+
+    .logout svg {
+        width: 2rem;
+        /* height: 3rem; */
+    }
+
+    #theme-btn{
+        right: 0rem;
+        top: -5rem;
+        color: var(--font-color-neutral-light);
+        border: 1px solid var(--font-color-neutral-light);
+    }
+}
+
+@media screen and ( min-width: 490px) and (max-width: 621px){
+    .card-schedule{
+        width: 100%;
+        flex-direction: row;
+    }
+    .icons-shedule{
+        flex-direction: column;
+    }
+}
+
+@media screen and ( min-width: 621px) and (max-width: 768px) {
+    .radio-container{
+        flex-direction: column;
+    }
+
+    .radio-input, .checkbox-container{
+        gap: 1rem;
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    .input-container.form-details-container-position{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search {
+        width: 80%;
+        margin: 1rem auto 0;
+    }
+
+    .form-home-tutor{
+        padding: 2rem;
+    }
+
+    .card-content{
+        display: flex;
+        justify-content: center;
+    }
+
+    .position-content-schedule{
+        margin: 7rem 0rem;
+        width: 100%;
+    }
+}
+
+@media screen and ( min-width: 769px) and (max-width: 850px){
+    .form-home-tutor{
+        padding: 3rem;
+    }
+    
+    
+    .position-content-schedule{
+        margin: 7rem 0rem;
+        width: 100%;
+    }
+}
+
+@media screen and ( min-width: 769px) and (max-width: 1024px) {
+    .radio-input{
+        width: 45%;
+    }
+
+    .search {
+        width: 40%;
+    }
 }

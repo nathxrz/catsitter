@@ -48,6 +48,22 @@ window.onload = function(){
     const btnAdmAddBadges = document.getElementById('btn-adm-add-badges');
     const btnCloseAdmAddBadges = document.getElementById('btn-close-adm-add-badges');
 
+    const checkboxMenu = document.getElementById('checkbox-menu');
+
+    if(checkboxMenu){
+            checkboxMenu.addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+
+            if (menu.classList.contains('hidden')) {
+                // Se o elemento possui a classe 'hidden', remova-a
+                menu.classList.remove('hidden');
+            } else {
+                // Se o elemento não possui a classe 'hidden', adicione-a
+                menu.classList.add('hidden');
+            }
+        })
+    }
+
     if(inputCPF){
         inputCPF.addEventListener("keypress", mascaraCPF);
     }

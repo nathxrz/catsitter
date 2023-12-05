@@ -60,7 +60,7 @@
         require("./includes/components/header.php");
     ?>
     <main>
-        <section>
+        <section class='form-home-tutor'>
             <div class="content-box position-content">
                 <form action="tutor_home_page.php" method="POST">
                     <div class='form-container'>
@@ -169,7 +169,7 @@
 
         <?php
             if(isset($sittersAvailable)){ ?>
-                <section class=''>
+                <section class='form-home-tutor'>
                     <div class='content-box position-content'>
                         <div class='input-container position-filter'>
                             <form action="tutor_home_page.php?filter" id="search-filter" method="POST">
