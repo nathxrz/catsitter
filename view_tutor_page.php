@@ -29,7 +29,7 @@
             </a>
 
             <div class='user-info'>
-                <img class="img-profile" src="images/<?php echo $profile['foto']?>" alt="">
+                <img class="img-profile" src="images/<?php echo $profile['foto']?>" alt="Foto do usuário.">
                 <h3><?php echo $profile['nome'] ." ". $profile['sobrenome']?></h3>
             </div>
 

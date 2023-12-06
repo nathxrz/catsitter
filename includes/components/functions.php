@@ -585,4 +585,22 @@ function searchUsersFilter($type, $pdo){
 
     return $users->fetchAll();
 }
+
+function catSitterFirewall(){
+    if(!isset($_SESSION['cod_catsitter'])) {
+        redirect('tutor_profile_page.php');
+    }
+}
+
+function adminFirewall(){
+    if(!isset($_SESSION['adm'])) {
+        redirect('tutor_profile_page.php');
+    }
+}
+
+function tutorFirewall(){
+    if(isset($_SESSION['cod_catsitter'])) {
+        redirect('sitter_profile_page.php');
+    }
+}
 ?>

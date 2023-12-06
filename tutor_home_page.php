@@ -10,6 +10,8 @@
     $_SESSION["msg_error"] = "";
     $_SESSION["redirect"] = "tutor_home_page.php";
 
+    tutorFirewall();
+
     if(isset($_SESSION["cod_usuario"])){
         $pets = searchPets($_SESSION["cod_usuario"], $pdo);
         $profile = searchUser($_SESSION["email"], $pdo);
@@ -60,7 +62,7 @@
         require("./includes/components/header.php");
     ?>
     <main>
-        <section class='form-home-tutor'>
+        <section class='padding-form'>
             <div class="content-box position-content">
                 <form action="tutor_home_page.php" method="POST">
                     <div class='form-container'>
@@ -111,7 +113,7 @@
                                 <p>Endereço:</p>
                                 <select name="address" id="address" required>
                                     <option value="">Selecione seu endereço:</option>
-                                    <option value="" <?php if(isset($_POST['address'])) echo ("selected")?>><?php echo $profile['rua'] . ", " . $profile['numero'] . ". " .  $profile['cidade'] ?></option>
+                                    <option value="<?php echo $profile['rua'] . ", " . $profile['numero'] . ". " .  $profile['cidade'] ?>" <?php if(isset($_POST['address'])) echo ("selected")?>><?php echo $profile['rua'] . ", " . $profile['numero'] . ". " .  $profile['cidade'] ?></option>
                                 </select>
                             </label>
 
@@ -169,7 +171,7 @@
 
         <?php
             if(isset($sittersAvailable)){ ?>
-                <section class='form-home-tutor'>
+                <section class='padding-form'>
                     <div class='content-box position-content'>
                         <div class='input-container position-filter'>
                             <form action="tutor_home_page.php?filter" id="search-filter" method="POST">
@@ -208,15 +210,15 @@
                             </div>
                             <?php } ?>
                         <!-- modal de confirmação de agendamento -->
-                        <div class='card-content'>
+                        <div class='card-content sitters'>
                             <?php 
                                 foreach($sittersAvailable as $sitters) {
                                     ?>
                             <div class="card-profile">
                                 <form action="tutor_home_page.php?schedule" method="POST">
-                                    <a href="view_sitter_page.php?user=<?php echo $sitters['cod_usuario']?>"><img class="img-profile" src="images/<?php echo $sitters['foto']?>" alt=""></a>
+                                    <a href="view_sitter_page.php?user=<?php echo $sitters['cod_usuario']?>"><img class="img-profile" src="images/<?php echo $sitters['foto']?>" alt="Foto do usuário."></a>
                                     <a href="view_sitter_page.php?user=<?php echo $sitters['cod_usuario']?>">
-                                        <p><?php echo $sitters['nome'] . " " . $sitters['sobrenome']?></p>
+                                        <p title='<?php echo $sitters['nome'] . " " . $sitters['sobrenome']?>'><?php echo $sitters['nome'] . " " . $sitters['sobrenome']?></p>
                                     </a>
                                     <p class='price-view'>R$ <?php echo $sitters['preco']?></p>
                                     <input type="hidden" name='sitter' value='<?php echo $sitters['cod_catsitter']?>'>

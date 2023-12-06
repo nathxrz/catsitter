@@ -8,6 +8,8 @@
 
     $_SESSION['msg_error'] = '';
 
+    tutorFirewall();
+
     if(isset($_GET['addRotina'])){
         if(isset($_POST['routine']) and isset($_POST['cod_pet'])){
             $routine = $_POST['routine'];
@@ -101,7 +103,7 @@
 
             <div class='user-info'>
                 <div class='profile-user'>
-                    <img class="img-profile" src="images/<?php echo $pet_profile['foto']?>" alt="">
+                    <img class="img-profile" src="images/<?php echo $pet_profile['foto']?>" alt="Foto do usuário.">
                     <h3><?php echo $pet_profile['nome']?></h3>
                 </div>
                 <button id="btn-foto-pet" class='reset-btn-decoration btn-edit-image'>
@@ -400,7 +402,7 @@
                 <form action="pet_profile_page.php?editFoto&pet=<?php echo $_GET['pet']?>" method="POST" enctype="multipart/form-data">               
                     <h2>Foto de perfil</h2>
                     <div class='form-container'>
-                    <img class="img-profile img-position-form" src="images/<?php echo $pet_profile['foto']?>" alt="">
+                    <img class="img-profile img-position-form" src="images/<?php echo $pet_profile['foto']?>" alt="Foto do animal.">
                          <div class="input-container">
                             <label for="file">Adicione uma foto do pet: *</label>
                             <input type="file" id="file" name="file" accept=".png, .jpg, .jpeg" required>

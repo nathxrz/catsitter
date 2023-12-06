@@ -45,7 +45,7 @@ create table gatos(
     cod_usuario int,
     constraint fk_gatos FOREIGN KEY(cod_usuario) REFERENCES usuarios (cod_usuario) on delete cascade on update cascade)
 
-create table cat_sitters(
+ create table cat_sitters(
 	cod_catsitter int AUTO_INCREMENT not null,
     preco varchar(100) DEFAULT NULL,
     cod_usuario int,
@@ -80,18 +80,16 @@ create table servicos(
     nome varchar(50) not null,
     descricao varchar (200) not null)
 
-create table agendamentos(
+create table agendamentos( 
     cod_agendamento int AUTO_INCREMENT not null,
-    dt_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    dt_fim DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    dt_agendamento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     cod_servico int, 
     cod_usuario int,
     cod_catsitter int,
-    cod_pet int,
     PRIMARY KEY (cod_agendamento),
-    CONSTRAINT fk_agend_servico FOREIGN KEY (cod_servico) REFERENCES servicos (cod_servico) on delete restrict on update cascade,
-    CONSTRAINT fk_agend_usuario FOREIGN KEY (cod_usuario) REFERENCES usuarios (cod_usuario) on delete restrict on update cascade,
-    CONSTRAINT fk_agend_sitter FOREIGN KEY (cod_catsitter) REFERENCES cat_sitters (cod_catsitter) on delete restrict on update cascade)
+    CONSTRAINT fk_agend_servico FOREIGN KEY (cod_servico) REFERENCES servicos (cod_servico) on delete cascade on update cascade,
+    CONSTRAINT fk_agend_usuario FOREIGN KEY (cod_usuario) REFERENCES usuarios (cod_usuario) on delete cascade on update cascade,
+    CONSTRAINT fk_agend_sitter FOREIGN KEY (cod_catsitter) REFERENCES cat_sitters (cod_catsitter) on delete cascade on update cascade)
 
 create table agendamento_pets(
     cod_agendamento int,

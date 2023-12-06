@@ -29,7 +29,7 @@
             </button>
 
             <div class='user-info'>
-                <img class="img-profile" src="images/<?php echo $pet_profile['foto']?>" alt="">
+                <img class="img-profile" src="images/<?php echo $pet_profile['foto']?>" alt="Foto do usuário.">
                 <h3><?php echo $pet_profile['nome']?></h3>
             </div>
 

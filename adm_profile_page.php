@@ -7,6 +7,8 @@
     require('./includes/components/connect.php');
     require('./includes/components/functions.php');
 
+    adminFirewall();
+
     if(isset($_SESSION["cod_usuario"])){
         $profile = searchUser($_SESSION["email"], $pdo);
         $foneUser = getFoneById($_SESSION["cod_usuario"], $pdo);
@@ -47,7 +49,7 @@
 
             <div class='user-info'>
                 <div class='profile-user'>
-                    <img class="img-profile" src="images/<?php echo $profile['foto']?>" alt="">
+                    <img class="img-profile" src="images/<?php echo $profile['foto']?>" alt="Foto do usuário">
                     <h3><?php echo $profile['nome'] ." ". $profile['sobrenome']?></h3>
                 </div>
             </div>

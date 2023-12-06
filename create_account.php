@@ -64,7 +64,7 @@
                     <div id="form-01" class="form-step"> 
                         <h2>Você é tutor ou cat sitter?</h2>
                         <div class='radio-container'>
-                            <div class="input-radio">
+                            <div class="input-radio" id="btn-type-user">
                                 <label for="tutor">Tutor</label>
                                 <input type="radio" id="tutor" name="type" value="tutor" checked/>
                             </div>

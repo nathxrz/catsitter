@@ -8,6 +8,8 @@
 
     $_SESSION["msg_error"] = '';
 
+    tutorFirewall();
+
     if(isset($_GET['addPet'])){
         if(isset($_POST['name']) and isset($_POST['sex']) and isset($_POST['breed'])){
             $name = $_POST['name'];
@@ -75,9 +77,9 @@
                     <div class="card-profile pet">
                         
                         <a href="pet_profile_page.php?pet=<?php echo ($pet['cod_pet'])?>">
-                            <img class="img-profile" src="images/<?php echo ($pet['foto'])?>" alt="">
+                            <img class="img-profile" src="images/<?php echo ($pet['foto'])?>" alt="Foto do animal.">
                             
-                            <p><?php echo ($pet['nome']) ?></p>
+                            <p title='<?php echo ($pet['nome']) ?>'><?php echo ($pet['nome']) ?></p>
                         </a>
                         
                         <a href="pet_page.php?delete=<?php echo ($pet['cod_pet'])?>" class='icon-delete-profile' >

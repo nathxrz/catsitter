@@ -434,6 +434,15 @@
     color: var(--font-color-neutral-light);
     background: var(--bg-color-btn-hover);
 }
+.icon-trash{
+    top: 1.5rem;
+    right: 1rem;
+}
+
+#btn-adm-add-badges{
+    bottom: 1rem;
+    right: 1.5rem;
+}
 
 @media screen and ( min-width: 320px) and (max-width: 620px) {
 
@@ -458,7 +467,7 @@
         margin: 1rem auto 0;
     }
 
-    .form-home-tutor{
+    .padding-form{
         padding: 1rem;
     }
 
@@ -503,6 +512,40 @@
         color: var(--font-color-neutral-light);
         border: 1px solid var(--font-color-neutral-light);
     }
+
+    .badges-width{
+        width: 100%;
+    }
+
+    .icon-trash{
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .icon-trash svg{
+        width: 2rem;
+    }
+
+    #btn-adm-add-badges{
+        bottom: 0rem;
+        right: 1rem;
+    }
+
+    #btn-adm-add-badges svg{
+        width: 3rem;
+    }
+
+    .position-filter{
+        flex-direction: column;
+    }
+
+    .position-filter input{
+        width: 100%;
+    }
+
+    .radio-adm-content{
+        gap: 2rem;
+    }
 }
 
 @media screen and ( min-width: 490px) and (max-width: 621px){
@@ -512,6 +555,10 @@
     }
     .icons-shedule{
         flex-direction: column;
+    }
+
+      .position-filter{
+        flex-direction: row;
     }
 }
 
@@ -536,7 +583,7 @@
         margin: 1rem auto 0;
     }
 
-    .form-home-tutor{
+    .padding-form{
         padding: 2rem;
     }
 
@@ -549,10 +596,31 @@
         margin: 7rem 0rem;
         width: 100%;
     }
+
+    .badges-width{
+        width: 45%;
+    }
+
+    .icon-trash svg{
+        width: 2rem;
+    }
+
+    #btn-adm-add-badges{
+        bottom: .5rem;
+        right: 1.5rem;
+    }
+
+    .position-filter{
+        gap: 2rem;
+    }
+
+    .radio-adm-content{
+        gap: 2rem;
+    }
 }
 
 @media screen and ( min-width: 769px) and (max-width: 850px){
-    .form-home-tutor{
+    .padding-form{
         padding: 3rem;
     }
     
@@ -560,6 +628,27 @@
     .position-content-schedule{
         margin: 7rem 0rem;
         width: 100%;
+    }
+
+    .badges-width{
+        width: 45%;
+    } 
+
+    .icon-trash svg{
+        width: 2rem;
+    } 
+
+     #btn-adm-add-badges{
+        bottom: .5rem;
+        right: 1.5rem;
+    }
+
+    .position-filter{
+        gap: 2rem;
+    }
+
+    .radio-adm-content{
+        gap: 2rem;
     }
 }
 
@@ -570,5 +659,41 @@
 
     .search {
         width: 40%;
+    }
+    
+    .badges-width{
+        width: 45%;
+    }
+
+    .icon-trash svg{
+        width: 2rem;
+    }
+
+    #btn-adm-add-badges{
+        bottom: .5rem;
+        right: 1.5rem;
+    }
+
+    .search-input input{
+        width: 70%;
+    }
+}
+
+@media screen and ( min-width: 1024px) and (max-width: 1450px){
+    .badges-width{
+        width: 45%;
+    }
+
+    .icon-trash svg{
+        width: 2rem;
+    }
+
+    #btn-adm-add-badges{
+        bottom: .5rem;
+        right: 1.5rem;
+    }
+
+    .search-input input{
+        width: 80%;
     }
 }

@@ -226,6 +226,12 @@ main::after{
     position: relative;
 }
 
+.content-box-form{
+    height: calc(100vh - 4rem);
+    overflow: scroll;
+}
+
+
 .content-box h2{
     font-family: var(--font-family-title);
     line-height: 130%;
@@ -353,6 +359,10 @@ main::after{
     line-height: 145%;
 
     margin-top: 2rem;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .img-profile{
@@ -707,6 +717,18 @@ input::placeholder{
         display: flex;
         align-items: center;
         justify-content: end;
+    }
+
+    #menu li{
+        margin-bottom: 2rem;
+    }
+
+    .menu-container + ul#menu{
+        display: none;
+    }
+
+    .menu-container + ul#menu.open{
+        display: block;
     }
     
     .menu-container label{

@@ -8,6 +8,8 @@
 
     $_SESSION["redirect"] = "tutor_schedule_page.php";
 
+    tutorFirewall();
+
     if (isset($_GET['delete'])) {
         $cod_schedule = $_GET['delete'];
         $delete_schedule = deleteSchedule($cod_schedule, $pdo);
@@ -27,7 +29,7 @@
     ?>
 
     <main>
-        <section class='form-home-tutor'>
+        <section class='padding-form'>
             <div class="content-box position-content-schedule">
                 <?php
                     if(isset($schedules) and !$schedules){ ?>
@@ -41,7 +43,7 @@
                 <div class="card-schedule">
 
                     <a href="view_sitter_page.php?user=<?php echo $catsitter['cod_usuario']?>">
-                        <img class="img-profile" src="images/<?php echo $catsitter['foto']?>" alt="">
+                        <img class="img-profile" src="images/<?php echo $catsitter['foto']?>" alt="Foto do usuário.">
                     </a>
 
                     <div class='appointment-information'>

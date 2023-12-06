@@ -6,6 +6,8 @@
     require('./includes/components/authenticator.php');
     require('./includes/components/functions.php');
 
+    catSitterFirewall();
+
     if (isset($_GET['delete'])) {
         $cod_schedule = $_GET['delete'];
         $delete_schedule = deleteSchedule($cod_schedule, $pdo);
@@ -37,7 +39,7 @@
                         ?>
                 <div class="card-schedule">
 
-                    <a href="view_tutor_page.php?user=<?php echo $tutor['cod_usuario']?>"><img class="img-profile" src="images/<?php echo $tutor['foto']?>" alt=""></a>
+                    <a href="view_tutor_page.php?user=<?php echo $tutor['cod_usuario']?>"><img class="img-profile" src="images/<?php echo $tutor['foto']?>" alt="Foto do usuário"></a>
 
                     <div class='appointment-information'>
                         <a href="view_tutor_page.php?user=<?php echo $tutor['cod_usuario']?>">
