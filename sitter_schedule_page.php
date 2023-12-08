@@ -6,6 +6,8 @@
     require('./includes/components/authenticator.php');
     require('./includes/components/functions.php');
 
+    $_SESSION["redirect"] = "sitter_schedule_page.php";
+
     catSitterFirewall();
 
     if (isset($_GET['delete'])) {

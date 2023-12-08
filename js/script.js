@@ -306,13 +306,18 @@ function searchData(){
 function filterByBadge(){
     const forms = document.getElementById('search-filter');
     const time = forms.time.value;
-    const date = forms.date.vaule;
+    const date = forms.date.value;
     const filter = forms.filter.value;
     const type = forms.type.value;
     const address = forms.address.value;
-    const pets = [];
 
-    forms['pets[]'].forEach(pet => pets.push(pet.value));
+    const pets = [];
+    
+    if(!!forms['pets[]'].length) {
+        forms['pets[]'].forEach(pet => pets.push(pet.value));
+    }else {
+        pets.push(forms['pets[]'].value);
+    }
 
     const url = `data.php?time=${time}&date=${date}&filter=${filter}`;
 
